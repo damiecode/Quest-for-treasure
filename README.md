@@ -13,6 +13,8 @@ Quest for treasure is created using vanilla JS and Phaser Js. It is a simple Vid
 
 The full project requirements can be found [here](https://www.notion.so/RPG-game-f94a617841e240a293c0b6928beebe89).
 
+The full description of the game can be found [here](https://github.com/damiecode/Quest-for-treasure/wiki)
+
 ## Built With
 
 - JavaScript (ES6)
