@@ -7,7 +7,7 @@
 </p> -->
 
 <br>
-This project is part of a series of projects to be completed by students of [Microverse](https://www.microverse.org/ 'The Global School for Remote Software Developers!').
+This project is part of a series of projects to be completed by students of [Microverse](https://www.microverse.org/) 'The Global School for Remote Software Developers!'.
 
 Quest for treasure is created using vanilla JS and Phaser Js. It is a simple Video game. It is a platform game where the goal of the game is to fetch the key and open the door that leads to the next level.
 
