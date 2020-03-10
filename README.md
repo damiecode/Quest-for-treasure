@@ -23,7 +23,7 @@ The full description of the game can be found [here](https://github.com/damiecod
 - npm
 - webpack
 
-### ✨ [Live Demo](https://powerful-earth-04908.herokuapp.com/)
+### ✨ [Live Demo](https://quest-for-treasure.netlify.com/)
 
 ## Usage
 
