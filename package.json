@@ -4,7 +4,10 @@
   "description": "<h1 align=\"center\">Welcome to Quest for treasure 👋</h1> <br> <!-- <p>   <a href=\"https://rawcdn.githack.com/damiecode/Quest-for-treasure/feature/weatherApp/dist/index.html\" target=\"_blank\">     <img alt=\"Website\" src=\"weather.png\" />   </a> </p> -->",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "webpack-dev-server --hot",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/damiecode/Quest-for-treasure/issues"
   },
-  "homepage": "https://github.com/damiecode/Quest-for-treasure#readme"
+  "homepage": "https://github.com/damiecode/Quest-for-treasure#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.8.7"
+  }
 }
