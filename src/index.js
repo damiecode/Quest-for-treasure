@@ -4,6 +4,7 @@ import Phaser from 'phaser';
 import BootScene from './scenes/bootScene';
 import PreloaderScene from './scenes/preloaderScene';
 import TitleScene from './scenes/titleScene';
+import OptionsScene from './scenes/optionsScene';
 import GameScene from './scenes/gameScene';
 
 import config from './config';
