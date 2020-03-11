@@ -40,7 +40,7 @@ export default class TitleScene extends Phaser.Scene {
     this.optionsButton.on(
       'pointerdown',
       (pointer) => {
-        this.scene.start('Options');
+        this.scene.start('OptionsScene');
       },
     );
   }
