@@ -10,7 +10,7 @@ import GameScene from './scenes/gameScene';
 import config from './config';
 
 const gameConfig = Object.assign(config, {
-  scene: [BootScene, PreloaderScene, TitleScene, GameScene],
+  scene: [BootScene, PreloaderScene, TitleScene, OptionsScene, GameScene],
 });
 
 class Game extends Phaser.Game {
