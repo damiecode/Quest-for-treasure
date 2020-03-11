@@ -22,7 +22,7 @@ export default class TitleScene extends Phaser.Scene {
     this.gameButton.on(
       'pointerdown',
       (pointer) => {
-        this.scene.start('Game');
+        this.scene.start('GameScene');
       },
     );
 
