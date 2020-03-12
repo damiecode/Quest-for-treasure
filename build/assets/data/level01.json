@@ -1,7 +1,7 @@
 {
     "platforms": [
-        {"image": "ground", "x": 400, "y": 600},
-        {"image": "grass:8x1", "x": 400, "y": 420},
+        {"image": "ground", "x": 450, "y": 600},
+        {"image": "grass:8x1", "x": 300, "y": 420},
         {"image": "grass:2x1", "x": 820, "y": 336},
         {"image": "grass:1x1", "x": 588, "y": 504},
         {"image": "grass:8x1", "x": 672, "y": 378},
