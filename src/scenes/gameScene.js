@@ -1,5 +1,13 @@
 import Phaser from 'phaser';
 
+function Hero(game, x, y) {
+  Phaser.Sprite.call(this, game, x, y, 'hero');
+  this.anchor.set(0.5, 0.5);
+}
+
+Hero.prototype = Object.create(Phaser.Sprite.prototype);
+Hero.prototype.constructor = Hero;
+
 export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
@@ -14,22 +22,25 @@ export default class extends Phaser.Scene {
     this.load.image('grass:4x1', './assets/images/grass_4x1.png');
     this.load.image('grass:2x1', './assets/images/grass_2x1.png');
     this.load.image('grass:1x1', './assets/images/grass_1x1.png');
-    this.load.spritesheet('dude',
-      './assets/images/dude.png',
-      { frameWidth: 32, frameHeight: 48 });
+    this.load.image('hero', './assets/images/hero_stopped.png');
   }
 
   create() {
-    const player = this.physics.add.sprite(100, 450, 'dude');
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.loadLevel(this.cache.json.get('level:1'));
   }
 
   loadLevel(data) {
     data.platforms.forEach(this.spawnPlatform, this);
+    this.spawnCharacters({ hero: data.hero });
   }
 
   spawnPlatform(platform) {
     this.add.sprite(platform.x, platform.y, platform.image);
+  }
+
+  spawnCharacters(data) {
+    this.hero = new Hero(this.game, data.hero.x, data.hero.y);
+    this.game.add.existing(this.hero);
   }
 }
