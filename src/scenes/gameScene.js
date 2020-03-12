@@ -26,7 +26,7 @@ export default class extends Phaser.Scene {
   create() {
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.loadLevel(this.cache.json.get('level:1'));
-    const player = this.physics.add.sprite(100, 450, 'dude');
+    const player = this.physics.add.sprite(100, 450, 'dude').setOrigin(0.5, 0.5);
     const platforms = this.physics.add.staticGroup(300, 450, 'ground');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
