@@ -26,6 +26,6 @@ export default class extends Phaser.Scene {
   }
 
   spawnPlatform(platform) {
-    this.game.add.sprite(platform.x, platform.y, platform.image);
+    this.add.sprite(platform.x, platform.y, platform.image);
   }
 }
