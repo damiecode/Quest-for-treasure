@@ -17,7 +17,7 @@ export default class extends Phaser.Scene {
     this.load.image('grass:1x1', './assets/images/grass_1x1.png');
     this.load.spritesheet('dude',
       './assets/images/dude.png',
-      { frameWidth: 32, frameHeight: 48 });
+      { frameWidth: 35, frameHeight: 42 });
     this.load.on('complete', () => {
       makeAnimations(this);
     });
@@ -26,10 +26,9 @@ export default class extends Phaser.Scene {
   create() {
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.loadLevel(this.cache.json.get('level:1'));
-    const player = this.physics.add.sprite(100, 450, 'dude');
+    const player = this.physics.add.sprite(100, 450, 'dude').setOrigin(0.5,0.5);
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
-    player.anchor.set(0.5, 0.5);
   }
 
   loadLevel(data) {
