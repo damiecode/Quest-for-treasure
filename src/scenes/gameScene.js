@@ -24,12 +24,12 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    const player = this.physics.add.sprite(100, 450, 'dude');
-    const platforms = this.physics.add.staticGroup();
+    const player = this.physics.add.sprite(100, 450, 'dude').setOrigin(0.5,0.5);
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.loadLevel(this.cache.json.get('level:1'));
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
+    // eslint-disable-next-line no-undef
     this.physics.add.collider(player, platforms);
   }
 
