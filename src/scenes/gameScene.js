@@ -20,9 +20,10 @@ export default class extends Phaser.Scene {
   }
 
   create() {
+    const player = this.physics.add.sprite(100, 450, 'dude');
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.loadLevel(this.cache.json.get('level:1'));
-    const player = this.physics.add.sprite(100, 450, 'dude');
+    player.anchor.set(0.5, 0.5);
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
     this.anims.create({
@@ -44,6 +45,8 @@ export default class extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
+
+    const cursors = this.input.keyboard.createCursorKeys();
   }
 
   loadLevel(data) {
@@ -52,5 +55,25 @@ export default class extends Phaser.Scene {
 
   spawnPlatform(platform) {
     this.add.sprite(platform.x, platform.y, platform.image);
+  }
+
+  update() {
+    if (this.cursors.left.isDown) {
+      this.player.setVelocityX(-160);
+
+      this.player.anims.play('left', true);
+    } else if (this.cursors.right.isDown) {
+      this.player.setVelocityX(160);
+
+      this.player.anims.play('right', true);
+    } else {
+      this.player.setVelocityX(0);
+
+      this.player.anims.play('turn');
+    }
+
+    if (this.cursors.up.isDown && this.player.body.touching.down) {
+      this.player.setVelocityY(-330);
+    }
   }
 }
