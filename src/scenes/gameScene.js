@@ -7,7 +7,7 @@ export default class extends Phaser.Scene {
 
   preload() {
     this.load.image('background', './assets/images/sky.png');
-    this.load.json('level:1', './assets/data/level00.json');
+    this.load.json('level:1', './assets/data/level01.json');
     this.load.image('ground', './assets/images/ground.png');
     this.load.image('grass:8x1', './assets/images/grass_8x1.png');
     this.load.image('grass:6x1', './assets/images/grass_6x1.png');
