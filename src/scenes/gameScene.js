@@ -24,12 +24,12 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    var player;
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.loadLevel(this.cache.json.get('level:1'));
-    player = this.physics.add.sprite(100, 450, 'dude');
+    const player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
+    player.anchor.set(0.5, 0.5);
   }
 
   loadLevel(data) {
