@@ -26,7 +26,7 @@ export default class extends Phaser.Scene {
       frameWidth: 22,
       frameHeight: 22,
     });
-    this.load.audio('sfx:jump', 'audio/jump.wav');
+    this.load.audio('sfx:jump', './assets/audio/jump.wav');
   }
 
   create() {
