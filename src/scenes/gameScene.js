@@ -43,7 +43,7 @@ export default class extends Phaser.Scene {
     this.enemy = this.physics.add.sprite(200, 450, 'spider');
     this.enemy.setCollideWorldBounds(true);
     this.tweens.timeline({
-      targets: this.platforms.body.velocity,
+      targets: platforms.body.velocity,
       loop: -1,
       tweens: [
         {
