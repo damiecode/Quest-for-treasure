@@ -37,7 +37,7 @@ export default class extends Phaser.Scene {
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
     this.sfx = {
-      jump: this.game.add.audio('sfx:jump'),
+      jump: this.add.audio('sfx:jump'),
     };
   }
 
