@@ -32,7 +32,7 @@ export default class extends Phaser.Scene {
     const platforms = this.physics.add.staticGroup();
     platforms.create(400, 568, 'platform').setScale(2).refreshBody();
 
-    platforms.create(600, 400, 'platform');
+    platforms.create(1000, 400, 'platform');
     platforms.create(50, 250, 'platform');
     platforms.create(750, 220, 'platform');
     this.player = this.physics.add.sprite(100, 450, 'dude');
@@ -64,8 +64,8 @@ export default class extends Phaser.Scene {
     //     },
     //   ],
     // });
-    this.physics.add.collider(this.player, this.platform);
-    this.physics.add.collider(this.enemy, this.platform);
+    this.physics.add.collider(this.player, platforms);
+    this.physics.add.collider(this.enemy, platforms);
   }
 
   update() {
