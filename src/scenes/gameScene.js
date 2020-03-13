@@ -26,7 +26,7 @@ export default class extends Phaser.Scene {
       frameWidth: 22,
       frameHeight: 22,
     });
-    this.game.load.spritesheet('spider', 'images/spider.png', {
+    this.load.spritesheet('spider', './assets/images/spider.png', {
       frameWidth: 42,
       frameHeight: 32,
     });
