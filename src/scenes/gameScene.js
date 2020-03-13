@@ -35,7 +35,7 @@ export default class extends Phaser.Scene {
 
   loadLevel(data) {
     data.platforms.forEach(this.spawnPlatform, this);
-    this.spawnCharacters({ hero: data.hero });
+    Hero.spawnCharacters({ hero: data.hero });
   }
 
   spawnPlatform(platform) {
