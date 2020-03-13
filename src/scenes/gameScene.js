@@ -26,6 +26,10 @@ export default class extends Phaser.Scene {
       frameWidth: 22,
       frameHeight: 22,
     });
+    this.game.load.spritesheet('spider', 'images/spider.png', {
+      frameWidth: 42,
+      frameHeight: 32,
+    });
   }
 
   create() {
@@ -38,11 +42,14 @@ export default class extends Phaser.Scene {
     data.platforms.forEach(this.spawnPlatform, this);
     this.platforms = this.add.group();
     this.coins = this.add.group();
+    this.spiders = this.add.group();
     data.coins.forEach(this.spawnCoin, this);
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
     this.physics.add.collider(this.player, this.platforms);
+    this.enemy = this.physics.add.sprite(200,450, 'spider');
+    this.enemy.setCollideWorldBounds(true);
   }
 
   spawnPlatform(platform) {
