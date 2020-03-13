@@ -21,7 +21,9 @@ export default class extends Phaser.Scene {
     this.load.on('complete', () => {
       makeAnimations(this);
     });
-    this.load.spritesheet('coin', './assets/images/coin_animated.png', 22, 22);
+    this.load.spritesheet('coin', './assets/images/coin_animated.png', {
+      frameWidth: 22, frameHeight: 22,
+    });
   }
 
   create() {
