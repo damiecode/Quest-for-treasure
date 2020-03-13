@@ -34,10 +34,10 @@ export default class extends Phaser.Scene {
 
   loadLevel(data) {
     data.platforms.forEach(this.spawnPlatform, this);
+    data.platforms.setCollisionByExclusion(-1, true);
   }
 
   spawnPlatform(platform) {
     this.add.sprite(platform.x, platform.y, platform.image);
-    platform.setCollisionByExclusion(-1, true);
   }
 }
