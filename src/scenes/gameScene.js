@@ -42,30 +42,30 @@ export default class extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
     this.enemy = this.physics.add.sprite(200, 450, 'spider');
     this.enemy.setCollideWorldBounds(true);
-    this.tweens.timeline({
-      targets: platforms.body.velocity,
-      loop: -1,
-      tweens: [
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: 150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: -150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-      ],
-    });
+    // this.tweens.timeline({
+    //   targets: platforms.body.velocity,
+    //   loop: -1,
+    //   tweens: [
+    //     {
+    //       x: 0, y: -200, duration: 2000, ease: 'Stepped',
+    //     },
+    //     {
+    //       x: 0, y: 0, duration: 1000, ease: 'Stepped',
+    //     },
+    //     {
+    //       x: 150, y: 100, duration: 4000, ease: 'Stepped',
+    //     },
+    //     {
+    //       x: 0, y: -200, duration: 2000, ease: 'Stepped',
+    //     },
+    //     {
+    //       x: 0, y: 0, duration: 1000, ease: 'Stepped',
+    //     },
+    //     {
+    //       x: -150, y: 100, duration: 4000, ease: 'Stepped',
+    //     },
+    //   ],
+    // });
     this.physics.add.collider(this.player, this.platform);
     this.physics.add.collider(this.enemy, this.platform);
   }
