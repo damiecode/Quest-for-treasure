@@ -1,10 +1,8 @@
 import Phaser from 'phaser';
 
 
-class Hero extends Phaser.Sprite {
+export default class Hero extends Phaser.Sprite {
   constructor(game, x, y) {
-    super(null);
+    super(game, x, y, 'hero');
   }
 }
-
-export default Hero;
