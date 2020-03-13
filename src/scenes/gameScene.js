@@ -26,10 +26,9 @@ export default class extends Phaser.Scene {
   create() {
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.loadLevel(this.cache.json.get('level:1'));
-    const player = this.physics.add.sprite(100, 450, 'dude').setOrigin(0.5, 0.5);
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
-    this.physics.add.collider(player, this.spawnPlatform);
+    this.player = this.physics.add.sprite(100, 450, 'dude');
+    this.player.setBounce(0.2);
+    this.player.setCollideWorldBounds(true);
   }
 
   loadLevel(data) {
@@ -38,5 +37,6 @@ export default class extends Phaser.Scene {
 
   spawnPlatform(platform) {
     this.add.sprite(platform.x, platform.y, platform.image);
+    this.physics.add.collider(this.player, platform);
   }
 }
