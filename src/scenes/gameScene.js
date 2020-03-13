@@ -50,8 +50,8 @@ export default class extends Phaser.Scene {
 
   spawnCoin(coin) {
     const sprite = this.coins.create(coin.x, coin.y, 'coin');
-    sprite.animations.add('rotate', [0, 1, 2, 1], 6, true);
-    sprite.animations.play('rotate');
+    // sprite.animations.add('rotate', [0, 1, 2, 1], 6, true);
+    // sprite.animations.play('rotate');
     this.game.physics.enable(sprite);
     sprite.body.allowGravity = false;
   }
