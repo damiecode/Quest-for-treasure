@@ -38,9 +38,9 @@ export default class extends Phaser.Scene {
 
   loadLevel(data) {
     data.platforms.forEach(this.spawnPlatform, this);
-    this.platforms = this.game.add.group();
-    this.coins = this.game.add.group();
-    this.spawnCharacters({ hero: data.hero, spiders: data.spiders });
+    this.platforms = this.add.group();
+    this.coins = this.add.group();
+    // this.spawnCharacters({ hero: data.hero, spiders: data.spiders });
     data.coins.forEach(this.spawnCoin, this);
   }
 
