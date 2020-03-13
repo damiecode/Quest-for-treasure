@@ -30,7 +30,7 @@ export default class extends Phaser.Scene {
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.cursors = this.input.keyboard.createCursorKeys();
     const platforms = this.physics.add.staticGroup();
-    platforms.create(1000, 568, 'platform').setOrigin(0, 0).setScale(2).refreshBody();
+    platforms.create(400, 568, 'platform').setScale(4).refreshBody();
 
     platforms.create(600, 400, 'platform');
     platforms.create(50, 250, 'platform');
