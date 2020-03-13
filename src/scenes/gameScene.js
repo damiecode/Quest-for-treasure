@@ -8,13 +8,7 @@ export default class extends Phaser.Scene {
 
   preload() {
     this.load.image('background', './assets/images/background.png');
-    this.load.json('level:1', './assets/data/level01.json');
-    this.load.image('ground', './assets/images/ground.png');
-    this.load.image('grass:8x1', './assets/images/grass_8x1.png');
-    this.load.image('grass:6x1', './assets/images/grass_6x1.png');
-    this.load.image('grass:4x1', './assets/images/grass_4x1.png');
-    this.load.image('grass:2x1', './assets/images/grass_2x1.png');
-    this.load.image('grass:1x1', './assets/images/grass_1x1.png');
+    this.load.image('platform', './assets/images/grass_4x1.png');
     this.load.spritesheet('dude', 'assets/images/dude.png', {
       frameWidth: 32,
       frameHeight: 48,
@@ -34,42 +28,33 @@ export default class extends Phaser.Scene {
 
   create() {
     this.add.image(0, 0, 'background').setOrigin(0, 0);
-    this.loadLevel(this.cache.json.get('level:1'));
     this.cursors = this.input.keyboard.createCursorKeys();
+    const platform = this.physics.add.image(100, 500, 'platform')
+      .setImmovable(true)
+      .setVelocity(100, -100);
+
+    platform.body.setAllowGravity(false);
+    const player = this.physics.add.sprite(100, 450, 'dude');
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+    const enemy = this.physics.add.sprite(200,450, 'spider');
+    enemy.setCollideWorldBounds(true);
+    this.physics.add.collider(player, platform);
+    this.physics.add.collider(enemy, platform);
   }
 
-  loadLevel(data) {
-    data.platforms.forEach(this.spawnPlatform, this);
-    this.platforms = this.add.group();
-    this.coins = this.add.group();
-    this.spiders = this.add.group();
-    data.coins.forEach(this.spawnCoin, this);
-    this.player = this.physics.add.sprite(100, 450, 'dude');
-    this.player.setBounce(0.2);
-    this.player.setCollideWorldBounds(true);
-    this.physics.add.collider(this.player, this.platforms);
-    this.enemy = this.physics.add.sprite(200,450, 'spider');
-    this.enemy.setCollideWorldBounds(true);
-  }
-
-  spawnPlatform(platform) {
-    this.add.sprite(platform.x, platform.y, platform.image);
-  }
-
-  spawnCoin(coin) {
-    const sprite = this.coins.create(coin.x, coin.y, 'coin');
-    // sprite.animations.add('rotate', [0, 1, 2, 1], 6, true);
-    // sprite.animations.play('rotate');
-  }
-
-  handleCollisions() {
-    this.game.physics.arcade.overlap(this.hero, this.coins, this.onHeroVsCoin,
-      null, this);
-  }
-
-  onHeroVsCoin(hero, coin) {
-    this.coin.kill();
-  }
+  this.tweens.timeline({
+    targets: platform.body.velocity,
+    loop: -1,
+    tweens: [
+      { x:    0, y: -200, duration: 2000, ease: 'Stepped' },
+      { x:    0, y:    0, duration: 1000, ease: 'Stepped' },
+      { x:  150, y:  100, duration: 4000, ease: 'Stepped' },
+      { x:    0, y: -200, duration: 2000, ease: 'Stepped' },
+      { x:    0, y:    0, duration: 1000, ease: 'Stepped' },
+      { x: -150, y:  100, duration: 4000, ease: 'Stepped' }
+    ]
+  });
 
   update() {
     if (this.cursors.left.isDown) {
