@@ -26,6 +26,7 @@ export default class extends Phaser.Scene {
       frameWidth: 22,
       frameHeight: 22,
     });
+    this.load.audio('sfx:jump', 'audio/jump.wav');
   }
 
   create() {
@@ -35,6 +36,9 @@ export default class extends Phaser.Scene {
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
+    this.sfx = {
+      jump: this.game.add.audio('sfx:jump'),
+    };
   }
 
   loadLevel(data) {
@@ -61,7 +65,8 @@ export default class extends Phaser.Scene {
     }
 
     if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
+      this.player.setVelocityY(-500);
+      this.sfx.jump.play();
     }
   }
 }
