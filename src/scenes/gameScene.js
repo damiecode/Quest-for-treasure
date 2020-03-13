@@ -21,6 +21,7 @@ export default class extends Phaser.Scene {
     this.load.on('complete', () => {
       makeAnimations(this);
     });
+    this.load.spritesheet('coin', './assets/images/coin_animated.png', 22, 22);
   }
 
   create() {
@@ -35,10 +36,23 @@ export default class extends Phaser.Scene {
 
   loadLevel(data) {
     data.platforms.forEach(this.spawnPlatform, this);
+    this.platforms = this.game.add.group();
+    this.coins = this.game.add.group();
+    this.spawnCharacters({ hero: data.hero, spiders: data.spiders });
+    data.coins.forEach(this.spawnCoin, this);
   }
 
   spawnPlatform(platform) {
     this.add.sprite(platform.x, platform.y, platform.image);
+  }
+
+  spawnCoin(coin) {
+    const sprite = this.coins.create(coin.x, coin.y, 'coin');
+    sprite.anchor.set(0.5, 0.5);
+    sprite.animations.add('rotate', [0, 1, 2, 1], 6, true);
+    sprite.animations.play('rotate');
+    this.physics.enable(sprite);
+    sprite.body.allowGravity = false;
   }
 
   update() {
@@ -46,13 +60,11 @@ export default class extends Phaser.Scene {
       this.player.setVelocityX(-160);
 
       this.player.anims.play('left', true);
-    }
-    else if (this.cursors.right.isDown) {
+    } else if (this.cursors.right.isDown) {
       this.player.setVelocityX(160);
 
       this.player.anims.play('right', true);
-    }
-    else {
+    } else {
       this.player.setVelocityX(0);
 
       this.player.anims.play('turn');
