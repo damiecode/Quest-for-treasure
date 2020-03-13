@@ -30,11 +30,12 @@ export default class extends Phaser.Scene {
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.cursors = this.input.keyboard.createCursorKeys();
     const platforms = this.physics.add.staticGroup();
-    platforms.create(400, 568, 'platform').setScale(2).refreshBody();
+    platforms.create(1000, 568, 'platform').setOrigin(0, 0).setScale(2).refreshBody();
 
-    platforms.create(1000, 400, 'platform');
+    platforms.create(600, 400, 'platform');
     platforms.create(50, 250, 'platform');
     platforms.create(750, 220, 'platform');
+    platforms.create(450, 120, 'platform');
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
