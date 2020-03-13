@@ -29,24 +29,21 @@ export default class extends Phaser.Scene {
   create() {
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.platform = this.physics.add.image(100, 500, 'platform')
-      .setImmovable(true)
-      .setVelocity(100, -100);
 
     this.platform.body.setAllowGravity(false);
     const platforms = this.physics.add.staticGroup();
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
-    this.platform.create(600, 400, 'ground');
-    this.platform.create(50, 250, 'ground');
-    this.platform.create(750, 220, 'ground');
+    platforms.create(600, 400, 'ground');
+    platforms.create(50, 250, 'ground');
+    platforms.create(750, 220, 'ground');
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
     this.enemy = this.physics.add.sprite(200, 450, 'spider');
     this.enemy.setCollideWorldBounds(true);
     this.tweens.timeline({
-      targets: this.platform.body.velocity,
+      targets: this.platforms.body.velocity,
       loop: -1,
       tweens: [
         {
