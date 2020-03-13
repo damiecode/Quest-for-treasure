@@ -32,9 +32,6 @@ export default class extends Phaser.Scene {
     this.add.image(0, 0, 'background').setOrigin(0, 0);
     this.loadLevel(this.cache.json.get('level:1'));
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.player = this.physics.add.sprite(100, 450, 'dude');
-    this.player.setBounce(0.2);
-    this.player.setCollideWorldBounds(true);
   }
 
   loadLevel(data) {
@@ -42,6 +39,10 @@ export default class extends Phaser.Scene {
     this.platforms = this.add.group();
     this.coins = this.add.group();
     data.coins.forEach(this.spawnCoin, this);
+    this.player = this.physics.add.sprite(100, 450, 'dude');
+    this.player.setBounce(0.2);
+    this.player.setCollideWorldBounds(true);
+    this.physics.add.collider(this.player, this.platforms);
   }
 
   spawnPlatform(platform) {
@@ -52,7 +53,6 @@ export default class extends Phaser.Scene {
     const sprite = this.coins.create(coin.x, coin.y, 'coin');
     // sprite.animations.add('rotate', [0, 1, 2, 1], 6, true);
     // sprite.animations.play('rotate');
-    
   }
 
   handleCollisions() {
