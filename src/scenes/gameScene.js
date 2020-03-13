@@ -41,9 +41,4 @@ export default class extends Phaser.Scene {
   spawnPlatform(platform) {
     this.add.sprite(platform.x, platform.y, platform.image);
   }
-
-  spawnCharacters(data) {
-    this.hero = new Hero(this.game, data.hero.x, data.hero.y);
-    this.add.existing(this.hero);
-  }
 }
