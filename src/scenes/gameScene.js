@@ -37,24 +37,35 @@ export default class extends Phaser.Scene {
     const player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
-    const enemy = this.physics.add.sprite(200,450, 'spider');
+    const enemy = this.physics.add.sprite(200, 450, 'spider');
     enemy.setCollideWorldBounds(true);
+    this.tweens.timeline({
+      targets: platform.body.velocity,
+      loop: -1,
+      tweens: [
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: 150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+      ],
+    });
     this.physics.add.collider(player, platform);
     this.physics.add.collider(enemy, platform);
   }
-
-  this.tweens.timeline({
-    targets: platform.body.velocity,
-    loop: -1,
-    tweens: [
-      { x:    0, y: -200, duration: 2000, ease: 'Stepped' },
-      { x:    0, y:    0, duration: 1000, ease: 'Stepped' },
-      { x:  150, y:  100, duration: 4000, ease: 'Stepped' },
-      { x:    0, y: -200, duration: 2000, ease: 'Stepped' },
-      { x:    0, y:    0, duration: 1000, ease: 'Stepped' },
-      { x: -150, y:  100, duration: 4000, ease: 'Stepped' }
-    ]
-  });
 
   update() {
     if (this.cursors.left.isDown) {
