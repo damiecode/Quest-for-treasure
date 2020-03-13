@@ -34,6 +34,11 @@ export default class extends Phaser.Scene {
       .setVelocity(100, -100);
 
     this.platform.body.setAllowGravity(false);
+    this.platform.create(400, 568, 'ground').setScale(2).refreshBody();
+
+    this.platform.create(600, 400, 'ground');
+    this.platform.create(50, 250, 'ground');
+    this.platform.create(750, 220, 'ground');
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
@@ -83,7 +88,7 @@ export default class extends Phaser.Scene {
     }
 
     if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-500);
+      this.player.setVelocityY(-330);
     }
   }
 }
