@@ -6,3 +6,5 @@ class Hero extends Phaser.Sprite {
     super(game, x, y, 'hero');
   }
 }
+
+export default Hero;

@@ -17,7 +17,7 @@ export default class extends Phaser.Scene {
     this.load.image('grass:2x1', './assets/images/grass_2x1.png');
     this.load.image('grass:1x1', './assets/images/grass_1x1.png');
     this.load.spritesheet('dude',
-      'assets/dude.png',
+      'assets/images/dude.png',
       { frameWidth: 32, frameHeight: 48 });
     this.load.on('complete', () => {
       makeAnimations(this);
