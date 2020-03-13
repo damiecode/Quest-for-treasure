@@ -15,3 +15,5 @@ class Hero extends Phaser.Sprite {
     this.body.velocity.x = direction * SPEED;
   }
 }
+
+export default Hero;
