@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 
 
-export default class extends Phaser.Sprite {
-  constructor(_game, _x, _y) {
-    super({ key: 'Hero' });
+class Hero extends Phaser.Sprite {
+  constructor(game, x, y) {
+    super(game, x, y, 'hero');
   }
 }
