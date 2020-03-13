@@ -34,7 +34,8 @@ export default class extends Phaser.Scene {
       .setVelocity(100, -100);
 
     this.platform.body.setAllowGravity(false);
-    this.platform.create(400, 568, 'ground').setScale(2).refreshBody();
+    const platforms = this.physics.add.staticGroup();
+    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
     this.platform.create(600, 400, 'ground');
     this.platform.create(50, 250, 'ground');
