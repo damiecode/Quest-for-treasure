@@ -39,7 +39,7 @@ export default class extends Phaser.Scene {
       frameHeight: 22,
     });
 
-    this.game.load.spritesheet('door', 'assets/images/door.png', {
+    this.load.spritesheet('door', 'assets/images/door.png', {
       frameWidth: 42,
       frameHeight: 66,
     });
@@ -128,6 +128,7 @@ export default class extends Phaser.Scene {
 
     player.anims.play('turn');
 
+    // eslint-disable-next-line no-undef
     gameOver = true;
   }
 }
