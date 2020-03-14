@@ -35,7 +35,7 @@ export default class extends Phaser.Scene {
       frameHeight: 22,
     });
     this.load.spritesheet('spider', './assets/images/spider.png', {
-      frameWidth: 22,
+      frameWidth: 32,
       frameHeight: 22,
     });
 
@@ -69,13 +69,13 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(enemy, platforms);
 
-    door = this.physics.add.group();
+    door = this.physics.add.staticGroup();
     door.create(0, 0, 'door');
 
-    key = this.physics.add.group();
-    key.create(600,600);
+    key = this.physics.add.staticGroup();
+    key.create(600, 600);
 
-    coins = this.physics.add.group({
+    coins = this.physics.add.staticGroup({
       key: 'coin',
       repeat: 11,
       setXY: { x: 12, y: 0, stepX: 70 },
