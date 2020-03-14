@@ -7,8 +7,10 @@ export default class extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('background', './assets/images/background.png');
-    this.load.image('platform', './assets/images/grass_4x1.png');
+    this.load.image('trees', 'assets/images/trees.png');
+    this.load.image('clouds', 'assets/images/clouds.png');
+    this.load.image('platform', 'assets/images/platform.png');
+    this.load.image('ice-platform', 'assets/images/ice-platform.png');
     this.load.spritesheet('dude', 'assets/images/dude.png', {
       frameWidth: 32,
       frameHeight: 48,
@@ -27,49 +29,47 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(0, 0, 'background').setOrigin(0, 0);
+    this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
+    this.sky.fixedToCamera = true;
+    this.add.sprite(0, 1906, 'trees');
     this.cursors = this.input.keyboard.createCursorKeys();
-    const platforms = this.physics.add.staticGroup();
-    platforms.create(400, 568, 'platform').setScale(4).refreshBody();
+    this.platforms = this.add.physicsGroup();
 
-    platforms.create(600, 400, 'platform');
-    platforms.create(50, 250, 'platform');
-    platforms.create(750, 220, 'platform');
-    platforms.create(450, 120, 'platform');
+    this.platforms.create(0, 64, 'ice-platform');
+    this.platforms.create(200, 180, 'platform');
+    this.platforms.create(400, 296, 'ice-platform');
+    this.platforms.create(600, 412, 'platform');
+
+    this.platforms.setAll('body.allowGravity', false);
+    this.platforms.setAll('body.immovable', true);
+    this.platforms.setAll('body.velocity.x', 100);
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
+    this.camera.follow(this.player);
     this.enemy = this.physics.add.sprite(200, 450, 'spider');
     this.enemy.setCollideWorldBounds(true);
-    // this.tweens.timeline({
-    //   targets: platforms.body.velocity,
-    //   loop: -1,
-    //   tweens: [
-    //     {
-    //       x: 0, y: -200, duration: 2000, ease: 'Stepped',
-    //     },
-    //     {
-    //       x: 0, y: 0, duration: 1000, ease: 'Stepped',
-    //     },
-    //     {
-    //       x: 150, y: 100, duration: 4000, ease: 'Stepped',
-    //     },
-    //     {
-    //       x: 0, y: -200, duration: 2000, ease: 'Stepped',
-    //     },
-    //     {
-    //       x: 0, y: 0, duration: 1000, ease: 'Stepped',
-    //     },
-    //     {
-    //       x: -150, y: 100, duration: 4000, ease: 'Stepped',
-    //     },
-    //   ],
-    // });
-    this.physics.add.collider(this.player, platforms);
-    this.physics.add.collider(this.enemy, platforms);
+
+    this.coins = this.physics.add.group({
+      key: 'coin',
+      repeat: 11,
+      setXY: { x: 12, y: 0, stepX: 70 },
+    });
+
+    this.coins.children.iterate((child) => {
+      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+  }
+
+  collectCoin(this.player, this.coins) {
+    this.coins.disableBody(true, true);
   }
 
   update() {
+    this.sky.tilePosition.y = -(this.camera.y * 0.7);
+    this.physics.add.collider(this.player, this.platforms);
+    this.physics.add.collider(this.enemy, this.platforms);
+    this.physics.add.collider(this.coins, this.platforms);
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-160);
 
