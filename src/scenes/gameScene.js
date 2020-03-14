@@ -33,7 +33,7 @@ export default class extends Phaser.Scene {
     this.sky.fixedToCamera = true;
     this.add.sprite(0, 1906, 'trees');
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.platforms = this.add.physicsGroup();
+    this.platforms = this.physics.add.staticGroup();
 
     this.platforms.create(0, 64, 'ice-platform');
     this.platforms.create(200, 180, 'platform');
