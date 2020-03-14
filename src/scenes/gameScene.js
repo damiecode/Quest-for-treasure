@@ -60,7 +60,6 @@ export default class extends Phaser.Scene {
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(enemy, platforms);
-    this.physics.add.collider(coins, platforms);
 
     coins = this.physics.add.group({
       key: 'coin',
