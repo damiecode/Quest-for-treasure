@@ -61,7 +61,7 @@ export default class extends Phaser.Scene {
     platforms.create(200, 180, 'platform');
     platforms.create(400, 296, 'ice-platform');
     platforms.create(600, 412, 'platform');
-    platforms.create(700, 296, 'ice-platform');
+    platforms.create(400, 496, 'ice-platform');
     platforms.create(800, 80, 'platform');
 
     player = this.physics.add.sprite(100, 450, 'dude');
@@ -82,7 +82,7 @@ export default class extends Phaser.Scene {
     door.create(20, 450, 'door');
 
     key = this.physics.add.staticGroup();
-    key.create(20, 20);
+    key.create(20, 20, 'key');
 
     coins = this.physics.add.group({
       key: 'coin',
