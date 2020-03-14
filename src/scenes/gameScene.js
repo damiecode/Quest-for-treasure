@@ -1,6 +1,14 @@
 import Phaser from 'phaser';
 import makeAnimations from '../animations/heroanimations';
 
+
+let player;
+let coins;
+let platforms;
+let cursors;
+let enemy;
+
+
 export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
@@ -31,43 +39,43 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    this.add.sprite(0, 0, 'background').setOrigin(0, 0);
+    this.add.sprite(0, 0, 'background').setOrigin(0, 0).setScale(2);
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
     this.add.sprite(0, 1906, 'trees');
     this.cursors = this.input.keyboard.createCursorKeys();
-    this.platforms = this.physics.add.staticGroup();
+    platforms = this.physics.add.staticGroup();
 
-    this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    this.platforms.create(0, 64, 'ice-platform');
-    this.platforms.create(200, 180, 'platform');
-    this.platforms.create(400, 296, 'ice-platform');
-    this.platforms.create(600, 412, 'platform');
+    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(0, 64, 'ice-platform');
+    platforms.create(200, 180, 'platform');
+    platforms.create(400, 296, 'ice-platform');
+    platforms.create(600, 412, 'platform');
 
-    this.player = this.physics.add.sprite(100, 450, 'dude');
-    this.player.setBounce(0.2);
-    this.player.setCollideWorldBounds(true);
-    this.enemy = this.physics.add.sprite(200, 450, 'spider');
-    this.enemy.setCollideWorldBounds(true);
+    player = this.physics.add.sprite(100, 450, 'dude');
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+    enemy = this.physics.add.sprite(200, 450, 'spider');
+    enemy.setCollideWorldBounds(true);
 
-    this.physics.add.collider(this.player, this.platforms);
-    this.physics.add.collider(this.enemy, this.platforms);
-    this.physics.add.collider(this.coins, this.platforms);
+    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(enemy, platforms);
+    this.physics.add.collider(coins, platforms);
 
-    this.coins = this.physics.add.group({
+    coins = this.physics.add.group({
       key: 'coin',
       repeat: 11,
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
-    // this.coins.children.iterate((child) => {
-    //   child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    // });
-  }
+    coins.children.iterate((child) => {
+      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
 
-  // collectCoin(player, coins) {
-  //   this.coins.disableBody(true, true);
-  // }
+    this.physics.add.collider(coins, platforms);
+
+    this.physics.add.overlap(player, coins, collectCoin, null, this);
+  }
 
   update() {
     if (this.cursors.left.isDown) {
@@ -87,5 +95,10 @@ export default class extends Phaser.Scene {
     if (this.cursors.up.isDown && this.player.body.touching.down) {
       this.player.setVelocityY(-330);
     }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  collectCoin(player, coins) {
+    coins.disableBody(true, true);
   }
 }
