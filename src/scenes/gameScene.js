@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
-import playerFactory from '../characters/player';
+import PlayerFactory from '../characters/player';
 
-let player;
+const player = new PlayerFactory();
 let coins;
 let platforms;
 let cursors;

@@ -1,4 +1,4 @@
-const playerFactory = (player, coins, platforms, enemy, door, key) => {
+const PlayerFactory = (player, coins, platforms, enemy, door, key) => {
   player = this.physics.add.sprite(100, 450, 'dude');
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(player, door);
@@ -13,4 +13,4 @@ const playerFactory = (player, coins, platforms, enemy, door, key) => {
   });
 };
 
-export default playerFactory;
+export default PlayerFactory;
