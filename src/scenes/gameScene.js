@@ -22,7 +22,7 @@ export default class extends Phaser.Scene {
   }
 
   init() {
-    this.coinPickupCount = 0;
+    this.hasKey = false;
   }
 
   preload() {
@@ -82,7 +82,6 @@ export default class extends Phaser.Scene {
     enemy.setCollideWorldBounds(true);
     enemy1.setCollideWorldBounds(true);
     enemy2.setCollideWorldBounds(true);
-    enemy.anims.play('crawl');
 
     enemyWalls = this.physics.add.staticGroup();
     enemyWalls.create(158, 250, 'invisible-wall');
@@ -119,6 +118,11 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(coins, platforms);
 
     this.physics.add.overlap(player, coins, this.collectCoin, null, this);
+    this.physics.add.overlap(player, key, this.collectKey, null, this);
+    this.physics.add.overlap(player, door, this.openDoor,
+      function (player, door) {
+        return this.hasKey && player.body.touching.down;
+      }, this);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -143,16 +147,19 @@ export default class extends Phaser.Scene {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  collectCoin(player, coins) {
+  collectCoin(_player, coins) {
     coins.disableBody(true, true);
     score += 10;
     scoreText.setText(`Score: ${score}`);
+  }
 
-    // if (coins.countActive(true) === 0) {
-    //   coins.children.iterate((child) => {
-    //     child.enableBody(true, child.x, 0, true, true);
-    //   });
-    // }
+  collectKey(_player, key) {
+    key.disableBody(true, true);
+    this.hasKey = true;
+  }
+
+  openDoor(player, door) {
+    this.scene.start('OptionsScene');
   }
 
   createHud() {
@@ -163,7 +170,7 @@ export default class extends Phaser.Scene {
   }
 
 
-  hitBomb(player, enemy) {
+  hitBomb(player, _enemy) {
     this.physics.pause();
 
     player.setTint(0xff0000);
@@ -178,7 +185,7 @@ export default class extends Phaser.Scene {
     this.physics.add.overlap(player, enemy, this.onHeroVsEnemy, null, this);
   }
 
-  onHeroVsEnemy(hero, enemy) {
+  onHeroVsEnemy(_hero, enemy) {
     if (player.body.velocity.y > 0) {
       enemy.disableBody(true, true);
     } else {
