@@ -70,7 +70,6 @@ export default class extends Phaser.Scene {
   // }
 
   update() {
-    this.sky.tilePosition.y = -(this.camera.y * 0.7);
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-160);
 
