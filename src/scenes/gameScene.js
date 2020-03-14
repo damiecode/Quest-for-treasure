@@ -97,6 +97,7 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(enemy1, enemyWalls);
     this.physics.add.collider(enemy2, enemyWalls);
 
+    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     this.createHud();
 
     door = this.physics.add.staticGroup();
