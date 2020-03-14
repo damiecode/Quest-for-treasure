@@ -39,11 +39,11 @@ export default class extends Phaser.Scene {
       frameHeight: 22,
     });
 
-    this.load.spritesheet('door', 'assets/images/door.png', {
+    this.load.spritesheet('door', './assets/images/door.png', {
       frameWidth: 42,
       frameHeight: 66,
     });
-    this.load.image('key', 'assets/images/key.png');
+    this.load.image('key', './assets/images/key.png');
   }
 
   create() {
@@ -70,12 +70,12 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(enemy, platforms);
 
     door = this.physics.add.staticGroup();
-    door.create(0, 0, 'door');
+    door.create(20, 500, 'door');
 
     key = this.physics.add.staticGroup();
-    key.create(600, 600);
+    key.create(20, 0);
 
-    coins = this.physics.add.staticGroup({
+    coins = this.physics.add.group({
       key: 'coin',
       repeat: 11,
       setXY: { x: 12, y: 0, stepX: 70 },
