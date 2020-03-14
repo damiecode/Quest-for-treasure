@@ -141,7 +141,6 @@ export default class extends Phaser.Scene {
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
     }
-    this.coinFont.text = `x${this.coinPickupCount}`;
   }
 
   // eslint-disable-next-line class-methods-use-this
