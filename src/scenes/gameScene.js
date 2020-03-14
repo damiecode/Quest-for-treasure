@@ -12,12 +12,13 @@ let enemy2;
 let door;
 let key;
 let enemyWalls;
+let score = 0;
+let scoreText;
 
 
 export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
-    this.score = 0;
   }
 
   init() {
@@ -96,9 +97,6 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(enemy1, enemyWalls);
     this.physics.add.collider(enemy2, enemyWalls);
 
-    this.registry.set('score', this.score);
-    this.scoreText = this.add.text(10, 10, 'Score: 0', { font: '32px Arial', fill: '#000000' });
-
     this.createHud();
 
     door = this.physics.add.staticGroup();
@@ -146,7 +144,14 @@ export default class extends Phaser.Scene {
   // eslint-disable-next-line class-methods-use-this
   collectCoin(player, coins) {
     coins.disableBody(true, true);
-    this.score += 1;
+    score += 10;
+    scoreText.setText(`Score: ${score}`);
+
+    if (coins.countActive(true) === 0) {
+      coins.children.iterate((child) => {
+        child.enableBody(true, child.x, 0, true, true);
+      });
+    }
   }
 
   createHud() {
