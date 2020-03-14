@@ -8,7 +8,7 @@ export default class extends Phaser.Scene {
 
   preload() {
     this.load.image('ground', 'assets/images/ground.png');
-    this.load.image('background', 'assets/background.png');
+    this.load.image('background', 'assets/images/background.png');
     this.load.image('trees', 'assets/images/trees.png');
     this.load.image('clouds', 'assets/images/clouds.png');
     this.load.image('platform', 'assets/images/platform.png');
@@ -47,9 +47,12 @@ export default class extends Phaser.Scene {
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
-    this.camera.follow(this.player);
     this.enemy = this.physics.add.sprite(200, 450, 'spider');
     this.enemy.setCollideWorldBounds(true);
+
+    this.physics.add.collider(this.player, this.platforms);
+    this.physics.add.collider(this.enemy, this.platforms);
+    this.physics.add.collider(this.coins, this.platforms);
 
     this.coins = this.physics.add.group({
       key: 'coin',
@@ -68,9 +71,6 @@ export default class extends Phaser.Scene {
 
   update() {
     this.sky.tilePosition.y = -(this.camera.y * 0.7);
-    this.physics.add.collider(this.player, this.platforms);
-    this.physics.add.collider(this.enemy, this.platforms);
-    this.physics.add.collider(this.coins, this.platforms);
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-160);
 
