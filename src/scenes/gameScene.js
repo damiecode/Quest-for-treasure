@@ -7,6 +7,8 @@ export default class extends Phaser.Scene {
   }
 
   preload() {
+    this.load.image('ground', 'assets/images/ground.png');
+    this.load.image('background', 'assets/background.png');
     this.load.image('trees', 'assets/images/trees.png');
     this.load.image('clouds', 'assets/images/clouds.png');
     this.load.image('platform', 'assets/images/platform.png');
@@ -29,20 +31,18 @@ export default class extends Phaser.Scene {
   }
 
   create() {
+    this.add.sprite(0, 0, 'background').setOrigin(0, 0);
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
     this.add.sprite(0, 1906, 'trees');
     this.cursors = this.input.keyboard.createCursorKeys();
     this.platforms = this.physics.add.staticGroup();
 
+    this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
     this.platforms.create(0, 64, 'ice-platform');
     this.platforms.create(200, 180, 'platform');
     this.platforms.create(400, 296, 'ice-platform');
     this.platforms.create(600, 412, 'platform');
-
-    this.platforms.setAll('body.allowGravity', false);
-    this.platforms.setAll('body.immovable', true);
-    this.platforms.setAll('body.velocity.x', 100);
 
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.player.setBounce(0.2);
