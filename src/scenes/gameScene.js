@@ -72,8 +72,8 @@ export default class extends Phaser.Scene {
     enemy.anims.play('crawl');
 
     enemyWalls = this.physics.add.staticGroup();
-    enemyWalls.create(198, 180, 'invisible-wall');
-    enemyWalls.create(240, 180, 'invisible-wall');
+    enemyWalls.create(158, 250, 'invisible-wall');
+    enemyWalls.create(270, 250, 'invisible-wall');
     // enemyWalls.setVisible = false;
 
     this.physics.add.collider(player, platforms);
