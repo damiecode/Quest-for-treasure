@@ -74,7 +74,7 @@ export default class extends Phaser.Scene {
 
     this.physics.add.collider(coins, platforms);
 
-    this.physics.add.overlap(player, coins, collectCoin, null, this);
+    this.physics.add.overlap(player, coins, this.collectCoin, null, this);
   }
 
   update() {
