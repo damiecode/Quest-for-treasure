@@ -7,6 +7,8 @@ let coins;
 let platforms;
 let cursors;
 let enemy;
+let enemy1;
+let enemy2;
 let door;
 let key;
 let enemyWalls;
@@ -67,11 +69,12 @@ export default class extends Phaser.Scene {
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
-    enemy = this.physics.add.group();
-    enemy = this.create(121, 399, 'spider');
-    enemy = this.create(800, 362, 'spider');
-    enemy = this.create(500, 147, 'spider');
+    enemy = this.physics.add.sprite(121, 399, 'spider');
+    enemy1 = this.physics.add.sprite(800, 362, 'spider');
+    enemy2 = this.physics.add.sprite(500, 147, 'spider');
     enemy.setCollideWorldBounds(true);
+    enemy1.setCollideWorldBounds(true);
+    enemy2.setCollideWorldBounds(true);
     enemy.anims.play('crawl');
 
     enemyWalls = this.physics.add.staticGroup();
@@ -81,7 +84,11 @@ export default class extends Phaser.Scene {
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(enemy, platforms);
+    this.physics.add.collider(enemy1, platforms);
+    this.physics.add.collider(enemy2, platforms);
     this.physics.add.collider(enemy, enemyWalls);
+    this.physics.add.collider(enemy1, enemyWalls);
+    this.physics.add.collider(enemy2, enemyWalls);
 
     door = this.physics.add.staticGroup();
     door.create(20, 450, 'door');
