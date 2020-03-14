@@ -69,15 +69,11 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(enemy, platforms);
 
-    door = this.physics.add.group({
-      key: 'door',
-      setXY: { x: 12, y: 0, stepX: 70 },
-    });
+    door = this.physics.add.group();
+    door.create(0, 0, 'door');
 
-    key = this.physics.add.group({
-      key: 'key',
-      setXY: { x: 12, y: 0, stepX: 70 },
-    });
+    key = this.physics.add.group();
+    key.create(600,600);
 
     coins = this.physics.add.group({
       key: 'coin',
