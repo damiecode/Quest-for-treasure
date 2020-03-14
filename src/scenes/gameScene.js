@@ -67,6 +67,7 @@ export default class extends Phaser.Scene {
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
+    enemy = this.physics.add.group();
     enemy = this.physics.add.sprite(121, 399, 'spider');
     enemy = this.physics.add.sprite(800, 362, 'spider');
     enemy = this.physics.add.sprite(500, 147, 'spider');
