@@ -148,11 +148,11 @@ export default class extends Phaser.Scene {
     score += 10;
     scoreText.setText(`Score: ${score}`);
 
-    if (coins.countActive(true) === 0) {
-      coins.children.iterate((child) => {
-        child.enableBody(true, child.x, 0, true, true);
-      });
-    }
+    // if (coins.countActive(true) === 0) {
+    //   coins.children.iterate((child) => {
+    //     child.enableBody(true, child.x, 0, true, true);
+    //   });
+    // }
   }
 
   createHud() {
