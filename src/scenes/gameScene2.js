@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
-import playerFactory from '../characters/player';
+
 
 let player;
 let coins;
@@ -19,7 +19,7 @@ let scoreText;
 
 export default class extends Phaser.Scene {
   constructor() {
-    super({ key: 'GameScene' });
+    super({ key: 'GameScene2' });
   }
 
   init() {
@@ -73,6 +73,9 @@ export default class extends Phaser.Scene {
     platforms.create(700, 296, 'ice-platform');
     platforms.create(400, 80, 'platform');
 
+    player = this.physics.add.sprite(100, 450, 'dude');
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
     enemy = this.physics.add.sprite(160, 20, 'spider');
     enemy1 = this.physics.add.sprite(700, 20, 'spider');
     enemy2 = this.physics.add.sprite(400, 200, 'spider');
@@ -85,6 +88,7 @@ export default class extends Phaser.Scene {
     enemyWalls.create(270, 250, 'invisible-wall');
     // enemyWalls.setVisible = false;
 
+    this.physics.add.collider(player, platforms);
     this.physics.add.collider(enemy, platforms);
     this.physics.add.collider(enemy1, platforms);
     this.physics.add.collider(enemy2, platforms);
@@ -112,6 +116,11 @@ export default class extends Phaser.Scene {
     });
 
     this.physics.add.collider(coins, platforms);
+    this.physics.add.collider(player, door);
+    this.physics.add.overlap(player, coins, this.collectCoin, null, this);
+    this.physics.add.overlap(player, key, this.collectKey, null, this);
+    this.physics.add.overlap(player, door, this.openDoor,
+      (player, door) => this.hasKey && player.body.touching.down, this);
   }
 
   // eslint-disable-next-line class-methods-use-this
