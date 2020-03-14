@@ -43,7 +43,7 @@ export default class extends Phaser.Scene {
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
     this.add.sprite(0, 1906, 'trees');
-    this.cursors = this.input.keyboard.createCursorKeys();
+    cursors = this.input.keyboard.createCursorKeys();
     platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
@@ -76,23 +76,24 @@ export default class extends Phaser.Scene {
     this.physics.add.overlap(player, coins, this.collectCoin, null, this);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   update() {
-    if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-160);
+    if (cursors.left.isDown) {
+      player.setVelocityX(-160);
 
-      this.player.anims.play('left', true);
-    } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(160);
+      player.anims.play('left', true);
+    } else if (cursors.right.isDown) {
+      player.setVelocityX(160);
 
-      this.player.anims.play('right', true);
+      player.anims.play('right', true);
     } else {
-      this.player.setVelocityX(0);
+      player.setVelocityX(0);
 
-      this.player.anims.play('turn');
+      player.anims.play('turn');
     }
 
-    if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
+    if (cursors.up.isDown && player.body.touching.down) {
+      player.setVelocityY(-330);
     }
   }
 
