@@ -7,6 +7,8 @@ let coins;
 let platforms;
 let cursors;
 let enemy;
+let door;
+let key;
 
 
 export default class extends Phaser.Scene {
@@ -33,9 +35,15 @@ export default class extends Phaser.Scene {
       frameHeight: 22,
     });
     this.load.spritesheet('spider', './assets/images/spider.png', {
-      frameWidth: 42,
-      frameHeight: 32,
+      frameWidth: 22,
+      frameHeight: 22,
     });
+
+    this.game.load.spritesheet('door', 'assets/images/door.png', {
+      frameWidth: 42,
+      frameHeight: 66,
+    });
+    this.load.image('key', 'assets/images/key.png');
   }
 
   create() {
@@ -60,6 +68,16 @@ export default class extends Phaser.Scene {
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(enemy, platforms);
+
+    door = this.physics.add.group({
+      key: 'door',
+      setXY: { x: 12, y: 0, stepX: 70 },
+    });
+
+    key = this.physics.add.group({
+      key: 'key',
+      setXY: { x: 12, y: 0, stepX: 70 },
+    });
 
     coins = this.physics.add.group({
       key: 'coin',
@@ -100,5 +118,16 @@ export default class extends Phaser.Scene {
   // eslint-disable-next-line class-methods-use-this
   collectCoin(player, coins) {
     coins.disableBody(true, true);
+  }
+
+
+  hitBomb(player, enemy) {
+    this.physics.pause();
+
+    player.setTint(0xff0000);
+
+    player.anims.play('turn');
+
+    gameOver = true;
   }
 }
