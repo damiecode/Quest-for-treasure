@@ -71,7 +71,7 @@ export default class extends Phaser.Scene {
     enemy = this.physics.add.sprite(800, 362, 'spider');
     enemy = this.physics.add.sprite(500, 147, 'spider');
     enemy.setCollideWorldBounds(true);
-    enemy.anims.play('eWalkLeft', true);
+    enemy.anims.play('crawl');
 
     enemyWalls = this.physics.add.staticGroup();
     enemyWalls.create(158, 250, 'invisible-wall');
