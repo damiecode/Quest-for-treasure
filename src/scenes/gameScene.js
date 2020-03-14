@@ -60,14 +60,14 @@ export default class extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
-    this.coins.children.iterate((child) => {
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-    });
+    // this.coins.children.iterate((child) => {
+    //   child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    // });
   }
 
-  collectCoin(player, coins) {
-    this.coins.disableBody(true, true);
-  }
+  // collectCoin(player, coins) {
+  //   this.coins.disableBody(true, true);
+  // }
 
   update() {
     this.sky.tilePosition.y = -(this.camera.y * 0.7);
