@@ -75,6 +75,7 @@ export default class extends Phaser.Scene {
     enemy.setCollideWorldBounds(true);
     enemy1.setCollideWorldBounds(true);
     enemy2.setCollideWorldBounds(true);
+    enemy.anims.play('crawl');
 
     enemyWalls = this.physics.add.staticGroup();
     enemyWalls.create(158, 250, 'invisible-wall');

@@ -21,8 +21,8 @@ export default function makeAnimations(scene) {
 
   scene.anims.create({
     key: 'crawl',
-    frames: scene.anims.generateFrameNumbers('spider', { start: 0, end: 3 }),
-    frameRate: 1,
+    frames: scene.anims.generateFrameNumbers('spider', { start: 0, end: 2 }),
+    frameRate: 8,
     repeat: -1,
   });
 
