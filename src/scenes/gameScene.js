@@ -43,6 +43,7 @@ export default class extends Phaser.Scene {
     this.platforms.setAll('body.allowGravity', false);
     this.platforms.setAll('body.immovable', true);
     this.platforms.setAll('body.velocity.x', 100);
+
     this.player = this.physics.add.sprite(100, 450, 'dude');
     this.player.setBounce(0.2);
     this.player.setCollideWorldBounds(true);
@@ -61,7 +62,7 @@ export default class extends Phaser.Scene {
     });
   }
 
-  collectCoin(this.player, this.coins) {
+  collectCoin(player, coins) {
     this.coins.disableBody(true, true);
   }
 
