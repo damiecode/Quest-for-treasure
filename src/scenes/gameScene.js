@@ -53,8 +53,7 @@ export default class extends Phaser.Scene {
     });
     this.load.image('key', './assets/images/key.png');
     this.load.image('invisible-wall', './assets/images/invisible_wall.png');
-    this.load.image('icon:coin', 'images/coin_icon.png');
-    this.load.image('font:numbers', 'images/numbers.png');
+    this.load.image('icon:coin', 'assets/images/coin_icon.png');
   }
 
   create() {
@@ -153,18 +152,9 @@ export default class extends Phaser.Scene {
 
   createHud() {
     const coinIcon = this.make.image(0, 0, 'icon:coin');
-    const NUMBERS_STR = '0123456789X ';
-    this.coinFont = this.add.retroFont('font:numbers', 20, 26,
-      NUMBERS_STR, 6);
-
-    const coinScoreImg = this.game.make.image(coinIcon.x + coinIcon.width,
-      coinIcon.height / 2, this.coinFont);
-    coinScoreImg.setOrigin(0, 0.5);
-
     this.hud = this.physics.add.group();
     this.hud.add(coinIcon);
     this.hud.setOrigin(10, 10);
-    this.hud.add(coinScoreImg);
   }
 
 
