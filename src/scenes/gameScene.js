@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import makeAnimations from '../animations/heroanimations';
+import makeAnimations from '../animations/animations';
 
 
 let player;
@@ -9,6 +9,7 @@ let cursors;
 let enemy;
 let door;
 let key;
+let enemyWalls;
 
 
 export default class extends Phaser.Scene {
@@ -44,6 +45,7 @@ export default class extends Phaser.Scene {
       frameHeight: 66,
     });
     this.load.image('key', './assets/images/key.png');
+    this.load.image('invisible-wall', './assets/images/invisible_wall.png');
   }
 
   create() {
@@ -59,6 +61,8 @@ export default class extends Phaser.Scene {
     platforms.create(200, 180, 'platform');
     platforms.create(400, 296, 'ice-platform');
     platforms.create(600, 412, 'platform');
+    platforms.create(700, 296, 'ice-platform');
+    platforms.create(800, 80, 'platform');
 
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
@@ -66,18 +70,23 @@ export default class extends Phaser.Scene {
     enemy = this.physics.add.sprite(200, 450, 'spider');
     enemy.setCollideWorldBounds(true);
 
+    enemyWalls = this.physics.add.staticGroup();
+    enemyWalls.create();
+    enemyWalls.setVisible = false;
+
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(enemy, platforms);
+    this.physics.add.collider(enemy, enemyWalls);
 
     door = this.physics.add.staticGroup();
-    door.create(20, 500, 'door');
+    door.create(20, 450, 'door');
 
     key = this.physics.add.staticGroup();
-    key.create(20, 0);
+    key.create(20, 20);
 
     coins = this.physics.add.group({
       key: 'coin',
-      repeat: 11,
+      repeat: 15,
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
