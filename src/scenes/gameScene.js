@@ -61,8 +61,8 @@ export default class extends Phaser.Scene {
     platforms.create(200, 180, 'platform');
     platforms.create(400, 296, 'ice-platform');
     platforms.create(600, 412, 'platform');
-    platforms.create(400, 496, 'ice-platform');
-    platforms.create(800, 80, 'platform');
+    platforms.create(700, 296, 'ice-platform');
+    platforms.create(400, 80, 'platform');
 
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
