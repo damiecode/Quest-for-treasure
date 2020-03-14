@@ -17,6 +17,11 @@ let enemyWalls;
 export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
+    this.score = 0;
+  }
+
+  init() {
+    this.coinPickupCount = 0;
   }
 
   preload() {
@@ -48,6 +53,8 @@ export default class extends Phaser.Scene {
     });
     this.load.image('key', './assets/images/key.png');
     this.load.image('invisible-wall', './assets/images/invisible_wall.png');
+    this.load.image('icon:coin', 'images/coin_icon.png');
+    this.load.image('font:numbers', 'images/numbers.png');
   }
 
   create() {
@@ -90,6 +97,11 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(enemy1, enemyWalls);
     this.physics.add.collider(enemy2, enemyWalls);
 
+    this.registry.set('score', this.score);
+    this.scoreText = this.add.text(10, 10, 'Score: 0', { font: '32px Arial', fill: '#000000' });
+
+    this.createHud();
+
     door = this.physics.add.staticGroup();
     door.create(20, 450, 'door');
 
@@ -130,11 +142,29 @@ export default class extends Phaser.Scene {
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
     }
+    this.coinFont.text = `x${this.coinPickupCount}`;
   }
 
   // eslint-disable-next-line class-methods-use-this
   collectCoin(player, coins) {
     coins.disableBody(true, true);
+    this.score += 1;
+  }
+
+  createHud() {
+    const coinIcon = this.make.image(0, 0, 'icon:coin');
+    const NUMBERS_STR = '0123456789X ';
+    this.coinFont = this.add.retroFont('font:numbers', 20, 26,
+      NUMBERS_STR, 6);
+
+    const coinScoreImg = this.game.make.image(coinIcon.x + coinIcon.width,
+      coinIcon.height / 2, this.coinFont);
+    coinScoreImg.setOrigin(0, 0.5);
+
+    this.hud = this.physics.add.group();
+    this.hud.add(coinIcon);
+    this.hud.setOrigin(10, 10);
+    this.hud.add(coinScoreImg);
   }
 
 
@@ -147,5 +177,17 @@ export default class extends Phaser.Scene {
 
     // eslint-disable-next-line no-undef
     gameOver = true;
+  }
+
+  hitEnemy() {
+    this.physics.add.overlap(player, enemy, this.onHeroVsEnemy, null, this);
+  }
+
+  onHeroVsEnemy(hero, enemy) {
+    if (player.body.velocity.y > 0) {
+      enemy.disableBody(true, true);
+    } else {
+      this.scene.restart();
+    }
   }
 }
