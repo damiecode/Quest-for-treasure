@@ -19,12 +19,12 @@ export default function makeAnimations(scene) {
     repeat: -1,
   });
 
-  // scene.anims.create({
-  //   key: 'crawl',
-  //   frames: scene.anims.generateFrameNumbers('spider', { start: 5, end: 8 }),
-  //   frameRate: 10,
-  //   repeat: -1,
-  // });
+  scene.anims.create({
+    key: 'crawl',
+    frames: scene.anims.generateFrameNumbers('spider', { start: 0, end: 3 }),
+    frameRate: 10,
+    repeat: -1,
+  });
 
   // scene.anims.create({
   //   key: 'die',

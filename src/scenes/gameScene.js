@@ -69,10 +69,12 @@ export default class extends Phaser.Scene {
     player.setCollideWorldBounds(true);
     enemy = this.physics.add.sprite(200, 450, 'spider');
     enemy.setCollideWorldBounds(true);
+    enemy.anims.play('crawl');
 
     enemyWalls = this.physics.add.staticGroup();
-    enemyWalls.create();
-    enemyWalls.setVisible = false;
+    enemyWalls.create(198, 180, 'invisible-wall');
+    enemyWalls.create(240, 180, 'invisible-wall');
+    // enemyWalls.setVisible = false;
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(enemy, platforms);
