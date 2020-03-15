@@ -34,6 +34,10 @@ export default class extends Phaser.Scene {
     this.load.image('clouds', 'assets/images/clouds.png');
     this.load.image('platform', 'assets/images/platform.png');
     this.load.image('ice-platform', 'assets/images/ice-platform.png');
+    this.load.spritesheet('coin', './assets/images/coin_animated.png', {
+      frameWidth: 22,
+      frameHeight: 22,
+    });
     this.load.spritesheet('dude', 'assets/images/dude.png', {
       frameWidth: 32,
       frameHeight: 48,
