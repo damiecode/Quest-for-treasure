@@ -14,6 +14,7 @@ let score = 0;
 let lives = 3;
 let livesText;
 let scoreText;
+let gameOverText;
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -27,11 +28,10 @@ export default class extends Phaser.Scene {
 
   preload() {
     this.load.image('ground', 'assets/images/ground.png');
-    this.load.image('background', 'assets/images/background.png');
+    this.load.image('background', 'assets/images/sky.png');
     this.load.image('trees', 'assets/images/trees.png');
     this.load.image('clouds', 'assets/images/clouds.png');
     this.load.image('platform', 'assets/images/platform.png');
-    this.load.image('ice-platform', 'assets/images/ice-platform.png');
     this.load.spritesheet('dude', 'assets/images/dude.png', {
       frameWidth: 32,
       frameHeight: 48,
@@ -60,11 +60,11 @@ export default class extends Phaser.Scene {
     platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(0, 64, 'ice-platform');
+    platforms.create(0, 64, 'platform');
     platforms.create(200, 180, 'platform');
-    platforms.create(400, 296, 'ice-platform');
+    platforms.create(400, 296, 'platform');
     platforms.create(600, 412, 'platform');
-    platforms.create(700, 296, 'ice-platform');
+    platforms.create(700, 296, 'platform');
     platforms.create(400, 80, 'platform');
 
     player = this.physics.add.sprite(100, 450, 'dude');
@@ -74,8 +74,8 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
 
     scoreText = this.add.text(100, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-    livesText = this.add.text(200, 16, 'lives: 3', { fontSize: '32px', fill: '#000' });
-    gameOver = this.add.text(160, 50, 'Game Over', { fontSize: '32px', fill: '#000' });
+    livesText = this.add.text(100, 16, 'lives: 3', { fontSize: '32px', fill: '#000' });
+    gameOverText = this.add.text(160, 50, 'Game Over', { fontSize: '32px', fill: '#000' });
     this.createHud();
 
     door = this.physics.add.staticGroup();
@@ -101,10 +101,8 @@ export default class extends Phaser.Scene {
     });
 
     bombs.children.iterate((child) => {
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     });
-
-    bombs.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
     this.physics.add.collider(coins, platforms);
     this.physics.add.collider(player, door);
