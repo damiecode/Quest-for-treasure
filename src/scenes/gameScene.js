@@ -11,7 +11,7 @@ let bombs;
 let door;
 let key;
 let score = 0;
-let lives = 3;
+const lives = 3;
 let scoreText;
 
 
