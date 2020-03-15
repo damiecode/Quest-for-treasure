@@ -72,7 +72,7 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
     bombs = this.physics.add.group();
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(100, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     this.createHud();
 
     door = this.physics.add.staticGroup();
