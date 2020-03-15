@@ -163,10 +163,14 @@ export default class extends Phaser.Scene {
   hitBomb(player, bomb) {
     this.lives -= 1;
     livesText.setText(`Lives: ${this.lives}`);
+    this.end();
   }
 
   end() {
     if (this.lives <= 0) {
+      this.physics.pause();
+      player.setTint(0xff0000);
+      player.anims.play('turn');
       this.scene.restart();
     } else {
       this.create();
