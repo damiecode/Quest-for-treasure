@@ -70,7 +70,6 @@ export default class extends Phaser.Scene {
     player.setCollideWorldBounds(true);
 
     this.physics.add.collider(player, platforms);
-    bombs = this.physics.add.group();
 
     scoreText = this.add.text(100, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     this.createHud();
@@ -93,14 +92,15 @@ export default class extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
-    bombs.setBounce(1);
-    bombs.setCollideWorldBounds(true);
-    bombs.setVelocity(Phaser.Math.Between(-200, 200), 20);
-
-
     coins.children.iterate((child) => {
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
+
+    bombs.children.iterate((child) => {
+      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+
+    bombs.setVelocity(Phaser.Math.Between(-200, 200), 20);
 
     this.physics.add.collider(coins, platforms);
     this.physics.add.collider(player, door);
