@@ -7,19 +7,16 @@ let player;
 let coins;
 let platforms;
 let cursors;
-let enemy;
-let enemy1;
-let enemy2;
+let bombs;
 let door;
 let key;
-let enemyWalls;
 let score = 0;
 let scoreText;
 
 
 export default class extends Phaser.Scene {
   constructor() {
-    super({ key: 'GameScene2' });
+    super({ key: 'GameScene' });
   }
 
   init() {
@@ -44,17 +41,12 @@ export default class extends Phaser.Scene {
       frameWidth: 22,
       frameHeight: 22,
     });
-    this.load.spritesheet('spider', './assets/images/spider.png', {
-      frameWidth: 32,
-      frameHeight: 22,
-    });
-
     this.load.spritesheet('door', './assets/images/door.png', {
       frameWidth: 42,
       frameHeight: 66,
     });
     this.load.image('key', './assets/images/key.png');
-    this.load.image('invisible-wall', './assets/images/invisible_wall.png');
+    this.load.image('bomb', 'assets/images/bomb.png');
   }
 
   create() {
@@ -76,25 +68,9 @@ export default class extends Phaser.Scene {
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
-    enemy = this.physics.add.sprite(160, 20, 'spider');
-    enemy1 = this.physics.add.sprite(700, 20, 'spider');
-    enemy2 = this.physics.add.sprite(400, 200, 'spider');
-    enemy.setCollideWorldBounds(true);
-    enemy1.setCollideWorldBounds(true);
-    enemy2.setCollideWorldBounds(true);
-
-    enemyWalls = this.physics.add.staticGroup();
-    enemyWalls.create(158, 250, 'invisible-wall');
-    enemyWalls.create(270, 250, 'invisible-wall');
-    // enemyWalls.setVisible = false;
 
     this.physics.add.collider(player, platforms);
-    this.physics.add.collider(enemy, platforms);
-    this.physics.add.collider(enemy1, platforms);
-    this.physics.add.collider(enemy2, platforms);
-    this.physics.add.collider(enemy, enemyWalls);
-    this.physics.add.collider(enemy1, enemyWalls);
-    this.physics.add.collider(enemy2, enemyWalls);
+    bombs = this.physics.add.group();
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     this.createHud();
@@ -118,6 +94,8 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(coins, platforms);
     this.physics.add.collider(player, door);
     this.physics.add.overlap(player, coins, this.collectCoin, null, this);
+    this.physics.add.collider(bombs, platforms);
+    this.physics.add.collider(player, bombs, this.hitBomb, null, this);
     this.physics.add.overlap(player, key, this.collectKey, null, this);
     this.physics.add.overlap(player, door, this.openDoor,
       (player, door) => this.hasKey && player.body.touching.down, this);
@@ -149,6 +127,18 @@ export default class extends Phaser.Scene {
     coins.disableBody(true, true);
     score += 10;
     scoreText.setText(`Score: ${score}`);
+    if (coins.countActive(true) === 0) {
+      coins.children.iterate((child) => {
+        child.enableBody(true, child.x, 0, true, true);
+      });
+
+      const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+      const bomb = bombs.create(x, 16, 'bomb');
+      bomb.setBounce(1);
+      bomb.setCollideWorldBounds(true);
+      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    }
   }
 
   collectKey(_player, key) {
@@ -168,26 +158,13 @@ export default class extends Phaser.Scene {
   }
 
 
-  hitBomb(player, _enemy) {
+  hitBomb(player, bomb) {
     this.physics.pause();
 
     player.setTint(0xff0000);
 
     player.anims.play('turn');
 
-    // eslint-disable-next-line no-undef
-    gameOver = true;
-  }
-
-  hitEnemy() {
-    this.physics.add.overlap(player, enemy, this.onHeroVsEnemy, null, this);
-  }
-
-  onHeroVsEnemy(_hero, enemy) {
-    if (player.body.velocity.y > 0) {
-      enemy.disableBody(true, true);
-    } else {
-      this.scene.restart();
-    }
+    this.scene.restart();
   }
 }
