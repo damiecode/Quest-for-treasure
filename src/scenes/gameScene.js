@@ -95,7 +95,7 @@ export default class extends Phaser.Scene {
     bombs = this.physics.add.group({
       key: 'bomb',
       repeat: 1,
-      setXY: { x: 12, y: 0, stepX: 70 },
+      setXY: { x: 12, y: 0, stepX: 90 },
     });
 
     coins.children.iterate((child) => {
@@ -152,7 +152,7 @@ export default class extends Phaser.Scene {
   }
 
   openDoor(player, door) {
-    this.scene.start('gameScene2');
+    this.scene.start('GameScene2');
   }
 
   createHud() {
@@ -169,6 +169,7 @@ export default class extends Phaser.Scene {
       player.setTint(0xff0000);
       player.anims.play('turn');
       gameOverText.setVisible(true);
+      score = 0;
       this.restart();
     } else {
       this.lives -= 1;
@@ -180,7 +181,6 @@ export default class extends Phaser.Scene {
     // eslint-disable-next-line no-alert
     const restart = window.confirm('Do you want to play again?');
     if (restart === true) {
-      score = 0;
       this.scene.restart();
     } else {
       this.scene.start('TitleScene');
