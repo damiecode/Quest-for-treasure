@@ -9,9 +9,9 @@ export default class PreloaderScene extends Phaser.Scene {
     super('PreloaderScene');
   }
 
-  init() {
+  async init() {
     this.readyCount = 0;
-    loader.init();
+    await loader.init();
   }
 
   preload() {
