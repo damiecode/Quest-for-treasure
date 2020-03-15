@@ -41,10 +41,6 @@ export default class extends Phaser.Scene {
     this.load.on('complete', () => {
       makeAnimations(this);
     });
-    this.load.spritesheet('coin', './assets/images/coin_animated.png', {
-      frameWidth: 22,
-      frameHeight: 22,
-    });
     this.load.spritesheet('door', './assets/images/door.png', {
       frameWidth: 42,
       frameHeight: 66,
@@ -79,6 +75,9 @@ export default class extends Phaser.Scene {
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
+    gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
+    gameOverText.setOrigin(0.5);
+    gameOverText.setVisible(false);
     this.createHud();
 
     door = this.physics.add.staticGroup();
@@ -120,9 +119,9 @@ export default class extends Phaser.Scene {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  setFriction(player, platform) {
-    if (platform.key === 'ice-platform') {
-      player.body.x -= platform.body.x - platform.body.prev.x;
+  setFriction(player, platforms) {
+    if (platforms.key === 'ice-platform') {
+      player.body.x -= platforms.body.x - platforms.body.prev.x;
     }
   }
 

@@ -38,10 +38,6 @@ export default class extends Phaser.Scene {
     this.load.on('complete', () => {
       makeAnimations(this);
     });
-    this.load.spritesheet('coin', './assets/images/coin_animated.png', {
-      frameWidth: 22,
-      frameHeight: 22,
-    });
     this.load.spritesheet('door', './assets/images/door.png', {
       frameWidth: 42,
       frameHeight: 66,
@@ -165,9 +161,9 @@ export default class extends Phaser.Scene {
 
   hitBomb(player, bomb) {
     if (this.lives <= 0) {
-      this.physics.pause();
       player.setTint(0xff0000);
       player.anims.play('turn');
+      this.physics.pause();
       gameOverText.setVisible(true);
       score = 0;
       this.restart();
