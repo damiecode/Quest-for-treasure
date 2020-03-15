@@ -11,13 +11,12 @@ let bombs;
 let door;
 let key;
 let score = 0;
-const lives = 3;
 let scoreText;
 
 
 export default class extends Phaser.Scene {
   constructor() {
-    super({ key: 'GameScene' });
+    super({ key: 'GameScene2' });
   }
 
   init() {
@@ -73,7 +72,7 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
     bombs = this.physics.add.group();
 
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(100, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
     this.createHud();
 
     door = this.physics.add.staticGroup();
@@ -87,6 +86,17 @@ export default class extends Phaser.Scene {
       repeat: 15,
       setXY: { x: 12, y: 0, stepX: 70 },
     });
+
+    bombs = this.physics.add.group({
+      key: 'bomb',
+      repeat: 2,
+      setXY: { x: 12, y: 0, stepX: 70 },
+    });
+
+    bombs.setBounce(1);
+    bombs.setCollideWorldBounds(true);
+    bombs.setVelocity(Phaser.Math.Between(-200, 200), 20);
+
 
     coins.children.iterate((child) => {
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
@@ -128,18 +138,6 @@ export default class extends Phaser.Scene {
     coins.disableBody(true, true);
     score += 10;
     scoreText.setText(`Score: ${score}`);
-    if (coins.countActive(true) === 0) {
-      coins.children.iterate((child) => {
-        child.enableBody(true, child.x, 0, true, true);
-      });
-
-      const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-      const bomb = bombs.create(x, 16, 'bomb');
-      bomb.setBounce(1);
-      bomb.setCollideWorldBounds(true);
-      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    }
   }
 
   collectKey(_player, key) {
