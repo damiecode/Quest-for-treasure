@@ -101,8 +101,11 @@ export default class extends Phaser.Scene {
     });
 
     bombs.children.iterate((child) => {
+      child.setBounce(1);
+      child.setCollideWorldBounds(true);
       child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     });
+
 
     this.physics.add.collider(coins, platforms);
     this.physics.add.collider(player, door);
