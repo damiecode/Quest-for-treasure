@@ -170,7 +170,7 @@ export default class extends Phaser.Scene {
       player.setTint(0xff0000);
       player.anims.play('turn');
       this.gameOver = true;
-      this.scene.restart();
+      this.restart()
     } else {
       this.lives -= 1;
       this.create();
@@ -179,7 +179,10 @@ export default class extends Phaser.Scene {
 
 
   restart() {
-    window.confirm('do you want to play again?');
-    if()
+    if (confirm('do you want to play again?')) {
+      this.scene.restart();
+    } else {
+      this.scene.start('titleScene');
+    }
   }
 }
