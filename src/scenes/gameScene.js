@@ -22,6 +22,7 @@ export default class extends Phaser.Scene {
 
   init() {
     this.hasKey = false;
+    this.gameOver = false;
   }
 
   preload() {
@@ -73,7 +74,8 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
 
     scoreText = this.add.text(100, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
-    livesText = this.add.text(160, 16, 'lives: 3', { fontSize: '32px', fill: '#000' });
+    livesText = this.add.text(200, 16, 'lives: 3', { fontSize: '32px', fill: '#000' });
+    gameOver = this.add.text(160, 50, 'Game Over', { fontSize: '32px', fill: '#000' });
     this.createHud();
 
     door = this.physics.add.staticGroup();
@@ -161,11 +163,12 @@ export default class extends Phaser.Scene {
 
   hitBomb(player, bomb) {
     lives -= 1;
+    livesText.setText(`Lives: ${lives}`);
     if (lives === 0) {
       player.setTint(0xff0000);
       player.anims.play('turn');
-
       this.physics.pause();
+      this.gameOver = true;
       this.scene.restart();
     }
   }
