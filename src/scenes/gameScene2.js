@@ -87,6 +87,17 @@ export default class extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
+    bombs = this.physics.add.group({
+      key: 'bomb',
+      repeat: 2,
+      setXY: { x: 12, y: 0, stepX: 70 },
+    });
+
+    bombs.setBounce(1);
+    bombs.setCollideWorldBounds(true);
+    bombs.setVelocity(Phaser.Math.Between(-200, 200), 20);
+
+
     coins.children.iterate((child) => {
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
@@ -127,13 +138,6 @@ export default class extends Phaser.Scene {
     coins.disableBody(true, true);
     score += 10;
     scoreText.setText(`Score: ${score}`);
-
-    const x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-    const bomb = bombs.create(x, 16, 'bomb');
-    bomb.setBounce(1);
-    bomb.setCollideWorldBounds(true);
-    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
   }
 
   collectKey(_player, key) {
