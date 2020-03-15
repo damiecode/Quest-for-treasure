@@ -11,10 +11,8 @@ let bombs;
 let door;
 let key;
 let score = 0;
-this.lives = 3;
 let livesText;
 let scoreText;
-let gameOverText;
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -24,6 +22,7 @@ export default class extends Phaser.Scene {
   init() {
     this.hasKey = false;
     this.gameOver = false;
+    this.lives = 3;
   }
 
   preload() {
