@@ -22,7 +22,6 @@ export default class extends Phaser.Scene {
 
   init() {
     this.hasKey = false;
-    this.gameOver = false;
     this.lives = 3;
   }
 
@@ -77,7 +76,7 @@ export default class extends Phaser.Scene {
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
     gameOverText.setOrigin(0.5);
-    gameOverText.setVisible = false;
+    gameOverText.setVisible(false);
 
     this.createHud();
 
@@ -169,8 +168,7 @@ export default class extends Phaser.Scene {
       this.physics.pause();
       player.setTint(0xff0000);
       player.anims.play('turn');
-      this.gameOver = true;
-      gameOverText.setVisible = true;
+      gameOverText.setVisible(true);
       this.restart();
     } else {
       this.lives -= 1;
