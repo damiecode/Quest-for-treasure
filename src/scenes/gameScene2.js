@@ -13,6 +13,7 @@ let key;
 let score = 0;
 let livesText;
 let scoreText;
+let gameOverText;
 
 
 export default class extends Phaser.Scene {
