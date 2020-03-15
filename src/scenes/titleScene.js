@@ -3,6 +3,7 @@
 /* eslint-disable no-undef */
 import 'phaser';
 import config from '../config';
+import Button from '../objects/button';
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
@@ -10,72 +11,18 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    this.gameButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
-    this.centerButton(this.gameButton, 1);
+    this.gameButton = new Button(this, config.width / 2, config.height - 100, 'blueButton1', 'blueButton2', 'Play', 'GameScene');
 
-    this.gameText = this.add.text(0, 0, 'Play', {
-      fontSize: '32px',
-      fill: '#fff',
-    });
-    this.centerButtonText(this.gameText, this.gameButton);
+    this.optionsButton = new Button(this, config.width / 2, config.height - 100, 'blueButton1', 'blueButton2', 'Options', 'OptionsScene');
 
-    this.gameButton.on(
-      'pointerdown',
-      (pointer) => {
-        this.scene.start('GameScene');
-      },
-    );
+    this.scoresButton = new Button(this, config.width / 2, config.height - 100, 'blueButton1', 'blueButton2', 'Scores', 'ScoresScene');
 
-    this.optionsButton = this.add
-      .sprite(300, 200, 'blueButton1')
-      .setInteractive();
-    this.centerButton(this.optionsButton);
-
-    this.optionsText = this.add.text(0, 0, 'Options', {
-      fontSize: '32px',
-      fill: '#fff',
-    });
-    this.centerButtonText(this.optionsText, this.optionsButton);
-
-    this.optionsButton.on(
-      'pointerdown',
-      (pointer) => {
-        this.scene.start('OptionsScene');
-      },
-    );
-
-    this.scoresButton = this.add
-      .sprite(300, 200, 'blueButton1')
-      .setInteractive();
-    this.centerButton(this.scoresButton);
-
-    this.scoresText = this.add.text(0, 0, 'Scores', {
-      fontSize: '32px',
-      fill: '#fff',
-    });
-    this.centerButtonText(this.scoresText, this.scoresButton);
-
-    this.scoresButton.on(
-      'pointerdown',
-      (pointer) => {
-        this.scene.start('ScoresScene');
-      },
-    );
-  }
-
-  centerButton(gameObject, offset = 0) {
-    Phaser.Display.Align.In.Center(
-      gameObject,
-      this.add.zone(
-        config.width / 2,
-        config.height / 2 - offset * 100,
-        config.width,
-        config.height,
-      ),
-    );
-  }
-
-  centerButtonText(gameText, gameButton) {
-    Phaser.Display.Align.In.Center(gameText, gameButton);
+    this.model = this.sys.global.model;
+    if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
+      this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
+      this.bgMusic.play();
+      this.model.bgMusicPlaying = true;
+      this.sys.globals.bgMusic = this.bgMusic;
+    }
   }
 }

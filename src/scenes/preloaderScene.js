@@ -1,9 +1,6 @@
 /* eslint-disable no-undef */
 import 'phaser';
 
-const loader = require('./../leaderboard');
-
-
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('PreloaderScene');
@@ -11,7 +8,6 @@ export default class PreloaderScene extends Phaser.Scene {
 
   async init() {
     this.readyCount = 0;
-    await loader.init();
   }
 
   preload() {

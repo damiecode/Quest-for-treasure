@@ -1,6 +1,7 @@
 
 import Phaser from 'phaser';
 
+import Model from './model';
 import BootScene from './scenes/bootScene';
 import PreloaderScene from './scenes/preloaderScene';
 import TitleScene from './scenes/titleScene';
@@ -17,6 +18,8 @@ const gameConfig = Object.assign(config, {
 class Game extends Phaser.Game {
   constructor() {
     super(gameConfig);
+    const model = new Model();
+    this.globals = { model, bgMusic: null };
   }
 }
 
