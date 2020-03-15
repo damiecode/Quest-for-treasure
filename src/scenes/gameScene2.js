@@ -73,6 +73,7 @@ export default class extends Phaser.Scene {
     player.setCollideWorldBounds(true);
 
     this.physics.add.collider(player, platforms);
+    this.physics.add.collider(player, platforms, this.setFriction, null, this);
     bombs = this.physics.add.group();
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
@@ -135,6 +136,12 @@ export default class extends Phaser.Scene {
 
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
+    }
+  }
+
+  setFriction(player, platform) {
+    if (platform.key === 'ice-platform') {
+      player.body.x -= platform.body.x - platform.body.prev.x;
     }
   }
 
