@@ -119,6 +119,13 @@ export default class extends Phaser.Scene {
   }
 
   // eslint-disable-next-line class-methods-use-this
+  setFriction(player, platform) {
+    if (platform.key === 'ice-platform') {
+      player.body.x -= platform.body.x - platform.body.prev.x;
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   update() {
     if (cursors.left.isDown) {
       player.setVelocityX(-160);
@@ -136,12 +143,6 @@ export default class extends Phaser.Scene {
 
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
-    }
-  }
-
-  setFriction(player, platform) {
-    if (platform.key === 'ice-platform') {
-      player.body.x -= platform.body.x - platform.body.prev.x;
     }
   }
 
@@ -170,20 +171,26 @@ export default class extends Phaser.Scene {
 
 
   hitBomb(player, bomb) {
-    livesText.setText(`Lives: ${this.lives}`);
-    this.end();
-  }
-
-  end() {
     if (this.lives <= 0) {
       this.physics.pause();
       player.setTint(0xff0000);
       player.anims.play('turn');
-      this.gameOver = true;
-      this.scene.restart();
+      gameOverText.setVisible(true);
+      score = 0;
+      this.restart();
     } else {
       this.lives -= 1;
       this.create();
+    }
+  }
+
+  restart() {
+    // eslint-disable-next-line no-alert
+    const restart = window.confirm('Do you want to play again?');
+    if (restart === true) {
+      this.scene.restart();
+    } else {
+      this.scene.start('TitleScene');
     }
   }
 }
