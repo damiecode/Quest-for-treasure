@@ -73,7 +73,7 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
-    livesText = this.add.text(200, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
+    livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
     this.createHud();
 
     door = this.physics.add.staticGroup();
@@ -90,7 +90,7 @@ export default class extends Phaser.Scene {
 
     bombs = this.physics.add.group({
       key: 'bomb',
-      repeat: 2,
+      repeat: 1,
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
@@ -106,7 +106,6 @@ export default class extends Phaser.Scene {
 
 
     this.physics.add.collider(coins, platforms);
-    this.physics.add.collider(player, door);
     this.physics.add.overlap(player, coins, this.collectCoin, null, this);
     this.physics.add.collider(bombs, platforms);
     this.physics.add.collider(player, bombs, this.hitBomb, null, this);
@@ -161,7 +160,6 @@ export default class extends Phaser.Scene {
 
 
   hitBomb(player, bomb) {
-    this.lives -= 1;
     livesText.setText(`Lives: ${this.lives}`);
     this.end();
   }
@@ -171,9 +169,17 @@ export default class extends Phaser.Scene {
       this.physics.pause();
       player.setTint(0xff0000);
       player.anims.play('turn');
+      this.gameOver = true;
       this.scene.restart();
     } else {
+      this.lives -= 1;
       this.create();
     }
+  }
+
+
+  restart() {
+    window.confirm('do you want to play again?');
+    if()
   }
 }

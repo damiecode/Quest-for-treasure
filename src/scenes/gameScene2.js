@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
 
 
-let player;
+et player;
 let coins;
 let platforms;
 let cursors;
@@ -11,6 +11,7 @@ let bombs;
 let door;
 let key;
 let score = 0;
+let livesText;
 let scoreText;
 
 
@@ -21,6 +22,8 @@ export default class extends Phaser.Scene {
 
   init() {
     this.hasKey = false;
+    this.gameOver = false;
+    this.lives = 3;
   }
 
   preload() {
@@ -72,7 +75,8 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
     bombs = this.physics.add.group();
 
-    scoreText = this.add.text(100, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
+    livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
     this.createHud();
 
     door = this.physics.add.staticGroup();
@@ -83,7 +87,7 @@ export default class extends Phaser.Scene {
 
     coins = this.physics.add.group({
       key: 'coin',
-      repeat: 15,
+      repeat: 20,
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
@@ -93,13 +97,14 @@ export default class extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 70 },
     });
 
-    bombs.setBounce(1);
-    bombs.setCollideWorldBounds(true);
-    bombs.setVelocity(Phaser.Math.Between(-200, 200), 20);
-
-
     coins.children.iterate((child) => {
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
+
+    bombs.children.iterate((child) => {
+      child.setBounce(1);
+      child.setCollideWorldBounds(true);
+      child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     });
 
     this.physics.add.collider(coins, platforms);
@@ -158,12 +163,20 @@ export default class extends Phaser.Scene {
 
 
   hitBomb(player, bomb) {
-    this.physics.pause();
+    livesText.setText(`Lives: ${this.lives}`);
+    this.end();
+  }
 
-    player.setTint(0xff0000);
-
-    player.anims.play('turn');
-
-    this.scene.restart();
+  end() {
+    if (this.lives <= 0) {
+      this.physics.pause();
+      player.setTint(0xff0000);
+      player.anims.play('turn');
+      this.gameOver = true;
+      this.scene.restart();
+    } else {
+      this.lives -= 1;
+      this.create();
+    }
   }
 }
