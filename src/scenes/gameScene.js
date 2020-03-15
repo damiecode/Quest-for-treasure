@@ -11,8 +11,8 @@ let bombs;
 let door;
 let key;
 let score = 0;
+let lives = 3;
 let scoreText;
-
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -164,6 +164,9 @@ export default class extends Phaser.Scene {
 
     player.anims.play('turn');
 
-    this.scene.restart();
+    lives -= 1;
+    if(lives === 0) {
+      this.scene.restart();
+    }
   }
 }
