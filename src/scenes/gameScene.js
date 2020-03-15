@@ -180,9 +180,10 @@ export default class extends Phaser.Scene {
     // eslint-disable-next-line no-alert
     const restart = window.confirm('Do you want to play again?');
     if (restart === true) {
+      score = 0;
       this.scene.restart();
     } else {
-      this.scene.start('titleScene');
+      this.scene.start('TitleScene');
     }
   }
 }
