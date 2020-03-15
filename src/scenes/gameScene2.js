@@ -16,7 +16,7 @@ let scoreText;
 
 export default class extends Phaser.Scene {
   constructor() {
-    super({ key: 'GameScene' });
+    super({ key: 'GameScene2' });
   }
 
   init() {
