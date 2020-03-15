@@ -74,7 +74,7 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
-    livesText = this.add.text(16, this.sys.config.height - 50, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
+    livesText = this.add.text(200, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
     this.createHud();
 
     door = this.physics.add.staticGroup();
