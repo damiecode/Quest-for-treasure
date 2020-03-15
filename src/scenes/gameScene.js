@@ -13,6 +13,7 @@ let key;
 let score = 0;
 let livesText;
 let scoreText;
+let gameOverText;
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -74,6 +75,10 @@ export default class extends Phaser.Scene {
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
+    gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
+    gameOverText.setOrigin(0.5);
+    gameOverText.setVisible = false;
+
     this.createHud();
 
     door = this.physics.add.staticGroup();
@@ -160,26 +165,23 @@ export default class extends Phaser.Scene {
 
 
   hitBomb(player, bomb) {
-    livesText.setText(`Lives: ${this.lives}`);
-    this.end();
-  }
-
-  end() {
     if (this.lives <= 0) {
       this.physics.pause();
       player.setTint(0xff0000);
       player.anims.play('turn');
       this.gameOver = true;
-      this.restart()
+      gameOverText.setVisible = true;
+      this.restart();
     } else {
       this.lives -= 1;
       this.create();
     }
   }
 
-
   restart() {
-    if (confirm('do you want to play again?')) {
+    // eslint-disable-next-line no-alert
+    const restart = window.confirm('Do you want to play again?');
+    if (restart === true) {
       this.scene.restart();
     } else {
       this.scene.start('titleScene');

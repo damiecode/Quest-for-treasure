@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
 
 
-et player;
+let player;
 let coins;
 let platforms;
 let cursors;
