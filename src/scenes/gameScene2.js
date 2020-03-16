@@ -202,6 +202,6 @@ export default class extends Phaser.Scene {
   }
 
   restart() {
-    this.scene.start('ScoresScene');
+    this.scene.start('TitleScene');
   }
 }
