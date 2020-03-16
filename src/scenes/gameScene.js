@@ -73,19 +73,10 @@ export default class extends Phaser.Scene {
     movingPlatforms2 = this.physics.add.image(400, 296, 'platform');
     movingPlatforms3 = this.physics.add.image(600, 412, 'platform');
     movingPlatforms4 = this.physics.add.image(700, 296, 'platform');
-    movingPlatforms5 = this.physics.add.image(400, 80, 'platform');
     movingPlatforms1.setCollideWorldBounds(true);
     movingPlatforms2.setCollideWorldBounds(true);
     movingPlatforms3.setCollideWorldBounds(true);
     movingPlatforms4.setCollideWorldBounds(true);
-    movingPlatforms5.setCollideWorldBounds(true);
-
-
-    movingPlatforms = this.physics.add.image({
-      key: 'platforms',
-      repeat: 5,
-      setXY: { x: 30, y: 10, stepX: 80 },
-    });
 
     this.tweens.timeline({
       targets: movingPlatforms.body.velocity,
@@ -231,30 +222,6 @@ export default class extends Phaser.Scene {
         },
       ],
     });
-    this.tweens.timeline({
-      targets: movingPlatforms5.body.velocity,
-      loop: -1,
-      tweens: [
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: 150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: -150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-      ],
-    });
 
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
@@ -266,13 +233,12 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, movingPlatforms2);
     this.physics.add.collider(player, movingPlatforms3);
     this.physics.add.collider(player, movingPlatforms4);
-    this.physics.add.collider(player, movingPlatforms5);
+
     this.physics.add.collider(platforms, movingPlatforms);
     this.physics.add.collider(platforms, movingPlatforms1);
     this.physics.add.collider(platforms, movingPlatforms2);
     this.physics.add.collider(platforms, movingPlatforms3);
     this.physics.add.collider(platforms, movingPlatforms4);
-    this.physics.add.collider(platforms, movingPlatforms5);
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
