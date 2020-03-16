@@ -123,6 +123,12 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, movingPlatforms3);
     this.physics.add.collider(player, movingPlatforms4);
     this.physics.add.collider(player, movingPlatforms5);
+    this.physics.add.collider(platforms, movingPlatforms);
+    this.physics.add.collider(platforms, movingPlatforms1);
+    this.physics.add.collider(platforms, movingPlatforms2);
+    this.physics.add.collider(platforms, movingPlatforms3);
+    this.physics.add.collider(platforms, movingPlatforms4);
+    this.physics.add.collider(platforms, movingPlatforms5);
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
