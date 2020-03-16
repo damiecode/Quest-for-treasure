@@ -85,6 +85,13 @@ export default class extends Phaser.Scene {
     // movingPlatforms.create(700, 296, 'platform');
     // movingPlatforms.create(400, 80, 'platform');
 
+
+    movingPlatforms = this.physics.add.image({
+      key: 'platforms',
+      repeat: 5,
+      setXY: { x: 30, y: 10, stepX: 80 },
+    });
+
     this.tweens.timeline({
       targets: movingPlatforms.body.velocity,
       loop: -1,
@@ -141,12 +148,6 @@ export default class extends Phaser.Scene {
 
     key = this.physics.add.staticGroup();
     key.create(20, 20, 'key');
-
-    movingPlatforms = this.physics.add.image({
-      key: 'platforms',
-      repeat: 5,
-      setXY: { x: 30, y: 10, stepX: 80 },
-    });
 
     coins = this.physics.add.group({
       key: 'coin',
