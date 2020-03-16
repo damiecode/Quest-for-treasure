@@ -6,11 +6,6 @@ import makeAnimations from '../animations/animations';
 let player;
 let coins;
 let platforms;
-let movingPlatforms;
-let movingPlatforms1;
-let movingPlatforms2;
-let movingPlatforms3;
-let movingPlatforms4;
 let cursors;
 let bombs;
 let door;
@@ -63,193 +58,23 @@ export default class extends Phaser.Scene {
     this.add.sprite(0, 0, 'background').setOrigin(0, 0).setScale(2);
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
+    this.add.sprite(0, 1906, 'trees');
     cursors = this.input.keyboard.createCursorKeys();
     platforms = this.physics.add.staticGroup();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    movingPlatforms = this.physics.add.image(20, 64, 'platform');
-    movingPlatforms1 = this.physics.add.image(200, 180, 'platform');
-    movingPlatforms2 = this.physics.add.image(400, 296, 'platform');
-    movingPlatforms3 = this.physics.add.image(600, 412, 'platform');
-    movingPlatforms4 = this.physics.add.image(700, 296, 'platform');
-    movingPlatforms1.setCollideWorldBounds(true);
-    movingPlatforms2.setCollideWorldBounds(true);
-    movingPlatforms3.setCollideWorldBounds(true);
-    movingPlatforms4.setCollideWorldBounds(true);
-
-    this.tweens.timeline({
-      targets: movingPlatforms.body.velocity,
-      loop: -1,
-      tweens: [
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: 150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: -150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-      ],
-    });
-    this.tweens.timeline({
-      targets: movingPlatforms1.body.velocity,
-      loop: -1,
-      tweens: [
-        {
-          x: 0, y: 300, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: -200, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: 150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-        {
-          x: -150, y: 100, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: -150, y: 300, duration: 4000, ease: 'Stepped',
-        },
-      ],
-    });
-    this.tweens.timeline({
-      targets: movingPlatforms2.body.velocity,
-      loop: -1,
-      tweens: [
-        {
-          x: -150, y: -300, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 200, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: 150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: -300, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: -300, y: 100, duration: 4000, ease: 'Stepped',
-        },
-      ],
-    });
-    this.tweens.timeline({
-      targets: movingPlatforms3.body.velocity,
-      loop: -1,
-      tweens: [
-        {
-          x: 300, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 150, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: 200, y: 100, duration: 4000, ease: 'Stepped',
-        },
-        {
-          x: 80, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: -250, y: 100, duration: 4000, ease: 'Stepped',
-        },
-      ],
-    });
-    this.tweens.timeline({
-      targets: movingPlatforms.body.velocity,
-      loop: -1,
-      tweens: [
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: -200, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: 150, y: 300, duration: 4000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 200, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: -150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-      ],
-    });
-    this.tweens.timeline({
-      targets: movingPlatforms4.body.velocity,
-      loop: -1,
-      tweens: [
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: 150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: -150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-      ],
-    });
+    platforms.create(0, 64, 'platform');
+    platforms.create(200, 180, 'platform');
+    platforms.create(400, 296, 'platform');
+    platforms.create(600, 412, 'platform');
+    platforms.create(700, 296, 'platform');
+    platforms.create(400, 80, 'platform');
 
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
     this.physics.add.collider(player, platforms);
-    this.physics.add.collider(player, movingPlatforms);
-    this.physics.add.collider(player, movingPlatforms1);
-    this.physics.add.collider(player, movingPlatforms2);
-    this.physics.add.collider(player, movingPlatforms3);
-    this.physics.add.collider(player, movingPlatforms4);
-
-    this.physics.add.collider(platforms, movingPlatforms);
-    this.physics.add.collider(platforms, movingPlatforms1);
-    this.physics.add.collider(platforms, movingPlatforms2);
-    this.physics.add.collider(platforms, movingPlatforms3);
-    this.physics.add.collider(platforms, movingPlatforms4);
-
-    this.physics.add.collider(movingPlatforms1, movingPlatforms);
-    this.physics.add.collider(movingPlatforms1, movingPlatforms2);
-    this.physics.add.collider(movingPlatforms1, movingPlatforms3);
-    this.physics.add.collider(movingPlatforms1, movingPlatforms4);
-    this.physics.add.collider(movingPlatforms2, movingPlatforms3);
-    this.physics.add.collider(movingPlatforms2, movingPlatforms4);
-    this.physics.add.collider(movingPlatforms2, movingPlatforms3);
-    this.physics.add.collider(movingPlatforms2, movingPlatforms);
-    this.physics.add.collider(movingPlatforms, movingPlatforms3);
-    this.physics.add.collider(movingPlatforms, movingPlatforms4);
-    this.physics.add.collider(movingPlatforms4, movingPlatforms3);
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
@@ -293,6 +118,7 @@ export default class extends Phaser.Scene {
       child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     });
 
+
     this.physics.add.collider(coins, platforms);
     this.physics.add.overlap(player, coins, this.collectCoin, null, this);
     this.physics.add.collider(bombs, platforms);
@@ -321,14 +147,6 @@ export default class extends Phaser.Scene {
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
       this.jumpSound.play();
-    }
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  collide(movingPlatforms, player) {
-    if (movingPlatforms.body.move && movingPlatforms.body.touching.up
-      && player.body.touching.down) {
-      player.setGravity(10000);
     }
   }
 
