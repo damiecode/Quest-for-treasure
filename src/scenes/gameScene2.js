@@ -12,7 +12,6 @@ let bombs;
 let door;
 let key;
 let score = 0;
-let livesText;
 let scoreText;
 let gameOverText;
 
@@ -24,8 +23,6 @@ export default class extends Phaser.Scene {
 
   init() {
     this.hasKey = false;
-    this.gameOver = false;
-    this.lives = 3;
   }
 
   preload() {
@@ -81,7 +78,6 @@ export default class extends Phaser.Scene {
     bombs = this.physics.add.group();
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
-    livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
     gameOverText.setOrigin(0.5);
     gameOverText.setVisible(false);
@@ -175,7 +171,7 @@ export default class extends Phaser.Scene {
 
   openDoor(player, door) {
     this.doorSound.play();
-    this.scene.start('GameScene2');
+    this.scene.start('TitleScene');
   }
 
   createHud() {
@@ -187,18 +183,12 @@ export default class extends Phaser.Scene {
 
 
   hitBomb(player, bomb) {
-    if (this.lives <= 0) {
-      this.physics.pause();
-      player.setTint(0xff0000);
-      player.anims.play('turn');
-      this.gameOverSound.play();
-      gameOverText.setVisible(true);
-      this.restart();
-    } else {
-      this.lives -= 1;
-      score -= 20;
-      this.create();
-    }
+    this.physics.pause();
+    player.setTint(0xff0000);
+    player.anims.play('turn');
+    this.gameOverSound.play();
+    gameOverText.setVisible(true);
+    this.restart();
   }
 
   restart() {

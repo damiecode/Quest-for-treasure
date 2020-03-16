@@ -13,7 +13,6 @@ let door;
 let key;
 let chicks;
 let score = 0;
-let livesText;
 let scoreText;
 let gameOverText;
 
@@ -24,7 +23,6 @@ export default class extends Phaser.Scene {
 
   init() {
     this.hasKey = false;
-    this.lives = 3;
   }
 
   preload() {
@@ -48,8 +46,8 @@ export default class extends Phaser.Scene {
       frameHeight: 66,
     });
     this.load.spritesheet('chicks', './assets/images/chick.png', {
-      frameWidth: 32,
-      frameHeight: 32,
+      frameWidth: 22,
+      frameHeight: 22,
     });
     this.load.image('key', './assets/images/key.png');
     this.load.image('bomb', 'assets/images/bomb.png');
@@ -88,7 +86,6 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(chicks, platforms);
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
-    livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
     gameOverText.setOrigin(0.5);
     gameOverText.setVisible(false);
@@ -204,19 +201,12 @@ export default class extends Phaser.Scene {
 
 
   hitBomb(player, bomb) {
-    if (this.lives <= 0) {
-      this.physics.pause();
-      player.setTint(0xff0000);
-      player.anims.play('turn');
-      this.gameOverSound.play();
-      gameOverText.setVisible(true);
-      score = 0;
-      this.restart();
-    } else {
-      this.lives -= 1;
-      score -= 20;
-      this.create();
-    }
+    this.physics.pause();
+    player.setTint(0xff0000);
+    player.anims.play('turn');
+    this.gameOverSound.play();
+    gameOverText.setVisible(true);
+    this.restart();
   }
 
   restart() {
