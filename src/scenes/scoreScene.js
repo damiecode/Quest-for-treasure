@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import Button from '../objects/button';
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -30,6 +31,7 @@ export default class extends Phaser.Scene {
 
     panel.events.on('updateName', this.updateName, this);
     panel.events.on('submitName', this.submitName, this);
+    this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Back', 'TitleScene');
   }
 
   submitName() {

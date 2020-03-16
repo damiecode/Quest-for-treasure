@@ -66,24 +66,19 @@ export default class extends Phaser.Scene {
     this.sky.fixedToCamera = true;
     cursors = this.input.keyboard.createCursorKeys();
     platforms = this.physics.add.staticGroup();
-    // movingPlatforms = this.physics.add.image();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    // movingPlatforms1 = this.physics.add.image(200, 180, 'platform');
-    // movingPlatforms2 = this.physics.add.image(400, 296, 'platform');
-    // movingPlatforms3 = this.physics.add.image(600, 412, 'platform');
-    // movingPlatforms4 = this.physics.add.image(700, 296, 'platform');
-    // movingPlatforms5 = this.physics.add.image(400, 80, 'platform');
-    // movingPlatforms1.setCollideWorldBounds(true);
-    // movingPlatforms2.setCollideWorldBounds(true);
-    // movingPlatforms3.setCollideWorldBounds(true);
-    // movingPlatforms4.setCollideWorldBounds(true);
-    // movingPlatforms5.setCollideWorldBounds(true);
-    // movingPlatforms.create(200, 180, 'platform');
-    // movingPlatforms.create(400, 296, 'platform');
-    // movingPlatforms.create(600, 412, 'platform');
-    // movingPlatforms.create(700, 296, 'platform');
-    // movingPlatforms.create(400, 80, 'platform');
+    movingPlatforms = this.physics.add.image(20, 64, 'platform');
+    movingPlatforms1 = this.physics.add.image(200, 180, 'platform');
+    movingPlatforms2 = this.physics.add.image(400, 296, 'platform');
+    movingPlatforms3 = this.physics.add.image(600, 412, 'platform');
+    movingPlatforms4 = this.physics.add.image(700, 296, 'platform');
+    movingPlatforms5 = this.physics.add.image(400, 80, 'platform');
+    movingPlatforms1.setCollideWorldBounds(true);
+    movingPlatforms2.setCollideWorldBounds(true);
+    movingPlatforms3.setCollideWorldBounds(true);
+    movingPlatforms4.setCollideWorldBounds(true);
+    movingPlatforms5.setCollideWorldBounds(true);
 
 
     movingPlatforms = this.physics.add.image({
@@ -116,6 +111,150 @@ export default class extends Phaser.Scene {
         },
       ],
     });
+    this.tweens.timeline({
+      targets: movingPlatforms1.body.velocity,
+      loop: -1,
+      tweens: [
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: 150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+      ],
+    });
+    this.tweens.timeline({
+      targets: movingPlatforms2.body.velocity,
+      loop: -1,
+      tweens: [
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: 150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+      ],
+    });
+    this.tweens.timeline({
+      targets: movingPlatforms3.body.velocity,
+      loop: -1,
+      tweens: [
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: 150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+      ],
+    });
+    this.tweens.timeline({
+      targets: movingPlatforms.body.velocity,
+      loop: -1,
+      tweens: [
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: 150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+      ],
+    });
+    this.tweens.timeline({
+      targets: movingPlatforms4.body.velocity,
+      loop: -1,
+      tweens: [
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: 150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+      ],
+    });
+    this.tweens.timeline({
+      targets: movingPlatforms5.body.velocity,
+      loop: -1,
+      tweens: [
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: 150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+      ],
+    });
 
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
@@ -123,17 +262,17 @@ export default class extends Phaser.Scene {
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(player, movingPlatforms);
-    // this.physics.add.collider(player, movingPlatforms1);
-    // this.physics.add.collider(player, movingPlatforms2);
-    // this.physics.add.collider(player, movingPlatforms3);
-    // this.physics.add.collider(player, movingPlatforms4);
-    // this.physics.add.collider(player, movingPlatforms5);
+    this.physics.add.collider(player, movingPlatforms1);
+    this.physics.add.collider(player, movingPlatforms2);
+    this.physics.add.collider(player, movingPlatforms3);
+    this.physics.add.collider(player, movingPlatforms4);
+    this.physics.add.collider(player, movingPlatforms5);
     this.physics.add.collider(platforms, movingPlatforms);
-    // this.physics.add.collider(platforms, movingPlatforms1);
-    // this.physics.add.collider(platforms, movingPlatforms2);
-    // this.physics.add.collider(platforms, movingPlatforms3);
-    // this.physics.add.collider(platforms, movingPlatforms4);
-    // this.physics.add.collider(platforms, movingPlatforms5);
+    this.physics.add.collider(platforms, movingPlatforms1);
+    this.physics.add.collider(platforms, movingPlatforms2);
+    this.physics.add.collider(platforms, movingPlatforms3);
+    this.physics.add.collider(platforms, movingPlatforms4);
+    this.physics.add.collider(platforms, movingPlatforms5);
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
@@ -176,11 +315,6 @@ export default class extends Phaser.Scene {
       child.setCollideWorldBounds(true);
       child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     });
-
-    movingPlatforms.children.iterate((child) => {
-      child.setCollideWorldBounds(true);
-    });
-
 
     this.physics.add.collider(coins, platforms);
     this.physics.add.overlap(player, coins, this.collectCoin, null, this);
