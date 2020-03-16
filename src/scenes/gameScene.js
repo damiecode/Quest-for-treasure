@@ -11,7 +11,6 @@ let movingPlatforms1;
 let movingPlatforms2;
 let movingPlatforms3;
 let movingPlatforms4;
-let movingPlatforms5;
 let cursors;
 let bombs;
 let door;
@@ -240,6 +239,18 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(platforms, movingPlatforms3);
     this.physics.add.collider(platforms, movingPlatforms4);
 
+    this.physics.add.collider(movingPlatforms1, movingPlatforms);
+    this.physics.add.collider(movingPlatforms1, movingPlatforms2);
+    this.physics.add.collider(movingPlatforms1, movingPlatforms3);
+    this.physics.add.collider(movingPlatforms1, movingPlatforms4);
+    this.physics.add.collider(movingPlatforms2, movingPlatforms3);
+    this.physics.add.collider(movingPlatforms2, movingPlatforms4);
+    this.physics.add.collider(movingPlatforms2, movingPlatforms3);
+    this.physics.add.collider(movingPlatforms2, movingPlatforms);
+    this.physics.add.collider(movingPlatforms, movingPlatforms3);
+    this.physics.add.collider(movingPlatforms, movingPlatforms4);
+    this.physics.add.collider(movingPlatforms4, movingPlatforms3);
+
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
@@ -310,6 +321,13 @@ export default class extends Phaser.Scene {
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
       this.jumpSound.play();
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  collide(movingPlatforms, player) {
+    if (movingPlatforms.body.move && movingPlatforms.body.touching.up && player.body.touching.down) {
+      player.setGravity(10000);
     }
   }
 
