@@ -50,13 +50,17 @@ export default class extends Phaser.Scene {
     });
     this.load.image('key', './assets/images/key.png');
     this.load.image('bomb', 'assets/images/bomb.png');
+    this.load.audio('coinSound', ['assets/audio/coin.wav']);
+    this.load.audio('keySound', ['assets/audio/key.wav']);
+    this.load.audio('doorSound', ['assets/audio/door.wav']);
+    this.load.audio('jumpSound', ['assets/audio/jump.wav']);
+    this.load.audio('gameOver', ['assets/audio/game-over-2.wav']);
   }
 
   create() {
     this.add.sprite(0, 0, 'background').setOrigin(0, 0).setScale(2);
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
-    this.add.sprite(0, 1906, 'trees');
     cursors = this.input.keyboard.createCursorKeys();
     platforms = this.physics.add.staticGroup();
 
@@ -110,6 +114,12 @@ export default class extends Phaser.Scene {
       child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     });
 
+    this.coinSound = this.sound.add('coinSound');
+    this.keySound = this.sound.add('keySound');
+    this.jumpSound = this.sound.add('jumpSound');
+    this.doorSound = this.sound.add('doorSound');
+    this.gameOverSound = this.sound.add('gameOver');
+
     this.physics.add.collider(coins, platforms);
     this.physics.add.collider(player, door);
     this.physics.add.overlap(player, coins, this.collectCoin, null, this);
@@ -143,13 +153,15 @@ export default class extends Phaser.Scene {
       player.anims.play('turn');
     }
 
-    if (cursors.up.isDown && player.body.touching.down) {
+    iif (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
+      this.jumpSound.play();
     }
   }
 
   // eslint-disable-next-line class-methods-use-this
   collectCoin(_player, coins) {
+    this.coinSound.play();
     coins.disableBody(true, true);
     score += 10;
     scoreText.setText(`Score: ${score}`);
@@ -161,7 +173,8 @@ export default class extends Phaser.Scene {
   }
 
   openDoor(player, door) {
-    this.scene.start('gameScene2');
+    this.doorSound.play();
+    this.scene.start('GameScene2');
   }
 
   createHud() {
@@ -177,22 +190,18 @@ export default class extends Phaser.Scene {
       this.physics.pause();
       player.setTint(0xff0000);
       player.anims.play('turn');
+      this.gameOverSound.play();
       gameOverText.setVisible(true);
       score = 0;
       this.restart();
     } else {
       this.lives -= 1;
+      score -= 20;
       this.create();
     }
   }
 
   restart() {
-    // eslint-disable-next-line no-alert
-    const restart = window.confirm('Do you want to play again?');
-    if (restart === true) {
-      this.scene.restart();
-    } else {
-      this.scene.start('TitleScene');
-    }
+    this.scene.start('ScoresScene');
   }
 }

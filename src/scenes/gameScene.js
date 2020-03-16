@@ -58,9 +58,8 @@ export default class extends Phaser.Scene {
     this.add.sprite(0, 0, 'background').setOrigin(0, 0).setScale(2);
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
-    this.add.sprite(0, 1906, 'trees');
     cursors = this.input.keyboard.createCursorKeys();
-    platforms = this.physics.add.staticGroup();
+    platforms = this.physics.add.group();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
     platforms.create(0, 64, 'platform');
@@ -69,6 +68,19 @@ export default class extends Phaser.Scene {
     platforms.create(600, 412, 'platform');
     platforms.create(700, 296, 'platform');
     platforms.create(400, 80, 'platform');
+
+    this.tweens.timeline({
+      targets: platforms.body.velocity,
+      loop: -1,
+      tweens: [
+        { x:    0, y: -200, duration: 2000, ease: 'Stepped' },
+        { x:    0, y:    0, duration: 1000, ease: 'Stepped' },
+        { x:  150, y:  100, duration: 4000, ease: 'Stepped' },
+        { x:    0, y: -200, duration: 2000, ease: 'Stepped' },
+        { x:    0, y:    0, duration: 1000, ease: 'Stepped' },
+        { x: -150, y:  100, duration: 4000, ease: 'Stepped' }
+      ]
+    });
 
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
