@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
 import Button from '../objects/button';
-import GameScene from './gameScene';
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -8,7 +7,6 @@ export default class extends Phaser.Scene {
 
     // eslint-disable-next-line no-unused-expressions
     this.playerText;
-    this.score = GameScene.getScore();
   }
 
   preload() {
