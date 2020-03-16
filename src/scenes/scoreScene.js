@@ -13,7 +13,7 @@ export default class extends Phaser.Scene {
     this.load.image('rub', 'assets/images/rub.png');
     this.load.image('end', 'assets/images/end.png');
 
-    this.load.bitmapFont('arcade', 'assets/images/arcade.png', 'assets/imagesarcade.xml');
+    this.load.bitmapFont('arcade', 'assets/images/arcade.png', 'assets/images/arcade.xml');
   }
 
   create() {
