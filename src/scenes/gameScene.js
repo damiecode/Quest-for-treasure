@@ -10,6 +10,7 @@ let cursors;
 let bombs;
 let door;
 let key;
+let chicks;
 let score = 0;
 let livesText;
 let scoreText;
@@ -45,6 +46,10 @@ export default class extends Phaser.Scene {
       frameWidth: 42,
       frameHeight: 66,
     });
+    this.load.spritesheet('chicks', './assets/images/chicks.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
     this.load.image('key', './assets/images/key.png');
     this.load.image('bomb', 'assets/images/bomb.png');
     this.load.audio('coinSound', ['assets/audio/coin.wav']);
@@ -58,7 +63,6 @@ export default class extends Phaser.Scene {
     this.add.sprite(0, 0, 'background').setOrigin(0, 0).setScale(2);
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
-    this.add.sprite(0, 1906, 'trees');
     cursors = this.input.keyboard.createCursorKeys();
     platforms = this.physics.add.staticGroup();
 
@@ -73,6 +77,11 @@ export default class extends Phaser.Scene {
     player = this.physics.add.sprite(100, 450, 'dude');
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
+
+    chicks = this.physics.add.sprite();
+    chicks.setBounceX(0);
+    chicks.setBounceY(1);
+    chicks.setCollideWorldBounds(true);
 
     this.physics.add.collider(player, platforms);
 
@@ -105,7 +114,7 @@ export default class extends Phaser.Scene {
     bombs = this.physics.add.group({
       key: 'bomb',
       repeat: 1,
-      setXY: { x: 12, y: 0, stepX: 90 },
+      setXY: { x: 12, y: 0, stepX: 110 },
     });
 
     coins.children.iterate((child) => {
@@ -148,6 +157,22 @@ export default class extends Phaser.Scene {
       player.setVelocityY(-330);
       this.jumpSound.play();
     }
+
+    this.physics.collide(this, platforms, (chick, platform) => {
+      if (chick.body.velocity.x > 0 && chick.x > platform.x + (platform.width - chick.width)
+              || chick.body.velocity.x < 0 && chick.x < platform.x) {
+        chick.body.velocity.x *= -1;
+      }
+      if (chick.body.velocity.x > 0) {
+        chick.anims.play('right', true);
+      } else {
+        chick.anims.play('left', true);
+      }
+    });
+
+    this.physics.collide(this, chicks, (chick, chicks) => {
+      chick.body.velocity.x *= -1.0001;
+    });
   }
 
   // eslint-disable-next-line class-methods-use-this

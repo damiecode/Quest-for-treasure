@@ -20,16 +20,16 @@ export default function makeAnimations(scene) {
   });
 
   scene.anims.create({
-    key: 'crawl',
-    frames: scene.anims.generateFrameNumbers('spider', { start: 0, end: 2 }),
-    frameRate: 8,
+    key: 'eLeft',
+    frames: scene.anims.generateFrameNumbers('chicks', { start: 0, end: 5 }),
+    frameRate: 5,
     repeat: -1,
   });
 
-  // scene.anims.create({
-  //   key: 'die',
-  //   frames: scene.anims.generateFrameNumbers('spider', { start: 5, end: 8 }),
-  //   frameRate: 10,
-  //   repeat: -1,
-  // });
+  scene.anims.create({
+    key: 'eRight',
+    frames: scene.anims.generateFrameNumbers('chicks', { start: 5, end: 9 }),
+    frameRate: 5,
+    repeat: -1,
+  });
 }
