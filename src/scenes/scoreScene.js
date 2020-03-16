@@ -3,7 +3,7 @@ import Button from '../objects/button';
 
 export default class extends Phaser.Scene {
   constructor() {
-    super({ key: 'ScoresScene', active: true });
+    super({ key: 'ScoresScene'});
 
     // eslint-disable-next-line no-unused-expressions
     this.playerText;

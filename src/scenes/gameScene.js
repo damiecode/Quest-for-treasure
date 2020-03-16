@@ -326,7 +326,8 @@ export default class extends Phaser.Scene {
 
   // eslint-disable-next-line class-methods-use-this
   collide(movingPlatforms, player) {
-    if (movingPlatforms.body.move && movingPlatforms.body.touching.up && player.body.touching.down) {
+    if (movingPlatforms.body.move && movingPlatforms.body.touching.up
+      && player.body.touching.down) {
       player.setGravity(10000);
     }
   }
