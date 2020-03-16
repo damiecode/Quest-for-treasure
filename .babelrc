@@ -1,7 +1,14 @@
-{ "presets": ["@babel/preset-env"],
-  "plugins": [
-    ["transform-runtime", {
-      "regenerator": true
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "debug": false,
+      "modules": false,
+      "useBuiltIns": false
     }]
+  ],
+  "plugins": [
+    "@babel/syntax-dynamic-import",
+    "@babel/plugin-transform-runtime",
+    "@babel/transform-async-to-generator"
   ]
 }
