@@ -201,10 +201,6 @@ export default class extends Phaser.Scene {
     }
   }
 
-  getScore() {
-    return score;
-  }
-
   restart() {
     this.scene.start('ScoresScene');
   }
