@@ -28,7 +28,6 @@ export default class extends Phaser.Scene {
   preload() {
     this.load.image('ground', 'assets/images/ground.png');
     this.load.image('background', 'assets/images/sky.png');
-    this.load.image('trees', 'assets/images/trees.png');
     this.load.image('clouds', 'assets/images/clouds.png');
     this.load.image('platform', 'assets/images/platform.png');
     this.load.spritesheet('dude', 'assets/images/dude.png', {

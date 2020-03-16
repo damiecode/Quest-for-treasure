@@ -30,7 +30,6 @@ export default class extends Phaser.Scene {
   preload() {
     this.load.image('ground', 'assets/images/ground.png');
     this.load.image('background', 'assets/images/background.png');
-    this.load.image('trees', 'assets/images/trees.png');
     this.load.image('clouds', 'assets/images/clouds.png');
     this.load.image('platform', 'assets/images/platform.png');
     this.load.image('ice-platform', 'assets/images/ice-platform.png');
@@ -73,7 +72,6 @@ export default class extends Phaser.Scene {
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
-    this.physics.add.collider(player, platforms);
     this.physics.add.collider(player, platforms, this.setFriction, null, this);
     bombs = this.physics.add.group();
 
