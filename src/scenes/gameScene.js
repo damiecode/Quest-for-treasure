@@ -75,13 +75,25 @@ export default class extends Phaser.Scene {
       targets: movingPlatforms.body.velocity,
       loop: -1,
       tweens: [
-        { x:    0, y: -200, duration: 2000, ease: 'Stepped' },
-        { x:    0, y:    0, duration: 1000, ease: 'Stepped' },
-        { x:  150, y:  100, duration: 4000, ease: 'Stepped' },
-        { x:    0, y: -200, duration: 2000, ease: 'Stepped' },
-        { x:    0, y:    0, duration: 1000, ease: 'Stepped' },
-        { x: -150, y:  100, duration: 4000, ease: 'Stepped' }
-      ]
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: 150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+        },
+      ],
     });
 
     player = this.physics.add.sprite(100, 450, 'dude');
@@ -89,6 +101,7 @@ export default class extends Phaser.Scene {
     player.setCollideWorldBounds(true);
 
     this.physics.add.collider(player, platforms);
+    this.physics.add.collider(player, movingPlatforms);
 
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
