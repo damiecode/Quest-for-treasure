@@ -1,9 +1,7 @@
-import MakeAnimations from '../src/animations/animations';
-import GameScene from '../src/scenes/gameScene';
+const game = require('../src/objects/button');
 
-const animations = new MakeAnimations();
-const game = new GameScene();
+const button = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'TitleScene');
 
-test('player moves left', () => {
-  expect().toBe();
+test('creates a new button', () => {
+  expect(button.targetScene).toBe('TitleScene');
 });

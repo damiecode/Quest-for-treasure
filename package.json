@@ -50,6 +50,7 @@
       "jest-canvas-mock"
     ],
     "moduleFileExtensions": [
+      "module",
       "js",
       "jsx"
     ],
