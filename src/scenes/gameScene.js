@@ -61,15 +61,15 @@ export default class extends Phaser.Scene {
     this.sky.fixedToCamera = true;
     cursors = this.input.keyboard.createCursorKeys();
     platforms = this.physics.add.staticGroup();
-    movingPlatforms = this.physics.add.image();
+    // movingPlatforms = this.physics.add.image();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    movingPlatforms.create(0, 64, 'platform');
-    movingPlatforms.create(200, 180, 'platform');
-    movingPlatforms.create(400, 296, 'platform');
-    movingPlatforms.create(600, 412, 'platform');
-    movingPlatforms.create(700, 296, 'platform');
-    movingPlatforms.create(400, 80, 'platform');
+    movingPlatforms = this.physics.add.image(0, 64, 'platform');
+    // movingPlatforms.create(200, 180, 'platform');
+    // movingPlatforms.create(400, 296, 'platform');
+    // movingPlatforms.create(600, 412, 'platform');
+    // movingPlatforms.create(700, 296, 'platform');
+    // movingPlatforms.create(400, 80, 'platform');
 
     this.tweens.timeline({
       targets: movingPlatforms.body.velocity,
