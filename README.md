@@ -63,6 +63,11 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 4. Push to the branch (git push origin [chosen-name])
 5. Create a new Pull Request
 
+## Future features
+- Create different and more interesting levels for the game
+- Load the game levels with JSOn file
+- Modularize code so levels can be loaded in one page.
+
 ## Show your support
 
 Give a ⭐️ if you like this project!

@@ -47,6 +47,11 @@ export default class extends Phaser.Scene {
     });
     this.load.image('key', './assets/images/key.png');
     this.load.image('bomb', 'assets/images/bomb.png');
+    this.load.audio('coinSound', ['assets/audio/coin.wav']);
+    this.load.audio('keySound', ['assets/audio/key.wav']);
+    this.load.audio('doorSound', ['assets/audio/door.wav']);
+    this.load.audio('jumpSound', ['assets/audio/jump.wav']);
+    this.load.audio('gameOver', ['assets/audio/game-over-2.wav']);
   }
 
   create() {
@@ -90,6 +95,12 @@ export default class extends Phaser.Scene {
       repeat: 15,
       setXY: { x: 12, y: 0, stepX: 70 },
     });
+
+    this.coinSound = this.sound.add('coinSound');
+    this.keySound = this.sound.add('keySound');
+    this.jumpSound = this.sound.add('jumpSound');
+    this.doorSound = this.sound.add('doorSound');
+    this.gameOverSound = this.sound.add('gameOver');
 
     bombs = this.physics.add.group({
       key: 'bomb',
@@ -135,11 +146,13 @@ export default class extends Phaser.Scene {
 
     if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
+      this.jumpSound.play();
     }
   }
 
   // eslint-disable-next-line class-methods-use-this
   collectCoin(_player, coins) {
+    this.coinSound.play();
     coins.disableBody(true, true);
     score += 10;
     scoreText.setText(`Score: ${score}`);
@@ -151,6 +164,7 @@ export default class extends Phaser.Scene {
   }
 
   openDoor(player, door) {
+    this.doorSound.play();
     this.scene.start('GameScene2');
   }
 
@@ -167,6 +181,7 @@ export default class extends Phaser.Scene {
       this.physics.pause();
       player.setTint(0xff0000);
       player.anims.play('turn');
+      this.gameOverSound.play();
       gameOverText.setVisible(true);
       score = 0;
       this.restart();
@@ -177,12 +192,6 @@ export default class extends Phaser.Scene {
   }
 
   restart() {
-    // eslint-disable-next-line no-alert
-    const restart = window.confirm('Do you want to play again?');
-    if (restart === true) {
-      this.scene.restart();
-    } else {
-      this.scene.start('TitleScene');
-    }
+    this.scene.start('ScoresScene');
   }
 }
