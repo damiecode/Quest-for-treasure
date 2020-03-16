@@ -80,9 +80,10 @@ export default class extends Phaser.Scene {
     player.setCollideWorldBounds(true);
 
     chicks = this.physics.add.sprite(220, 200, 'chicks');
-    chicks.setBounceX(0);
-    chicks.setBounceY(1);
+    chicks.setBounceX(1);
+    chicks.setBounceY(0);
     chicks.setCollideWorldBounds(true);
+    chicks.body.velocity.x = 80;
 
     this.physics.add.collider(player, platforms);
 
@@ -165,9 +166,9 @@ export default class extends Phaser.Scene {
         chick.body.velocity.x *= -1;
       }
       if (chick.body.velocity.x > 0) {
-        chick.anims.play('right', true);
+        chick.anims.play('eRight', true);
       } else {
-        chick.anims.play('left', true);
+        chick.anims.play('eLeft', true);
       }
     });
 
