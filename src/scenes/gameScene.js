@@ -116,22 +116,22 @@ export default class extends Phaser.Scene {
       loop: -1,
       tweens: [
         {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+          x: 0, y: 300, duration: 2000, ease: 'Stepped',
         },
         {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+          x: 0, y: -200, duration: 1000, ease: 'Stepped',
         },
         {
           x: 150, y: 100, duration: 4000, ease: 'Stepped',
         },
         {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+          x: -150, y: 100, duration: 2000, ease: 'Stepped',
         },
         {
           x: 0, y: 0, duration: 1000, ease: 'Stepped',
         },
         {
-          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+          x: -150, y: 300, duration: 4000, ease: 'Stepped',
         },
       ],
     });
@@ -140,22 +140,22 @@ export default class extends Phaser.Scene {
       loop: -1,
       tweens: [
         {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+          x: -150, y: -300, duration: 2000, ease: 'Stepped',
         },
         {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+          x: 0, y: 200, duration: 1000, ease: 'Stepped',
         },
         {
           x: 150, y: 100, duration: 4000, ease: 'Stepped',
         },
         {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+          x: 0, y: -300, duration: 2000, ease: 'Stepped',
         },
         {
           x: 0, y: 0, duration: 1000, ease: 'Stepped',
         },
         {
-          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+          x: -300, y: 100, duration: 4000, ease: 'Stepped',
         },
       ],
     });
@@ -164,22 +164,22 @@ export default class extends Phaser.Scene {
       loop: -1,
       tweens: [
         {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
+          x: 300, y: -200, duration: 2000, ease: 'Stepped',
+        },
+        {
+          x: 0, y: 150, duration: 1000, ease: 'Stepped',
+        },
+        {
+          x: 200, y: 100, duration: 4000, ease: 'Stepped',
+        },
+        {
+          x: 80, y: -200, duration: 2000, ease: 'Stepped',
         },
         {
           x: 0, y: 0, duration: 1000, ease: 'Stepped',
         },
         {
-          x: 150, y: 100, duration: 4000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: -200, duration: 2000, ease: 'Stepped',
-        },
-        {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
-        },
-        {
-          x: -150, y: 100, duration: 4000, ease: 'Stepped',
+          x: -250, y: 100, duration: 4000, ease: 'Stepped',
         },
       ],
     });
@@ -191,16 +191,16 @@ export default class extends Phaser.Scene {
           x: 0, y: -200, duration: 2000, ease: 'Stepped',
         },
         {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+          x: -200, y: 0, duration: 1000, ease: 'Stepped',
         },
         {
-          x: 150, y: 100, duration: 4000, ease: 'Stepped',
+          x: 150, y: 300, duration: 4000, ease: 'Stepped',
         },
         {
           x: 0, y: -200, duration: 2000, ease: 'Stepped',
         },
         {
-          x: 0, y: 0, duration: 1000, ease: 'Stepped',
+          x: 0, y: 200, duration: 1000, ease: 'Stepped',
         },
         {
           x: -150, y: 100, duration: 4000, ease: 'Stepped',
