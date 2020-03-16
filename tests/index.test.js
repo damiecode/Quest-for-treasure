@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 const game = require('../src/objects/button');
 
 const button = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'TitleScene');
