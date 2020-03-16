@@ -77,7 +77,11 @@ export default class extends Phaser.Scene {
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
-    // chicks = this.physics.add.sprite(220, 20, 'chicks');
+    chicks = this.physics.add.sprite(220, 20, 'chicks');
+    chicks.setBounceX(1);
+    chicks.setBounceY(0);
+    chicks.setCollideWorldBounds(true);
+    chicks.body.velocity.x = 80;
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(chicks, platforms);
@@ -117,13 +121,6 @@ export default class extends Phaser.Scene {
       key: 'chicks',
       repeat: 5,
       setXY: { x: 12, y: 0, stepX: 90 },
-    });
-
-    chicks.children.iterate((child) => {
-      child.setBounceX(1);
-      child.setBounceY(0);
-      child.setCollideWorldBounds(true);
-      child.body.velocity.x = 80;
     });
 
     coins.children.iterate((child) => {
