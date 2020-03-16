@@ -1,12 +1,14 @@
 import Phaser from 'phaser';
 import Button from '../objects/button';
+import GameScene from './gameScene';
 
 export default class extends Phaser.Scene {
   constructor() {
-    super({ key: 'ScoresScene'});
+    super({ key: 'ScoresScene' });
 
     // eslint-disable-next-line no-unused-expressions
     this.playerText;
+    this.score = GameScene.getScore();
   }
 
   preload() {
@@ -19,7 +21,7 @@ export default class extends Phaser.Scene {
 
   create() {
     this.add.bitmapText(100, 260, 'arcade', 'RANK  SCORE   NAME').setTint(0xff00ff);
-    this.add.bitmapText(100, 310, 'arcade', '1ST   50000').setTint(0xff0000);
+    this.add.bitmapText(100, 310, 'arcade', `1ST   ${this.score}`).setTint(0xff0000);
 
     this.playerText = this.add.bitmapText(580, 310, 'arcade', '').setTint(0xff0000);
 

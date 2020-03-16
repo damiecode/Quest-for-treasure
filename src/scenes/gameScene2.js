@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
 import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
@@ -193,13 +194,16 @@ export default class extends Phaser.Scene {
       player.anims.play('turn');
       this.gameOverSound.play();
       gameOverText.setVisible(true);
-      score = 0;
       this.restart();
     } else {
       this.lives -= 1;
       score -= 20;
       this.create();
     }
+  }
+
+  getScore() {
+    return score;
   }
 
   restart() {
