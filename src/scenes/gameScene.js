@@ -59,7 +59,7 @@ export default class extends Phaser.Scene {
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
     cursors = this.input.keyboard.createCursorKeys();
-    platforms = this.physics.add.group();
+    platforms = this.physics.add.image();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
     platforms.create(0, 64, 'platform');
