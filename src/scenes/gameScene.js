@@ -187,6 +187,7 @@ export default class extends Phaser.Scene {
       this.restart();
     } else {
       this.lives -= 1;
+      score -= 20;
       this.create();
     }
   }
