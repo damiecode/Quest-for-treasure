@@ -153,7 +153,7 @@ export default class extends Phaser.Scene {
       player.anims.play('turn');
     }
 
-    iif (cursors.up.isDown && player.body.touching.down) {
+    if (cursors.up.isDown && player.body.touching.down) {
       player.setVelocityY(-330);
       this.jumpSound.play();
     }
