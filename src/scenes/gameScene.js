@@ -86,7 +86,7 @@ export default class extends Phaser.Scene {
     chicks.body.velocity.x = 80;
 
     this.physics.add.collider(player, platforms);
-
+    this.physics.add.collider(chicks, platforms);
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     livesText = this.add.text(350, 16, `Lives: ${this.lives}`, { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
