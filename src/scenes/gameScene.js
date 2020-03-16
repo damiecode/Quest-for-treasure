@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
 import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
@@ -46,7 +47,7 @@ export default class extends Phaser.Scene {
       frameWidth: 42,
       frameHeight: 66,
     });
-    this.load.spritesheet('chicks', './assets/images/chicks.png', {
+    this.load.spritesheet('chicks', './assets/images/chick.png', {
       frameWidth: 32,
       frameHeight: 32,
     });
