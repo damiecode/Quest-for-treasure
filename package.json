@@ -4,8 +4,9 @@
   "description": "<h1 align=\"center\">Welcome to Quest for treasure 👋</h1> <br> <!-- <p>   <a href=\"https://rawcdn.githack.com/damiecode/Quest-for-treasure/feature/weatherApp/dist/index.html\" target=\"_blank\">     <img alt=\"Website\" src=\"weather.png\" />   </a> </p> -->",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack/prod.js ",
-    "start": "webpack-dev-server --config webpack/base.js --open",
+    "start": "webpack-dev-server --hot",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
     "test": "jest"
   },
   "repository": {
