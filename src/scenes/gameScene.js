@@ -77,14 +77,11 @@ export default class extends Phaser.Scene {
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
-    chicks = this.physics.add.sprite(220, 200, 'chicks');
-    chicks.setBounceX(1);
-    chicks.setBounceY(0);
-    chicks.setCollideWorldBounds(true);
-    chicks.body.velocity.x = 80;
+    // chicks = this.physics.add.sprite(220, 20, 'chicks');
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(chicks, platforms);
+
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
     gameOverText.setOrigin(0.5);
@@ -116,6 +113,19 @@ export default class extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 110 },
     });
 
+    chicks = this.physics.add.group({
+      key: 'chicks',
+      repeat: 5,
+      setXY: { x: 12, y: 0, stepX: 90 },
+    });
+
+    chicks.children.iterate((child) => {
+      child.setBounceX(1);
+      chils.setBounceY(0);
+      chils.setCollideWorldBounds(true);
+      chils.body.velocity.x = 80;
+    });
+
     coins.children.iterate((child) => {
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
     });
@@ -130,7 +140,8 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(coins, platforms);
     this.physics.add.overlap(player, coins, this.collectCoin, null, this);
     this.physics.add.collider(bombs, platforms);
-    this.physics.add.collider(player, bombs, this.hitBomb, null, this);
+    this.physics.add.collider(player, bombs, this.getKilled, null, this);
+    this.physics.add.collider(player, chicks, this.getKilled, null, this);
     this.physics.add.overlap(player, key, this.collectKey, null, this);
     this.physics.add.overlap(player, door, this.openDoor,
       (player, door) => this.hasKey && player.body.touching.down, this);
@@ -200,7 +211,7 @@ export default class extends Phaser.Scene {
   }
 
 
-  hitBomb(player, bomb) {
+  getKilled(player, enemy) {
     this.physics.pause();
     player.setTint(0xff0000);
     player.anims.play('turn');

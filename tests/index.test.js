@@ -1,6 +1,9 @@
-const config = require('../src/index');
+import MakeAnimations from '../src/animations/animations';
+import GameScene from '../src/scenes/gameScene';
 
-test('player physics are enabled', () => {
-  player.init();
-  expect(game.physics.p2.enable).toBe(to.have.been.calledWith(player.sprite));
+const animations = new MakeAnimations();
+const game = new GameScene();
+
+test('player moves left', () => {
+  expect().toBe();
 });
