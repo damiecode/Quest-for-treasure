@@ -79,7 +79,7 @@ export default class extends Phaser.Scene {
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
-    chicks = this.physics.add.sprite();
+    chicks = this.physics.add.sprite(220, 200, 'chicks');
     chicks.setBounceX(0);
     chicks.setBounceY(1);
     chicks.setCollideWorldBounds(true);
