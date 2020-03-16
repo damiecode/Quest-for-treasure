@@ -6,6 +6,7 @@ import makeAnimations from '../animations/animations';
 let player;
 let coins;
 let platforms;
+let movingPlatforms;
 let cursors;
 let bombs;
 let door;
@@ -59,18 +60,19 @@ export default class extends Phaser.Scene {
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
     cursors = this.input.keyboard.createCursorKeys();
-    platforms = this.physics.add.image();
+    platforms = this.physics.add.staticGroup();
+    movingPlatforms = this.physics.add.image();
 
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(0, 64, 'platform');
-    platforms.create(200, 180, 'platform');
-    platforms.create(400, 296, 'platform');
-    platforms.create(600, 412, 'platform');
-    platforms.create(700, 296, 'platform');
-    platforms.create(400, 80, 'platform');
+    movingPlatforms.create(0, 64, 'platform');
+    movingPlatforms.create(200, 180, 'platform');
+    movingPlatforms.create(400, 296, 'platform');
+    movingPlatforms.create(600, 412, 'platform');
+    movingPlatforms.create(700, 296, 'platform');
+    movingPlatforms.create(400, 80, 'platform');
 
     this.tweens.timeline({
-      targets: platforms.body.velocity,
+      targets: movingPlatforms.body.velocity,
       loop: -1,
       tweens: [
         { x:    0, y: -200, duration: 2000, ease: 'Stepped' },
