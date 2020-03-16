@@ -121,9 +121,9 @@ export default class extends Phaser.Scene {
 
     chicks.children.iterate((child) => {
       child.setBounceX(1);
-      chils.setBounceY(0);
-      chils.setCollideWorldBounds(true);
-      chils.body.velocity.x = 80;
+      child.setBounceY(0);
+      child.setCollideWorldBounds(true);
+      child.body.velocity.x = 80;
     });
 
     coins.children.iterate((child) => {
