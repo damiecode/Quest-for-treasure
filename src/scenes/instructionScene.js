@@ -14,12 +14,12 @@ export default class InstructionsScene extends Phaser.Scene {
       y: height / 2 + 50,
       text: '',
       style: {
-        font: '18px monospace',
+        font: '30px monospace',
         fill: '#ffffff',
       },
     });
     instructionsText.setOrigin(0.5, 0.5);
-    instructionsText.setText(`To play the game, 
+    instructionsText.setText(` To play the game, 
     the player has to get a key to open the 
     door to the next level
     of a game while avoiding obstacles 

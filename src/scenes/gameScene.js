@@ -101,7 +101,14 @@ export default class extends Phaser.Scene {
     key.create(20, 20, 'key');
 
     coins = this.physics.add.staticGroup();
-    this.placeCoin();
+    coins.forEach(object => {
+      const obj = coins.create(object.x, object.y, 'coin');
+      obj.setScale(object.width / 16, object.height / 16);
+      obj.setOrigin(0);
+      obj.body.width = object.width;
+      obj.body.height = object.height;
+    });
+
 
     this.coinSound = this.sound.add('coinSound');
     this.keySound = this.sound.add('keySound');
@@ -173,6 +180,7 @@ export default class extends Phaser.Scene {
   placeCoin() {
     coins.x = Phaser.Math.Between(config.width * 0.2, config.width * 0.8);
     coins.y = Phaser.Math.Between(config.height * 0.2, config.height * 0.8);
+    coins.anims.play('rotate');
   }
 
   // eslint-disable-next-line class-methods-use-this
