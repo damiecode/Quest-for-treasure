@@ -32,4 +32,11 @@ export default function makeAnimations(scene) {
     frameRate: 5,
     repeat: -1,
   });
+
+  scene.anims.create({
+    key: 'rotate',
+    frames: scene.anims.generateFrameNumbers('coins', { start: 0, end: 1 }),
+    frameRate: 6,
+    repeat: -1,
+  });
 }

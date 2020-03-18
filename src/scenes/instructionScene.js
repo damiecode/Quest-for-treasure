@@ -19,9 +19,21 @@ export default class InstructionsScene extends Phaser.Scene {
       },
     });
     instructionsText.setOrigin(0.5, 0.5);
-    instructionsText.setText(`To play the game, the player has to get a key to open the door to the next level
-     of a game while avoiding obstacles like the bombs and the spiders.
-     Use the arrows of your keyboard to control the player to jumping and moving left and right`);
-    this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'TitleScene');
+    instructionsText.setText(`To play the game, 
+    the player has to get a key to open the 
+    door to the next level
+    of a game while avoiding obstacles 
+    like the bombs and the spiders.
+    Use the arrows of your keyboard to control the 
+    player to jumping and moving left and right`);
+    this.menuButton = new Button(
+      this,
+      400,
+      500,
+      'blueButton1',
+      'blueButton2',
+      'Menu',
+      'TitleScene',
+    );
   }
 }
