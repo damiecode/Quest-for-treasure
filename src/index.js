@@ -11,7 +11,6 @@ import GameScene from './scenes/gameScene';
 import GameScene2 from './scenes/gameScene2';
 
 import config from './config';
-import InstructionsScene from './scenes/instructionScene';
 
 const gameConfig = Object.assign(config, {
   scene: [BootScene, PreloaderScene, TitleScene, OptionsScene, InstructionsScene, GameScene,
