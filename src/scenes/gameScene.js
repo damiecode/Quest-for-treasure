@@ -101,7 +101,10 @@ export default class extends Phaser.Scene {
     key.create(20, 20, 'key');
 
     coins = this.physics.add.staticGroup();
-    coins.create(0, 0, 'coins');
+    coins.create(0, 0, 'coin');
+    coins = Phaser.Math.Between(config.width * 0.2, config.width * 0.8);
+    coins = Phaser.Math.Between(config.height * 0.2, config.height * 0.8);
+    coins.anims.play('rotate');
 
     this.coinSound = this.sound.add('coinSound');
     this.keySound = this.sound.add('keySound');
@@ -168,12 +171,6 @@ export default class extends Phaser.Scene {
     this.physics.collide(this, chicks, (chick, chicks) => {
       chick.body.velocity.x *= -1.0001;
     });
-  }
-
-  placeCoin() {
-    coins.x = Phaser.Math.Between(config.width * 0.2, config.width * 0.8);
-    coins.y = Phaser.Math.Between(config.height * 0.2, config.height * 0.8);
-    coins.anims.play('rotate');
   }
 
   // eslint-disable-next-line class-methods-use-this
