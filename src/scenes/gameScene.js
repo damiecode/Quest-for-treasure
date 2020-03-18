@@ -102,7 +102,7 @@ export default class extends Phaser.Scene {
 
     coins = this.physics.add.staticGroup();
     for (let i = 0; i < 30; i += 1) {
-      coins[i].create(0, 0, 'coin');
+      coins.create(0, 0, 'coin');
     }
 
 
