@@ -1,8 +1,9 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
 import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
-
+import config from '../config';
 
 let player;
 let coins;
@@ -99,11 +100,8 @@ export default class extends Phaser.Scene {
     key = this.physics.add.staticGroup();
     key.create(20, 20, 'key');
 
-    coins = this.physics.add.group({
-      key: 'coin',
-      repeat: 15,
-      setXY: { x: 12, y: 0, stepX: 70 },
-    });
+    coins = this.physics.add.staticGroup();
+    this.placeCoin();
 
     this.coinSound = this.sound.add('coinSound');
     this.keySound = this.sound.add('keySound');
@@ -114,17 +112,7 @@ export default class extends Phaser.Scene {
     bombs = this.physics.add.group({
       key: 'bomb',
       repeat: 1,
-      setXY: { x: 12, y: 0, stepX: 110 },
-    });
-
-    chicks = this.physics.add.group({
-      key: 'chicks',
-      repeat: 5,
-      setXY: { x: 12, y: 0, stepX: 90 },
-    });
-
-    coins.children.iterate((child) => {
-      child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+      setXY: { x: 12, y: 0, stepX: 20 },
     });
 
     bombs.children.iterate((child) => {
@@ -180,6 +168,11 @@ export default class extends Phaser.Scene {
     this.physics.collide(this, chicks, (chick, chicks) => {
       chick.body.velocity.x *= -1.0001;
     });
+  }
+
+  placeCoin() {
+    coins.x = Phaser.Math.Between(config.width * 0.2, config.width * 0.8);
+    coins.y = Phaser.Math.Between(config.height * 0.2, config.height * 0.8);
   }
 
   // eslint-disable-next-line class-methods-use-this
