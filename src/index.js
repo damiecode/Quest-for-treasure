@@ -6,13 +6,15 @@ import BootScene from './scenes/bootScene';
 import PreloaderScene from './scenes/preloaderScene';
 import TitleScene from './scenes/titleScene';
 import OptionsScene from './scenes/optionsScene';
+import InstructionsScene from './scenes/instructionScene';
 import GameScene from './scenes/gameScene';
 import GameScene2 from './scenes/gameScene2';
 
 import config from './config';
+import InstructionsScene from './scenes/instructionScene';
 
 const gameConfig = Object.assign(config, {
-  scene: [BootScene, PreloaderScene, TitleScene, OptionsScene, GameScene,
+  scene: [BootScene, PreloaderScene, TitleScene, OptionsScene, InstructionsScene, GameScene,
     GameScene2],
 });
 

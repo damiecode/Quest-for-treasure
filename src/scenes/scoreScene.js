@@ -36,11 +36,6 @@ export default class extends Phaser.Scene {
 
   submitName() {
     this.scene.stop('InputPanel');
-
-    this.add.bitmapText(100, 360, 'arcade', '2ND   40000    ANT').setTint(0xff8200);
-    this.add.bitmapText(100, 410, 'arcade', '3RD   30000    .-.').setTint(0xffff00);
-    this.add.bitmapText(100, 460, 'arcade', '4TH   20000    BOB').setTint(0x00ff00);
-    this.add.bitmapText(100, 510, 'arcade', '5TH   10000    ZIK').setTint(0x00bfff);
   }
 
   updateName(name) {
