@@ -101,10 +101,7 @@ export default class extends Phaser.Scene {
     key.create(20, 20, 'key');
 
     coins = this.physics.add.staticGroup();
-    for (let i = 0; i < 30; i += 1) {
-      coins.create(0, 0, 'coin');
-    }
-
+    coins.create(0, 0, 'coins');
 
     this.coinSound = this.sound.add('coinSound');
     this.keySound = this.sound.add('keySound');
