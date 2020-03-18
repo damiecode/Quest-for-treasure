@@ -160,21 +160,21 @@ export default class extends Phaser.Scene {
       this.jumpSound.play();
     }
 
-    // this.physics.collide(this, platforms, (chick, platform) => {
-    //   if (chick.body.velocity.x > 0 && chick.x > platform.x + (platform.width - chick.width)
-    //           || chick.body.velocity.x < 0 && chick.x < platform.x) {
-    //     chick.body.velocity.x *= -1;
-    //   }
-    //   if (chick.body.velocity.x > 0) {
-    //     chick.anims.play('eRight', true);
-    //   } else {
-    //     chick.anims.play('eLeft', true);
-    //   }
-    // });
+    this.physics.collide(this, platforms, (chick, platform) => {
+      if (chick.body.velocity.x > 0 && chick.x > platform.x + (platform.width - chick.width)
+              || chick.body.velocity.x < 0 && chick.x < platform.x) {
+        chick.body.velocity.x *= -1;
+      }
+      if (chick.body.velocity.x > 0) {
+        chick.anims.play('eRight', true);
+      } else {
+        chick.anims.play('eLeft', true);
+      }
+    });
 
-    // this.physics.collide(this, chicks, (chick, chicks) => {
-    //   chick.body.velocity.x *= -1.0001;
-    // });
+    this.physics.collide(this, chicks, (chick, chicks) => {
+      chick.body.velocity.x *= -1.0001;
+    });
   }
 
   placeCoin() {
