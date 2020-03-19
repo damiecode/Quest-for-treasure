@@ -28,14 +28,14 @@ export default class ScoreBoard extends Phaser.Scene {
   async getScore() {
     let y = 50;
     const scores = new PlayerName();
-    const scoreBoard = await scores.getUserScore();
-    const scoreArr = scoreBoard.result;
-    for (let i = 0; i < scoreArr.length; i += 1) {
+    const leaderboard = await scores.getLeaderboard();
+    const scoreRes = leaderboard.result;
+    for (let i = 0; i < scoreRes.length; i += 1) {
       y += 10;
       this.add.text(
         80,
         y,
-        `Name: ${scoreArr[i].user} Score: ${scoreArr[i].score}`,
+        `Name: ${scoreRes[i].user} Score: ${scoreRes[i].score}`,
         { fontSize: '18px', fill: '#fff', paddingTop: '4px' }
       );
     }

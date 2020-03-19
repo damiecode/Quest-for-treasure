@@ -5,6 +5,7 @@ import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
 import config from '../config';
 import Button from '../objects/button';
+import Player from '../player';
 
 let player;
 let coins;
@@ -21,6 +22,7 @@ let gameOverText;
 export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
+    this.leaderboard;
   }
 
   init() {
