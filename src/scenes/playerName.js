@@ -40,6 +40,7 @@ export default class PlayerInfo extends Phaser.Scene {
       return result;
     } catch (err) {
       console.log('error unable to fetch the data Please try again!');
+      return err;
     }
   }
 }

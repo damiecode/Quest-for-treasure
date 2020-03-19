@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
@@ -7,10 +8,8 @@ import config from '../config';
 import Button from '../objects/button';
 import Player from '../player';
 
-let player;
 let coins;
 let platforms;
-let cursors;
 let bombs;
 let door;
 let key;
@@ -23,6 +22,7 @@ export default class extends Phaser.Scene {
   constructor() {
     super({ key: 'GameScene' });
     this.leaderboard;
+    this.cursors;
   }
 
   init() {
@@ -63,13 +63,19 @@ export default class extends Phaser.Scene {
   }
 
   create() {
-    this.add.sprite(0, 0, 'background').setOrigin(0, 0).setScale(2);
+    this.add
+      .sprite(0, 0, 'background')
+      .setOrigin(0, 0)
+      .setScale(2);
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'clouds');
     this.sky.fixedToCamera = true;
-    cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.createCursorKeys();
     platforms = this.physics.add.staticGroup();
 
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms
+      .create(400, 568, 'ground')
+      .setScale(2)
+      .refreshBody();
     platforms.create(0, 64, 'platform');
     platforms.create(200, 180, 'platform');
     platforms.create(400, 296, 'platform');
@@ -77,9 +83,18 @@ export default class extends Phaser.Scene {
     platforms.create(700, 296, 'platform');
     platforms.create(400, 80, 'platform');
 
-    player = this.physics.add.sprite(100, 450, 'dude');
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
+    this.player = new Player(
+      {
+        scene: this,
+        x: 100,
+        y: 450,
+        key: 'dude',
+        name: this.player,
+      },
+      this.cursors,
+    );
+
+    // player = this.physics.add.sprite(100, 450, 'dude');
 
     chicks = this.physics.add.sprite(220, 20, 'chicks');
     chicks.setBounceX(1);
@@ -87,13 +102,23 @@ export default class extends Phaser.Scene {
     chicks.setCollideWorldBounds(true);
     chicks.body.velocity.x = 80;
 
-    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(this.player, platforms);
     this.physics.add.collider(chicks, platforms);
 
-    scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
-    gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
+    scoreText = this.add.text(100, 16, `score: ${score}`, {
+      fontSize: '32px',
+      fill: '#000',
+    });
+    gameOverText = this.add.text(400, 300, 'Game Over', {
+      fontSize: '64px',
+      fill: '#000',
+    });
     gameOverText.setOrigin(0.5);
-    gameOverTexthis.add.text(230, 60, 'PLUCKERS', { fontSize: '70px', fill: '#fff' });t.setVisible(false);
+    gameOverText.add.text(230, 60, 'Game Over', {
+      fontSize: '70px',
+      fill: '#fff',
+    });
+    gameOverText.setVisible(false);
 
     this.createHud();
 
@@ -124,21 +149,25 @@ export default class extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 20 },
     });
 
-    bombs.children.iterate((child) => {
+    bombs.children.iterate(child => {
       child.setBounce(1);
       child.setCollideWorldBounds(true);
       child.setVelocity(Phaser.Math.Between(-200, 200), 20);
     });
 
-
     this.physics.add.collider(coins, platforms);
-    this.physics.add.overlap(player, coins, this.collectCoin, null, this);
+    this.physics.add.overlap(this.player, coins, this.collectCoin, null, this);
     this.physics.add.collider(bombs, platforms);
-    this.physics.add.collider(player, bombs, this.getKilled, null, this);
-    this.physics.add.collider(player, chicks, this.getKilled, null, this);
-    this.physics.add.overlap(player, key, this.collectKey, null, this);
-    this.physics.add.overlap(player, door, this.openDoor,
-      (player, door) => this.hasKey && player.body.touching.down, this);
+    this.physics.add.collider(this.player, bombs, this.getKilled, null, this);
+    this.physics.add.collider(this.player, chicks, this.getKilled, null, this);
+    this.physics.add.overlap(this.player, key, this.collectKey, null, this);
+    this.physics.add.overlap(
+      this.player,
+      door,
+      this.openDoor,
+      (player, door) => this.hasKey && player.body.touching.down,
+      this,
+    );
 
     this.scoreBoard = new Button(
       this,
@@ -163,28 +192,12 @@ export default class extends Phaser.Scene {
 
   // eslint-disable-next-line class-methods-use-this
   update() {
-    if (cursors.left.isDown) {
-      player.setVelocityX(-160);
-
-      player.anims.play('left', true);
-    } else if (cursors.right.isDown) {
-      player.setVelocityX(160);
-
-      player.anims.play('right', true);
-    } else {
-      player.setVelocityX(0);
-
-      player.anims.play('turn');
-    }
-
-    if (cursors.up.isDown && player.body.touching.down) {
-      player.setVelocityY(-330);
-      this.jumpSound.play();
-    }
-
     this.physics.collide(this, platforms, (chick, platform) => {
-      if (chick.body.velocity.x > 0 && chick.x > platform.x + (platform.width - chick.width)
-              || chick.body.velocity.x < 0 && chick.x < platform.x) {
+      if (
+        (chick.body.velocity.x > 0
+          && chick.x > platform.x + (platform.width - chick.width))
+        || (chick.body.velocity.x < 0 && chick.x < platform.x)
+      ) {
         chick.body.velocity.x *= -1;
       }
       if (chick.body.velocity.x > 0) {
@@ -223,7 +236,6 @@ export default class extends Phaser.Scene {
     this.hud.add(coinIcon);
     this.hud.setOrigin(10, 10);
   }
-
 
   getKilled(player, enemy) {
     this.gameOverSound.play();
