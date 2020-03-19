@@ -24,7 +24,6 @@ class Game extends Phaser.Game {
     super(gameConfig);
     const model = new Model();
     this.globals = { model, bgMusic: null };
-    Leaderboard.createGameKey('Quest for treasure');
   }
 }
 
