@@ -1,44 +1,43 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable comma-dangle */
 import Phaser from 'phaser';
+import PlayerName from './playerName';
 import Button from '../objects/button';
 
-export default class extends Phaser.Scene {
+export default class ScoreBoard extends Phaser.Scene {
   constructor() {
-    super({ key: 'ScoresScene' });
-
-    // eslint-disable-next-line no-unused-expressions
-    this.playerText;
-  }
-
-  preload() {
-    this.load.image('block', 'assets/images/block.png');
-    this.load.image('rub', 'assets/images/rub.png');
-    this.load.image('end', 'assets/images/end.png');
-
-    this.load.bitmapFont('arcade', 'assets/images/arcade.png', 'assets/images/arcade.xml');
+    super('Scores');
+    this.game;
+    this.menuButton;
   }
 
   create() {
-    this.add.bitmapText(100, 260, 'arcade', 'RANK  SCORE   NAME').setTint(0xff00ff);
-    this.add.bitmapText(100, 310, 'arcade', `1ST   ${this.score}`).setTint(0xff0000);
+    this.add.text(80, 10, 'Leaderboard', { fontSize: '32px', fill: 'green' });
 
-    this.playerText = this.add.bitmapText(580, 310, 'arcade', '').setTint(0xff0000);
-
-    this.input.keyboard.enabled = false;
-
-    this.scene.launch('InputPanel');
-
-    const panel = this.scene.get('InputPanel');
-
-    panel.events.on('updateName', this.updateName, this);
-    panel.events.on('submitName', this.submitName, this);
-    this.menuButton = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Back', 'TitleScene');
+    this.menuButton = new Button(
+      this,
+      400,
+      500,
+      'blueButton1',
+      'blueButton2',
+      'Back',
+      'TitleScene'
+    );
   }
 
-  submitName() {
-    this.scene.stop('InputPanel');
-  }
-
-  updateName(name) {
-    this.playerText.setText(name);
+  async getScore() {
+    let y = 50;
+    const scores = new PlayerName();
+    const scoreBoard = await scores.getUserScore();
+    const scoreArr = scoreBoard.result;
+    for (let i = 0; i < scoreArr.length; i += 1) {
+      y += 10;
+      this.add.text(
+        80,
+        y,
+        `Name: ${scoreArr[i].user} Score: ${scoreArr[i].score}`,
+        { fontSize: '18px', fill: '#fff', paddingTop: '4px' }
+      );
+    }
   }
 }

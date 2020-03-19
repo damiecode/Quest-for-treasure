@@ -11,6 +11,8 @@ import GameScene from './scenes/gameScene';
 import GameScene2 from './scenes/gameScene2';
 import ScoresScene from './scenes/scoreScene';
 
+import Leaderboard from './leaderboard';
+
 import config from './config';
 
 const gameConfig = Object.assign(config, {
@@ -24,6 +26,7 @@ class Game extends Phaser.Game {
     super(gameConfig);
     const model = new Model();
     this.globals = { model, bgMusic: null };
+    Leaderboard.createGameKey('Quest for treasure');
   }
 }
 

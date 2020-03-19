@@ -4,6 +4,7 @@
 import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
 import config from '../config';
+import Button from '../objects/button';
 
 let player;
 let coins;
@@ -90,7 +91,7 @@ export default class extends Phaser.Scene {
     scoreText = this.add.text(100, 16, `score: ${score}`, { fontSize: '32px', fill: '#000' });
     gameOverText = this.add.text(400, 300, 'Game Over', { fontSize: '64px', fill: '#000' });
     gameOverText.setOrigin(0.5);
-    gameOverText.setVisible(false);
+    gameOverTexthis.add.text(230, 60, 'PLUCKERS', { fontSize: '70px', fill: '#fff' });t.setVisible(false);
 
     this.createHud();
 
@@ -103,10 +104,11 @@ export default class extends Phaser.Scene {
     coins = this.physics.add.staticGroup();
     for (let i = 0; i < 20; i += 1) {
       const x = Phaser.Math.RND.between(0, 800);
-      const y = Phaser.Math.RND.between(0, 600);
+      const y = Phaser.Math.RND.between(0, 400);
 
       const newobj = coins.create(x, y, 'coin');
     }
+    coins.setCollideWorldBounds(true);
 
     this.coinSound = this.sound.add('coinSound');
     this.keySound = this.sound.add('keySound');
@@ -135,6 +137,26 @@ export default class extends Phaser.Scene {
     this.physics.add.overlap(player, key, this.collectKey, null, this);
     this.physics.add.overlap(player, door, this.openDoor,
       (player, door) => this.hasKey && player.body.touching.down, this);
+
+    this.scoreBoard = new Button(
+      this,
+      config.width / 2,
+      config.height / 2,
+      'blueButton1',
+      'blueButton2',
+      'Score Board',
+      'ScoresScene',
+    );
+
+    this.menuButton = new Button(
+      this,
+      400,
+      500,
+      'blueButton1',
+      'blueButton2',
+      'Menu',
+      'TitleScene',
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -202,10 +224,10 @@ export default class extends Phaser.Scene {
 
 
   getKilled(player, enemy) {
+    this.gameOverSound.play();
     this.physics.pause();
     player.setTint(0xff0000);
     player.anims.play('turn');
-    this.gameOverSound.play();
     gameOverText.setVisible(true);
     this.restart();
   }
