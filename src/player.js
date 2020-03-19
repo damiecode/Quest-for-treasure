@@ -8,6 +8,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       config.y,
       config.name,
     );
+    config.scene.physics.world.enableBody(this);
     this.score = 0;
     this.name = config.name;
     this.cursors = cursor;

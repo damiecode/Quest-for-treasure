@@ -114,10 +114,6 @@ export default class extends Phaser.Scene {
       fill: '#000',
     });
     gameOverText.setOrigin(0.5);
-    gameOverText.add.text(230, 60, 'Game Over', {
-      fontSize: '70px',
-      fill: '#fff',
-    });
     gameOverText.setVisible(false);
 
     this.createHud();
