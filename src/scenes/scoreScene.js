@@ -6,7 +6,7 @@ import Button from '../objects/button';
 
 export default class ScoreBoard extends Phaser.Scene {
   constructor() {
-    super('Scores');
+    super('ScoresScene');
     this.game;
     this.menuButton;
   }

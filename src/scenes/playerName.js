@@ -22,7 +22,7 @@ export default class PlayerInfo extends Phaser.Scene {
         if (this.player.value !== '') {
           this.removeListener('click');
           this.setVisible(false);
-          this.scene.start('TitleScene', {
+          this.scene.start('GameScene', {
             player: this.player.value,
           });
         }

@@ -24,8 +24,9 @@ export default class InstructionsScene extends Phaser.Scene {
     door to the next level
     of a game while avoiding obstacles 
     like the bombs and the spiders.
-    Use the arrows of your keyboard to control the 
-    player to jumping and moving left and right`);
+    Use the arrows of your keyboard to
+    move the player left and right and 
+    spacebar for the player to jump`);
     this.menuButton = new Button(
       this,
       400,

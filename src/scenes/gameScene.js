@@ -6,15 +6,14 @@ import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
 import config from '../config';
 import Button from '../objects/button';
-import Player from '../player';
 
 let coins;
+let player;
 let platforms;
 let bombs;
 let door;
 let key;
 let chicks;
-let score = 0;
 let scoreText;
 let gameOverText;
 
@@ -23,6 +22,7 @@ export default class extends Phaser.Scene {
     super({ key: 'GameScene' });
     this.leaderboard;
     this.cursors;
+    this.score = 0;
   }
 
   init() {
@@ -83,18 +83,10 @@ export default class extends Phaser.Scene {
     platforms.create(700, 296, 'platform');
     platforms.create(400, 80, 'platform');
 
-    this.player = new Player(
-      {
-        scene: this,
-        x: 100,
-        y: 450,
-        key: 'dude',
-        name: this.player,
-      },
-      this.cursors,
-    );
 
-    // player = this.physics.add.sprite(100, 450, 'dude');
+    player = this.physics.add.sprite(100, 450, 'dude');
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
 
     chicks = this.physics.add.sprite(220, 20, 'chicks');
     chicks.setBounceX(1);
@@ -105,7 +97,7 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(this.player, platforms);
     this.physics.add.collider(chicks, platforms);
 
-    scoreText = this.add.text(100, 16, `score: ${score}`, {
+    scoreText = this.add.text(100, 16, `score: ${ this.score }`, {
       fontSize: '32px',
       fill: '#000',
     });
@@ -188,6 +180,24 @@ export default class extends Phaser.Scene {
 
   // eslint-disable-next-line class-methods-use-this
   update() {
+    if (this.cursors.left.isDown) {
+      player.setVelocityX(-160);
+
+      player.anims.play('left', true);
+    } else if (this.cursors.right.isDown) {
+      player.setVelocityX(160);
+
+      player.anims.play('right', true);
+    } else {
+      player.setVelocityX(0);
+
+      player.anims.play('turn');
+    }
+
+    if (this.cursors.space && this.player.body.touching.down) {
+      this.player.setVelocityY(-330);
+      this.jumpSound.play();
+    }
     this.physics.collide(this, platforms, (chick, platform) => {
       if (
         (chick.body.velocity.x > 0
@@ -212,8 +222,8 @@ export default class extends Phaser.Scene {
   collectCoin(_player, coins) {
     this.coinSound.play();
     coins.disableBody(true, true);
-    score += 10;
-    scoreText.setText(`Score: ${score}`);
+    this.score += 10;
+    scoreText.setText(`Score: ${ this.score }`);
   }
 
   collectKey(_player, key) {
