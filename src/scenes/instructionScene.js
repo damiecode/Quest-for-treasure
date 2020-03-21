@@ -11,7 +11,7 @@ export default class InstructionsScene extends Phaser.Scene {
     const { height } = this.cameras.main;
     const instructionsText = this.make.text({
       x: width / 2,
-      y: height / 2 + 50,
+      y: height / 2,
       text: '',
       style: {
         font: '30px monospace',
@@ -19,7 +19,8 @@ export default class InstructionsScene extends Phaser.Scene {
       },
     });
     instructionsText.setOrigin(0.5, 0.5);
-    instructionsText.setText(` To play the game, 
+    instructionsText.setText(` 
+    To play the game, 
     the player has to get a key to open the 
     door to the next level
     of a game while avoiding obstacles 
