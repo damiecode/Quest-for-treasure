@@ -97,7 +97,7 @@ export default class extends Phaser.Scene {
     this.physics.add.collider(this.player, platforms);
     this.physics.add.collider(chicks, platforms);
 
-    scoreText = this.add.text(100, 16, `score: ${ this.score }`, {
+    scoreText = this.add.text(100, 16, `score: ${this.score}`, {
       fontSize: '32px',
       fill: '#000',
     });
@@ -223,7 +223,7 @@ export default class extends Phaser.Scene {
     this.coinSound.play();
     coins.disableBody(true, true);
     this.score += 10;
-    scoreText.setText(`Score: ${ this.score }`);
+    scoreText.setText(`Score: ${this.score}`);
   }
 
   collectKey(_player, key) {

@@ -1,27 +1,33 @@
-/* eslint-disable-next-line import/no-unresolved */
-
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-  entry: {
-    app: './src/index.js',
-    'production-dependencies': ['phaser'],
-  },
-
+  mode: 'development',
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: '[name].js',
-  },
-  optimization: {
-    minimize: true,
+    filename: 'app.js',
+    path: path.resolve(process.cwd(__dirname, 'build')),
   },
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.(png|svg|jpg|gif|jpeg)$/,
+        use: [
+          'url-loader',
+        ],
+      },
+      {
         test: /\.js$/,
-        include: path.resolve(__dirname, 'src/'),
+        exclude: /node_modules/,
+        include: path.resolve(process.cwd(__dirname, 'src')),
         use: {
           loader: 'babel-loader',
           options: {
@@ -31,12 +37,18 @@ module.exports = {
       },
     ],
   },
-
+  devServer: {
+    contentBase: path.resolve(process.cwd(__dirname, 'build')),
+  },
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, 'assets', '**', '*'),
-        to: path.resolve(__dirname, 'build'),
+        from: path.resolve(process.cwd(__dirname, 'index.html')),
+        to: path.resolve(process.cwd(__dirname, 'build')),
+      },
+      {
+        from: path.resolve(process.cwd(__dirname, 'assets', '**', '*')),
+        to: path.resolve(process.cwd(__dirname, 'build')),
       },
     ]),
     new webpack.DefinePlugin({
@@ -44,8 +56,4 @@ module.exports = {
       'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
   ],
-
-  devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
-  },
 };

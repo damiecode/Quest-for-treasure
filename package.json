@@ -4,10 +4,13 @@
   "description": "<h1 align=\"center\">Welcome to Quest for treasure 👋</h1> <br> <!-- <p>   <a href=\"https://rawcdn.githack.com/damiecode/Quest-for-treasure/feature/weatherApp/dist/index.html\" target=\"_blank\">     <img alt=\"Website\" src=\"weather.png\" />   </a> </p> -->",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot",
-    "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "test": "jest"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
   },
   "repository": {
     "type": "git",
@@ -21,25 +24,27 @@
   },
   "homepage": "https://github.com/damiecode/Quest-for-treasure#readme",
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
-    "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.1.1",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
+    "file-loader": "^5.1.0",
     "jest": "^25.1.0",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
     "jest-canvas-mock": "^2.2.0"
   },
   "dependencies": {
-    "@babel/core": "^7.8.7",
     "@babel/runtime": "^7.8.7",
-    "axios": "^0.19.2",
-    "copy-webpack-plugin": "^5.1.1",
     "phaser": "^3.22.0",
-    "webfontloader": "^1.6.28",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "resolve-cwd": "^3.0.0",
+    "webfontloader": "^1.6.28"
   }
 }
