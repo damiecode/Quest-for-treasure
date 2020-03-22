@@ -8,7 +8,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.text(180, 60, 'QUEST FOR TREASURE', { fontSize: '60px', fill: '#fff' });
+    this.add.text(170, 60, 'QUEST FOR TREASURE', { fontSize: '60px', fill: '#fff' });
     this.gameButton = new Button(this, config.width / 2, config.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play', 'PlayerName');
 
     this.optionsButton = new Button(this, config.width / 2, config.height / 2, 'blueButton1', 'blueButton2', 'Options', 'OptionsScene');
