@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 
 import Phaser from 'phaser';
 
@@ -31,4 +30,4 @@ class Game extends Phaser.Game {
   }
 }
 
-const game = new Game();
+window.game = new Game();
