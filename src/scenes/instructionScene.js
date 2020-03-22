@@ -11,7 +11,7 @@ export default class InstructionsScene extends Phaser.Scene {
     const { height } = this.cameras.main;
     const instructionsText = this.make.text({
       x: width / 2,
-      y: height / 2,
+      y: height / 2 - 100,
       text: '',
       style: {
         font: '30px monospace',

@@ -12,7 +12,7 @@ export default class ScoreBoard extends Phaser.Scene {
   }
 
   create() {
-    this.add.text(80, 10, 'Leaderboard', { fontSize: '32px', fill: 'green' });
+    this.add.text(80, 10, 'Leaderboard', { fontSize: '32px', fill: 'blue' });
 
     this.menuButton = new Button(
       this,

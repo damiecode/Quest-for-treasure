@@ -253,6 +253,6 @@ export default class extends Phaser.Scene {
   }
 
   restart() {
-    this.scene.start('TitleScene');
+    this.scene.start('PlayerInfo');
   }
 }
