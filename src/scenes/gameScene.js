@@ -108,8 +108,6 @@ export default class extends Phaser.Scene {
     gameOverText.setOrigin(0.5);
     gameOverText.setVisible(false);
 
-    this.createHud();
-
     door = this.physics.add.staticGroup();
     door.create(20, 450, 'door');
 
@@ -234,13 +232,6 @@ export default class extends Phaser.Scene {
   openDoor(player, door) {
     this.doorSound.play();
     this.scene.start('GameScene2');
-  }
-
-  createHud() {
-    const coinIcon = this.make.image(0, 0, 'icon:coin');
-    this.hud = this.physics.add.group();
-    this.hud.add(coinIcon);
-    this.hud.setOrigin(10, 10);
   }
 
   getKilled(player, enemy) {
