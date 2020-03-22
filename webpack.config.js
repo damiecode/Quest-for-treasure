@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'app.js',
-    path: path.resolve(process.cwd(__dirname, 'build')),
+    path: path.resolve(__dirname, 'build'),
   },
   module: {
     rules: [
@@ -27,7 +27,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        include: path.resolve(process.cwd(__dirname, 'src')),
+        include: path.resolve(__dirname, 'src'),
         use: {
           loader: 'babel-loader',
           options: {
@@ -38,17 +38,17 @@ module.exports = {
     ],
   },
   devServer: {
-    contentBase: path.resolve(process.cwd(__dirname, 'build')),
+    contentBase: path.resolve(__dirname, 'build'),
   },
   plugins: [
     new CopyWebpackPlugin([
       {
-        from: path.resolve(process.cwd(__dirname, 'index.html')),
-        to: path.resolve(process.cwd(__dirname, 'build')),
+        from: path.resolve(__dirname, 'index.html'),
+        to: path.resolve(__dirname, 'build'),
       },
       {
-        from: path.resolve(process.cwd(__dirname, 'assets', '**', '*')),
-        to: path.resolve(process.cwd(__dirname, 'build')),
+        from: path.resolve(__dirname, 'assets', '**', '*'),
+        to: path.resolve(__dirname, 'build'),
       },
     ]),
     new webpack.DefinePlugin({
