@@ -4,7 +4,7 @@ import Phaser from 'phaser';
 
 export default class PlayerInfo extends Phaser.Scene {
   constructor() {
-    super('PlayerName');
+    super('PlayerInfo');
     this.player;
   }
 

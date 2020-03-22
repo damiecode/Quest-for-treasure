@@ -10,14 +10,14 @@ import OptionsScene from './scenes/optionsScene';
 import InstructionsScene from './scenes/instructionScene';
 import GameScene from './scenes/gameScene';
 import GameScene2 from './scenes/gameScene2';
-import PlayerName from './scenes/playerName';
+import PlayerInfo from './scenes/playerName';
 import ScoresScene from './scenes/scoreScene';
 
 import config from './config';
 
 const gameConfig = Object.assign(config, {
   scene: [BootScene, PreloaderScene, TitleScene, OptionsScene, InstructionsScene, GameScene,
-    GameScene2, PlayerName, ScoresScene],
+    GameScene2, PlayerInfo, ScoresScene],
 });
 
 
