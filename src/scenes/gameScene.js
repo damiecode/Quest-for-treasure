@@ -94,7 +94,7 @@ export default class extends Phaser.Scene {
     chicks.setCollideWorldBounds(true);
     chicks.body.velocity.x = 80;
 
-    this.physics.add.collider(this.player, platforms);
+    this.physics.add.collider(player, platforms);
     this.physics.add.collider(chicks, platforms);
 
     scoreText = this.add.text(100, 16, `score: ${this.score}`, {
@@ -142,13 +142,13 @@ export default class extends Phaser.Scene {
     });
 
     this.physics.add.collider(coins, platforms);
-    this.physics.add.overlap(this.player, coins, this.collectCoin, null, this);
+    this.physics.add.overlap(player, coins, this.collectCoin, null, this);
     this.physics.add.collider(bombs, platforms);
-    this.physics.add.collider(this.player, bombs, this.getKilled, null, this);
-    this.physics.add.collider(this.player, chicks, this.getKilled, null, this);
-    this.physics.add.overlap(this.player, key, this.collectKey, null, this);
+    this.physics.add.collider(player, bombs, this.getKilled, null, this);
+    this.physics.add.collider(player, chicks, this.getKilled, null, this);
+    this.physics.add.overlap(player, key, this.collectKey, null, this);
     this.physics.add.overlap(
-      this.player,
+      player,
       door,
       this.openDoor,
       (player, door) => this.hasKey && player.body.touching.down,
@@ -192,8 +192,8 @@ export default class extends Phaser.Scene {
       player.anims.play('turn');
     }
 
-    if (this.cursors.space && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
+    if (this.cursors.space && player.body.touching.down) {
+      player.setVelocityY(-330);
       this.jumpSound.play();
     }
     this.physics.collide(this, platforms, (chick, platform) => {
