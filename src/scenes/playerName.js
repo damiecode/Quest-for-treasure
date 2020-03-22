@@ -9,7 +9,7 @@ export default class PlayerInfo extends Phaser.Scene {
   }
 
   preload() {
-    this.load.html('info', '../src/form.html');
+    this.load.html('info', '../');
   }
 
   create() {
