@@ -85,7 +85,7 @@ export default class extends Phaser.Scene {
 
 
     player = this.physics.add.sprite(100, 450, 'dude');
-    player.setBounce(0.2);
+    player.setBounce(0.1);
     player.setCollideWorldBounds(true);
 
     chicks = this.physics.add.sprite(220, 20, 'chicks');
@@ -243,6 +243,6 @@ export default class extends Phaser.Scene {
   }
 
   restart() {
-    this.scene.start('PlayerInfo');
+    this.scene.start('ScoresScene');
   }
 }
