@@ -121,7 +121,6 @@ export default class extends Phaser.Scene {
 
       const newobj = coins.create(x, y, 'coin');
     }
-    coins.setCollideWorldBounds(true);
 
     this.coinSound = this.sound.add('coinSound');
     this.keySound = this.sound.add('keySound');
