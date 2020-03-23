@@ -156,8 +156,8 @@ export default class extends Phaser.Scene {
 
     this.scoreBoard = new Button(
       this,
-      config.width / 2,
-      config.height / 2,
+      500,
+      10,
       'blueButton1',
       'blueButton2',
       'Score Board',
@@ -166,8 +166,8 @@ export default class extends Phaser.Scene {
 
     this.menuButton = new Button(
       this,
-      400,
-      500,
+      700,
+      10,
       'blueButton1',
       'blueButton2',
       'Menu',
