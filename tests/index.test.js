@@ -1,20 +1,11 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-import Phaser from 'phaser';
-// import Button from '../src/objects/button';
+import initiate from './index.mock';
 
-// const button = new Button(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'TitleScene');
-
-// test('creates a new button', () => {
-//   expect(button.targetScene).toBe('TitleScene');
-// });
-
-describe('Phaser', () => {
-  it('Check the instance of Phaser', () => {
-    expect(Phaser).toBeInstanceOf(Object);
+describe('Testing mock index file', () => {
+  const game = initiate();
+  test('Game is an object', () => {
+    expect(typeof game).toBe('object');
   });
-
-  it('Check Phaser version', () => {
-    expect(Phaser).toHaveProperty('VERSION', '3.22.0');
+  test('Scene is an object', () => {
+    expect(typeof game.scene.scenes).toBe('object');
   });
 });

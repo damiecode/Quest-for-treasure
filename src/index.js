@@ -2,7 +2,6 @@
 import Phaser from 'phaser';
 
 import Model from './model';
-import Score from './player';
 import BootScene from './scenes/bootScene';
 import PreloaderScene from './scenes/preloaderScene';
 import TitleScene from './scenes/titleScene';
@@ -26,8 +25,6 @@ class Game extends Phaser.Game {
     super(gameConfig);
     const model = new Model();
     this.globals = { model, bgMusic: null };
-    const score = new Score();
-    this.score = { score };
   }
 }
 

@@ -9,10 +9,11 @@ export default class PlayerInfo extends Phaser.Scene {
   }
 
   preload() {
-    this.load.html('info', '../form.html');
+    this.load.html('info', './form.html');
   }
 
   create() {
+    this.add.text(100, 100, 'testing', { fill: '#fff' });
     const htmlDom = this.add.dom(400, 200).createFromCache('info');
     htmlDom.addListener('click');
     htmlDom.on('click', e => {
@@ -22,7 +23,7 @@ export default class PlayerInfo extends Phaser.Scene {
         if (this.player.value !== '') {
           this.removeListener('click');
           this.setVisible(false);
-          this.scene.start('GameScene', {
+          this.scene.start('TitleScene', {
             player: this.player.value,
           });
         }
