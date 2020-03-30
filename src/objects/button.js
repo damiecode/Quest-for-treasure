@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 export default class Button extends Phaser.GameObjects.Container {
-  constructor(scene, x, y, key1, key2, text, player, targetScene, targetSceneData) {
+  constructor(scene, x, y, key1, key2, text, targetScene) {
     super(scene);
     this.scene = scene;
     this.x = x;
@@ -15,11 +15,7 @@ export default class Button extends Phaser.GameObjects.Container {
     this.add(this.text);
 
     this.button.on('pointerdown', () => {
-      if (targetScene === null) {
-        player.uploadScore();
-      } else {
-        this.scene.scene.start(targetScene, targetSceneData);
-      }
+      this.scene.scene.start(targetScene);
     });
 
     this.button.on('pointerover', () => {
