@@ -4,8 +4,9 @@
 /* eslint-disable no-unused-vars */
 import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
-import config from '../config';
 import Button from '../objects/button';
+import { Player, result } from '../constructor';
+import PlayerInfo from './playerName';
 
 let coins;
 let player;
@@ -16,6 +17,7 @@ let key;
 let chicks;
 let scoreText;
 let gameOverText;
+const leaderboard = new PlayerInfo();
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -244,5 +246,14 @@ export default class extends Phaser.Scene {
 
   restart() {
     this.scene.start('ScoresScene');
+  }
+
+  updateScore(score) {
+    const results = JSON.parse(localStorage.getItem('result'));
+    result.splice(0, 1);
+    const player = Player(results[0].user, score);
+    result.push(player);
+    window.localStorage.setItem('result', JSON.stringify(result));
+    leaderboard.getLeaderboard();
   }
 }

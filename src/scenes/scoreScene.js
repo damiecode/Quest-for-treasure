@@ -4,15 +4,29 @@ import Phaser from 'phaser';
 import PlayerName from './playerName';
 import Button from '../objects/button';
 
+const scores = new PlayerName();
+
 export default class ScoreBoard extends Phaser.Scene {
   constructor() {
     super('ScoresScene');
-    this.game;
-    this.menuButton;
+    this.scores = [];
+  }
+
+  preload() {
+    this.load.bitmapFont('arcade', 'assets/images/arcade.png', 'assets/images/arcade.xml');
   }
 
   create() {
     this.add.text(80, 10, 'Leaderboard', { fontSize: '32px', fill: 'blue' });
+    this.add.bitmapText(100, 110, 'arcade', 'RANK  SCORE   NAME').setTint(0xffffff);
+
+    for (let i = 1; i < 6; i += 1) {
+      if (scores[i - 1]) {
+        this.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}      ${scores[i - 1].highScore}    ${scores[i - 1].name}`).setTint(0xffffff);
+      } else {
+        this.add.bitmapText(100, 160 + 50 * i, 'arcade', ` ${i}      0    ---`).setTint(0xffffff);
+      }
+    }
 
     this.menuButton = new Button(
       this,
@@ -27,7 +41,6 @@ export default class ScoreBoard extends Phaser.Scene {
 
   async getScore() {
     let y = 50;
-    const scores = new PlayerName();
     const leaderboard = await scores.getLeaderboard();
     const scoreRes = leaderboard.result;
     for (let i = 0; i < scoreRes.length; i += 1) {
