@@ -18,8 +18,8 @@ export default function updateLeaderboard(name, score) {
         },
       );
 
-      const result = await response.json();
-      return result;
+      const content = await response.json();
+      return content.result;
     } catch (err) {
       console.log('error unable to fetch the data Please try again!');
     }

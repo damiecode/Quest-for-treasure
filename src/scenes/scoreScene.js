@@ -1,8 +1,19 @@
+/* eslint-disable no-console */
+/* eslint-disable consistent-return */
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable comma-dangle */
 import Phaser from 'phaser';
-import PlayerName from './playerName';
 import Button from '../objects/button';
+import ranking from '../DOM/ranking';
+
+const sorter = (object) => {
+  const scoreArr = [];
+  for (let i = 0; i < object.length; i += 1) {
+    scoreArr.push([object[i].user, object[i].score]);
+  }
+  return Array.from(scoreArr).sort((a, b) => b[1] - a[1]);
+};
 
 export default class ScoreBoard extends Phaser.Scene {
   constructor() {
@@ -21,22 +32,21 @@ export default class ScoreBoard extends Phaser.Scene {
       'Back',
       'TitleScene'
     );
-    console.log(this.getScore());
+    this.getLeaderboard();
   }
 
-  async getScore() {
-    let y = 50;
-    const scores = new PlayerName();
-    const leaderboard = await scores.getLeaderboard();
-    const scoreRes = leaderboard.result;
-    for (let i = 0; i < scoreRes.length; i += 1) {
-      y += 10;
-      this.add.text(
-        80,
-        y,
-        `Name: ${scoreRes[i].user} Score: ${scoreRes[i].score}`,
-        { fontSize: '18px', fill: '#fff', paddingTop: '4px' }
+
+  async getLeaderboard() {
+    try {
+      const response = await fetch(
+        'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/RQ7wTRILVQffKgAUBlO7/scores/',
       );
+
+      const content = await response.json();
+      return ranking(sorter(content.result));
+    } catch (err) {
+      console.log(err);
+      console.log('error unable to fetch the data Please try again!');
     }
   }
 }

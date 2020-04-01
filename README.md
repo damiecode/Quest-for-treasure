@@ -1,10 +1,12 @@
 <h1 align="center">Welcome to Quest for treasure 👋</h1>
 <br>
-<!-- <p>
-  <a href="https://rawcdn.githack.com/damiecode/Quest-for-treasure/feature/weatherApp/dist/index.html" target="_blank">
-    <img alt="Website" src="weather.png" />
+<p>
+  <img alt="scene" src="img1.png" />
+  <br>
+  <a href="https://quest-for-treasure.netlify.com/" target="_blank">
+    <img alt="Website" src="img2.png" />
   </a>
-</p> -->
+</p>
 
 <br>
 
@@ -15,6 +17,14 @@ Quest for treasure is created using vanilla JS and Phaser Js. It is a simple Vid
 The full project requirements can be found [here](https://www.notion.so/RPG-game-f94a617841e240a293c0b6928beebe89).
 
 The full description of the game can be found [here](https://github.com/damiecode/Quest-for-treasure/wiki)
+
+## Game Design Document
+
+### The Game overview
+
+**_This game focuses on the desire for humans to get what they want. The player has to play to get the treasure while trying to avoid all obstacles._** [read more here](Quest-for-treasure.md)
+
+[Click here for game design document in PDF](./docs/QUEST%20FOR%20TREASURE.pdf)
 
 ## HOW TO PLAY
 

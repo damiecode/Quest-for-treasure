@@ -93,7 +93,7 @@ export default class extends Phaser.Scene {
     chicks.setBounceX(1);
     chicks.setBounceY(0);
     chicks.setCollideWorldBounds(true);
-    chicks.body.velocity.x = 80;
+    chicks.body.velocity.x = 150;
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(chicks, platforms);
@@ -161,7 +161,7 @@ export default class extends Phaser.Scene {
       10,
       'blueButton1',
       'blueButton2',
-      'Score Board',
+      'Scores',
       'ScoresScene',
     );
 

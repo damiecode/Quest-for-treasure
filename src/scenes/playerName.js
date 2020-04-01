@@ -6,14 +6,6 @@
 import Phaser from 'phaser';
 import updateLeaderboard from '../leaderboard';
 
-const sorter = (object) => {
-  const scoreArr = [];
-  for (let i = 0; i < object.length; i += 1) {
-    scoreArr.push([object[i].user, object[i].score]);
-  }
-  return Array.from(scoreArr).sort((a, b) => b[1] - a[1]);
-};
-
 export default class PlayerInfo extends Phaser.Scene {
   constructor() {
     super('PlayerInfo');
@@ -43,16 +35,7 @@ export default class PlayerInfo extends Phaser.Scene {
     updateLeaderboard(this.player, this.score);
   }
 
-  async getLeaderboard() {
-    try {
-      const response = await fetch(
-        'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/RQ7wTRILVQffKgAUBlO7/scores/',
-      );
-
-      const result = await response.json();
-      return sorter(result);
-    } catch (err) {
-      console.log('error unable to fetch the data Please try again!');
-    }
+  async getScore() {
+    return this.score;
   }
 }
