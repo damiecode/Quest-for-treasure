@@ -25,6 +25,9 @@ export default function initiate() {
     audio: {
       disableWebAudio: true,
     },
+    dom: {
+      createContainer: true,
+    },
     scene: [BootScene, PreloaderScene, TitleScene, OptionsScene, InstructionsScene, GameScene,
       GameScene2, PlayerInfo, ScoresScene],
   };
