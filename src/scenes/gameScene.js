@@ -1,7 +1,6 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-mixed-operators */
+/* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
 import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
 import Button from '../objects/button';
@@ -16,7 +15,6 @@ let key;
 let chicks;
 let scoreText;
 let gameOverText;
-const player1 = new PlayerInfo();
 
 export default class extends Phaser.Scene {
   constructor() {
@@ -216,14 +214,14 @@ export default class extends Phaser.Scene {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  collectCoin(_player, coins) {
+  collectCoin(player, coins) {
     this.coinSound.play();
     coins.disableBody(true, true);
     this.score += 10;
     scoreText.setText(`Score: ${this.score}`);
   }
 
-  collectKey(_player, key) {
+  collectKey(player, key) {
     key.disableBody(true, true);
     this.hasKey = true;
   }
@@ -243,17 +241,16 @@ export default class extends Phaser.Scene {
     player.setTint(0xff0000);
     player.anims.play('turn');
     gameOverText.setVisible(true);
-    const scores = new PlayerInfo();
-    const name = scores.player;
-    scores.uploadScore(this.getPlayerName, this.score);
+    this.getScore();
     this.restart();
+  }
+
+  async getScore() {
+    const scores = new PlayerInfo();
+    const scoreArr = await scores.uploadScore(localStorage.getItem('name'), this.score);
   }
 
   restart() {
     this.scene.start('ScoresScene');
-  }
-
-  getScore() {
-    return this.score;
   }
 }

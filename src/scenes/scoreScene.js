@@ -1,11 +1,9 @@
-/* eslint-disable no-console */
 /* eslint-disable consistent-return */
+/* eslint-disable no-alert */
 /* eslint-disable class-methods-use-this */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable comma-dangle */
 import Phaser from 'phaser';
 import Button from '../objects/button';
-// import PlayerInfo from './playerName';
+import PlayerInfo from './playerName';
 
 const sorter = (object) => {
   const scoreArr = [];
@@ -14,7 +12,6 @@ const sorter = (object) => {
   }
   return Array.from(scoreArr).sort((a, b) => b[1] - a[1]);
 };
-
 
 export default class ScoreBoard extends Phaser.Scene {
   constructor() {
@@ -34,40 +31,28 @@ export default class ScoreBoard extends Phaser.Scene {
       'blueButton1',
       'blueButton2',
       'Back',
-      'TitleScene'
+      'TitleScene',
     );
+    sorter(this.ranking());
+  }
+
+  async ranking() {
     const htmlDom = this.add.dom(400, 90).createFromCache('table');
     const content = htmlDom.getChildByID('body');
     content.innerHTML = '';
-    const scoreBoard = this.getLeaderboard();
-    console.log(scoreBoard);
-    for (let i = 10; i < scoreBoard; i += 1) {
-      let count = 11;
-      count -= 1;
+    const scores = new PlayerInfo();
+    const scoreBoard = await scores.getLeaderboard();
+    const scoreArr = scoreBoard.result;
+    for (let i = 0; i < scoreArr.length; i += 1) {
+      const count = i + 1;
       const row = content.insertRow(0);
       row.setAttribute('data-index', `${i}`);
       const cell1 = row.insertCell(0);
       const cell2 = row.insertCell(1);
       const cell3 = row.insertCell(2);
       cell1.innerHTML = count;
-      cell2.innerHTML = scoreBoard[i].user;
-      console.log(scoreBoard[i].user);
-      cell3.innerHTML = scoreBoard[i].score;
-      // [cell1.innerHTML, cell2.innerHTML, cell3.innerHTML] = [count, ranks[i][0], ranks[i][1]];
-    }
-  }
-
-  async getLeaderboard() {
-    try {
-      const response = await fetch(
-        'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/RQ7wTRILVQffKgAUBlO7/scores/',
-      );
-
-      const content = await response.json();
-      return sorter(content.result);
-    } catch (err) {
-      console.log(err);
-      console.log('error unable to fetch the data Please try again!');
+      cell2.innerHTML = scoreArr[i].user;
+      cell3.innerHTML = scoreArr[i].score;
     }
   }
 }

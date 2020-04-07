@@ -1,7 +1,7 @@
+/* eslint-disable no-alert */
 /* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-expressions */
-/* eslint-disable no-console */
 
 import Phaser from 'phaser';
 
@@ -21,7 +21,7 @@ export default class PlayerInfo extends Phaser.Scene {
     htmlDom.on('click', e => {
       if (e.target.name === 'submit') {
         this.player = htmlDom.getChildByName('player');
-
+        localStorage.setItem('name', this.player.value);
         if (this.player.value !== '') {
           htmlDom.removeListener('click');
           htmlDom.setVisible(false);
@@ -29,8 +29,22 @@ export default class PlayerInfo extends Phaser.Scene {
             player: this.player.value,
           });
         }
+        return this.player.value;
       }
     });
+  }
+
+  async getLeaderboard() {
+    try {
+      const response = await fetch(
+        'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/RQ7wTRILVQffKgAUBlO7/scores/',
+      );
+
+      const content = await response.json();
+      return content;
+    } catch (err) {
+      alert('error unable to fetch the data Please try again!');
+    }
   }
 
   async uploadScore(name, scores) {
@@ -53,7 +67,7 @@ export default class PlayerInfo extends Phaser.Scene {
       const result = await response.json();
       return result;
     } catch (err) {
-      console.log('error unable to fetch the data Please try again!');
+      alert('error unable to fetch the data Please try again!');
     }
   }
 }
