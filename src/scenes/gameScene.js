@@ -233,6 +233,10 @@ export default class extends Phaser.Scene {
     this.scene.start('GameScene2');
   }
 
+  getPlayerName() {
+    return this.player;
+  }
+
   getKilled(player, enemy) {
     this.gameOverSound.play();
     this.physics.pause();
@@ -240,7 +244,8 @@ export default class extends Phaser.Scene {
     player.anims.play('turn');
     gameOverText.setVisible(true);
     const scores = new PlayerInfo();
-    scores.uploadScore(scores.player.value, this.score);
+    const name = scores.player;
+    scores.uploadScore(this.getPlayerName, this.score);
     this.restart();
   }
 

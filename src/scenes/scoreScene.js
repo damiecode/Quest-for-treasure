@@ -40,7 +40,7 @@ export default class ScoreBoard extends Phaser.Scene {
     const content = htmlDom.getChildByID('body');
     content.innerHTML = '';
     const scoreBoard = this.getLeaderboard();
-
+    console.log(scoreBoard);
     for (let i = 10; i < scoreBoard; i += 1) {
       let count = 11;
       count -= 1;
@@ -51,6 +51,7 @@ export default class ScoreBoard extends Phaser.Scene {
       const cell3 = row.insertCell(2);
       cell1.innerHTML = count;
       cell2.innerHTML = scoreBoard[i].user;
+      console.log(scoreBoard[i].user);
       cell3.innerHTML = scoreBoard[i].score;
       // [cell1.innerHTML, cell2.innerHTML, cell3.innerHTML] = [count, ranks[i][0], ranks[i][1]];
     }
@@ -63,7 +64,7 @@ export default class ScoreBoard extends Phaser.Scene {
       );
 
       const content = await response.json();
-      return (sorter(content.result));
+      return sorter(content.result);
     } catch (err) {
       console.log(err);
       console.log('error unable to fetch the data Please try again!');
