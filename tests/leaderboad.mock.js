@@ -14,7 +14,7 @@ async function getGameKey() {
     const content = await response.json();
     return content;
   } catch (err) {
-    throw new Error('Unable to fetch Test Game Key');
+    throw new Error();
   }
 }
 

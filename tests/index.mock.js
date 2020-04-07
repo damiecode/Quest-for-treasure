@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 import Phaser from 'phaser';
 
@@ -11,27 +12,18 @@ import GameScene2 from '../src/scenes/gameScene2';
 import PlayerInfo from '../src/scenes/playerName';
 import ScoresScene from '../src/scenes/scoreScene';
 
+import config from '../src/config';
 
-export default function initiate() {
-  const gameConfig = {
-    type: Phaser.AUTO,
-    parent: 'content',
-    width: 960,
-    height: 600,
-    physics: {
-      default: 'arcade',
-      arcade: { gravity: { y: 300 } },
-    },
-    audio: {
-      disableWebAudio: true,
-    },
-    dom: {
-      createContainer: true,
-    },
-    scene: [BootScene, PreloaderScene, TitleScene, OptionsScene, InstructionsScene, GameScene,
-      GameScene2, PlayerInfo, ScoresScene],
-  };
+const gameConfig = Object.assign(config, {
+  scene: [BootScene, PreloaderScene, TitleScene, OptionsScene, InstructionsScene, GameScene,
+    GameScene2, PlayerInfo, ScoresScene],
+});
 
-  const game = new Phaser.Game(gameConfig);
-  return game;
+
+export default class Game extends Phaser.Game {
+  constructor() {
+    super(gameConfig);
+  }
 }
+
+const game = new Game();
