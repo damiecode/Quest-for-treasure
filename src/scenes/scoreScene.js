@@ -33,7 +33,7 @@ export default class ScoreBoard extends Phaser.Scene {
       'Back',
       'TitleScene',
     );
-    sorter(this.ranking());
+    this.ranking();
   }
 
   async ranking() {
@@ -50,9 +50,8 @@ export default class ScoreBoard extends Phaser.Scene {
       const cell1 = row.insertCell(0);
       const cell2 = row.insertCell(1);
       const cell3 = row.insertCell(2);
-      cell1.innerHTML = count;
-      cell2.innerHTML = scoreArr[i].user;
-      cell3.innerHTML = scoreArr[i].score;
+      const sorted = sorter(scoreArr);
+      [cell1.innerHTML, cell2.innerHTML, cell3.innerHTML] = [count, sorted[i][0], sorted[i][1]];
     }
   }
 }
