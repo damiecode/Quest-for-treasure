@@ -241,7 +241,6 @@ export default class extends Phaser.Scene {
     gameOverText.setVisible(true);
     const scores = new PlayerInfo();
     scores.uploadScore();
-    console.log(scores.uploadScore());
     this.restart();
   }
 

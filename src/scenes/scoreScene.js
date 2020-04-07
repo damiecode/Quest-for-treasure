@@ -40,7 +40,6 @@ export default class ScoreBoard extends Phaser.Scene {
     const content = htmlDom.getChildByID('body');
     content.innerHTML = '';
     const scoreBoard = this.getLeaderboard();
-    console.log(scoreBoard);
 
     for (let i = 10; i < scoreBoard; i += 1) {
       let count = 11;
