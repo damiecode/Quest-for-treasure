@@ -33,18 +33,10 @@ export default class PlayerInfo extends Phaser.Scene {
     });
   }
 
-  getPlayerName() {
-    return this.user;
-  }
-
-  getScore() {
-    return this.score;
-  }
-
-  async uploadScore() {
+  async uploadScore(name, scores) {
     const player = {
-      user: this.getPlayerName(),
-      score: this.getScore(),
+      user: name,
+      score: scores,
     };
     try {
       const response = await fetch(

@@ -240,7 +240,7 @@ export default class extends Phaser.Scene {
     player.anims.play('turn');
     gameOverText.setVisible(true);
     const scores = new PlayerInfo();
-    scores.uploadScore();
+    scores.uploadScore(scores.player.value, this.score);
     this.restart();
   }
 
