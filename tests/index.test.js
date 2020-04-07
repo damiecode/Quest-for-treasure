@@ -1,7 +1,7 @@
-import Game from './index.mock';
+import initiate from './index.mock';
 
 describe('Testing mock index file', () => {
-  const game = Game();
+  const game = initiate();
   test('Game is an object', () => {
     expect(typeof game).toBe('object');
   });

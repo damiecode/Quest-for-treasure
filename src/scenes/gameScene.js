@@ -224,15 +224,12 @@ export default class extends Phaser.Scene {
   collectKey(player, key) {
     key.disableBody(true, true);
     this.hasKey = true;
+    this.score += 10;
   }
 
   openDoor(player, door) {
     this.doorSound.play();
     this.scene.start('GameScene2');
-  }
-
-  getPlayerName() {
-    return this.player;
   }
 
   getKilled(player, enemy) {
