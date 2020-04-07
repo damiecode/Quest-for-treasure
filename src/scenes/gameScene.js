@@ -6,7 +6,6 @@ import Phaser from 'phaser';
 import makeAnimations from '../animations/animations';
 import Button from '../objects/button';
 import PlayerInfo from './playerName';
-import updateLeaderboard from '../leaderboard';
 
 let coins;
 let player;
@@ -240,10 +239,17 @@ export default class extends Phaser.Scene {
     player.setTint(0xff0000);
     player.anims.play('turn');
     gameOverText.setVisible(true);
+    const scores = new PlayerInfo();
+    scores.uploadScore();
+    console.log(scores.uploadScore());
     this.restart();
   }
 
   restart() {
-    this.scene.start('PlayerInfo');
+    this.scene.start('ScoresScene');
+  }
+
+  getScore() {
+    return this.score;
   }
 }

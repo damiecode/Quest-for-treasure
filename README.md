@@ -1,5 +1,9 @@
 <h1 align="center">Welcome to Quest for treasure 👋</h1>
 <br>
+This project is part of a series of projects to be completed by students of [Microverse](https://www.microverse.org/ 'The Global School for Remote Software Developers!')
+
+Quest for treasure is created using vanilla JS and Phaser Js. It is a simple Video game. It is a platform game where the goal of the game is to fetch the key and open the door that leads to the next level.
+<br>
 <p>
   <img alt="scene" src="img1.png" />
   <br>
@@ -9,10 +13,6 @@
 </p>
 
 <br>
-
-This project is part of a series of projects to be completed by students of [Microverse](https://www.microverse.org/ 'The Global School for Remote Software Developers!')
-
-Quest for treasure is created using vanilla JS and Phaser Js. It is a simple Video game. It is a platform game where the goal of the game is to fetch the key and open the door that leads to the next level.
 
 The full project requirements can be found [here](https://www.notion.so/RPG-game-f94a617841e240a293c0b6928beebe89).
 

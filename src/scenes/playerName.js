@@ -4,7 +4,6 @@
 /* eslint-disable no-console */
 
 import Phaser from 'phaser';
-import updateLeaderboard from '../leaderboard';
 
 export default class PlayerInfo extends Phaser.Scene {
   constructor() {
@@ -26,16 +25,43 @@ export default class PlayerInfo extends Phaser.Scene {
         if (this.player.value !== '') {
           htmlDom.removeListener('click');
           htmlDom.setVisible(false);
-          this.scene.start('ScoresScene', {
+          this.scene.start('GameScene', {
             player: this.player.value,
           });
         }
       }
     });
-    updateLeaderboard(this.player, this.score);
   }
 
-  async getScore() {
+  getPlayerName() {
+    return this.user;
+  }
+
+  getScore() {
     return this.score;
+  }
+
+  async uploadScore() {
+    const player = {
+      user: this.getPlayerName(),
+      score: this.getScore(),
+    };
+    try {
+      const response = await fetch(
+        'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/RQ7wTRILVQffKgAUBlO7/scores/',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+          },
+          body: JSON.stringify(player),
+        },
+      );
+
+      const result = await response.json();
+      return result;
+    } catch (err) {
+      console.log('error unable to fetch the data Please try again!');
+    }
   }
 }
