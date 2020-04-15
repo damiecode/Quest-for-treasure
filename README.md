@@ -29,11 +29,11 @@ The full description of the game can be found [here](https://github.com/damiecod
 
 ## HOW TO PLAY
 
-This is a simple prototype of a game where the player has to get a key to open the door to the next level of a game while avoiding obstacles like the bomb and the spider.Use the arrows of your keyboard to control the player to jumping and moving left and right.
+This is a simple prototype of a game where the player has to get a key to open the door to the next level while avoiding obstacles like the bomb and the spider. Use the arrows of your keyboard to control the player to moving left and right. Use space bar to jump.
 
 ## DESIGN PROCESS
 
-This is how this game was designed: In the first two days, what I had in mind was a game that was both interesting and challenging for the users. I planned that the game will have at least 2 levels since I could not get all my idea in one level. I named it quest for treasure where the treaure was the key which will take the player to the next level which would be more difficult than the next. I used the avialble sprites for the game and wanted all different scenes of the game to be in different files so it would be easier for me to spot errors when something goes wrong. Since i had some obstacles for the player to loose I had to create a way whch the user could gain points so I added coins to the game.
+This is how this game was designed: In the first two days, I had in mind a game that would be both interesting and challenging for the users. I planned that the game will have at least 2 levels since I could not get all my idea on one level. I gave it the name Quest-for-treasure where the treasure was the key which will take the player to the next level. The next level would be more difficult than the previous one. I used the available sprites for the game and wanted all different scenes of the game to be loaded from different files so it would be easier for me to spot errors when something goes wrong. Since I had some obstacles for the player to lose I had to create a way which the user could gain points so I added coins to the game.
 
 ## Built With
 
