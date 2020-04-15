@@ -33,7 +33,7 @@ This is a simple prototype of a game where the player has to get a key to open t
 
 ## DESIGN PROCESS
 
-This is how this game was designed: In the first two days, I had in mind a game that would be both interesting and challenging for the users. I planned that the game will have at least 2 levels since I could not get all my idea on one level. I gave it the name Quest-for-treasure where the treasure was the key which will take the player to the next level. The next level would be more difficult than the previous one. I used the available sprites for the game and wanted all different scenes of the game to be loaded from different files so it would be easier for me to spot errors when something goes wrong. Since I had some obstacles for the player to lose I had to create a way which the user could gain points so I added coins to the game.
+This is how this game was designed: In the first two days, I had in mind a game that would be both interesting and challenging for the users. I planned the game will have at least 2 levels since I could not fit all my ideas on a single level. I named it the name Quest-for-treasure: the treasure is the key which will take the player to the next, more difficult level. I used the available sprites for the game and built different scenes in different files, to make it easier to spot errors and bugs. Since I built obstacles into the game, I also had to create a way for the player to gain points so I added coins.
 
 ## Built With
 
@@ -84,7 +84,7 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 ## Future features
 - Create different and more interesting levels for the game
-- Load the game levels with JSOn file
+- Load the game levels with JSON file
 - Modularize code so levels can be loaded in one page.
 
 ## Show your support
