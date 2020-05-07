@@ -3,7 +3,7 @@
 
 This project is part of a series of projects to be completed by students of [Microverse](https://www.microverse.org/).
 
-Quest for treasure is created using vanilla JS and Phaser Js. It is a simple Video game. It is a platform game where the goal of the game is to fetch the key and open the door that leads to the next level.
+Quest for Treasure is created using vanilla JS and Phaser JS. It is a simple platform game where the goal is to fetch the key and open the door that leads to the next level.
 <br>
 <p>
   <img alt="scene" src="img1.png" />
@@ -33,7 +33,7 @@ This is a simple prototype of a game where the player has to get a key to open t
 
 ## DESIGN PROCESS
 
-This is how this game was designed: In the first two days, I had in mind a game that would be both interesting and challenging for the users. I planned the game will have at least 2 levels since I could not fit all my ideas on a single level. I named it the name Quest-for-treasure: the treasure is the key which will take the player to the next, more difficult level. I used the available sprites for the game and built different scenes in different files, to make it easier to spot errors and bugs. Since I built obstacles into the game, I also had to create a way for the player to gain points so I added coins.
+This is how this game was designed: In the first two days, what I had in mind was a game that was both interesting and challenging for users. I planned the game to have at least 2 levels, since I could not fit all my ideas in a single level. I named it Quest for Treasure: the treasure is a key, which will take the player to the next, more difficult level. I used the available sprites for the game and built different scenes in different files, in order to make it easier to spot errors and bugs. Since I built obstacles into the game, I also had to create a way for the player to gain points, so I added coins.
 
 ## Built With
 
