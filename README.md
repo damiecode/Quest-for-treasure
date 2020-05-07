@@ -65,6 +65,12 @@ $ npm run start
 
 > Open `http://127.0.0.1:8080` using your favourite broswer, if it doesn't open automatically.
 
+> Run tests
+
+```sh
+$ npm run test
+```
+
 ## Authors
 
 👤 **Damilola Ale**
