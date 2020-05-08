@@ -38,7 +38,7 @@ This is how this game was designed: In the first two days, what I had in mind wa
 ## Built With
 
 - JavaScript (ES6)
-- HMTL
+- HTML
 - PHASER JS
 - npm
 - webpack
